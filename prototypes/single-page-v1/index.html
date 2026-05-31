@@ -1,0 +1,1865 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dr. Ax Ali</title>
+  <meta name="description" content="Dr. Ax Ali is a creative scientist, founder, HCI researcher, and AI product builder.">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      var prefersDark = false;
+      try {
+        prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      } catch (error) {
+        prefersDark = false;
+      }
+      document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+      try {
+        if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("intro-pending");
+        }
+      } catch (error) {
+        document.documentElement.classList.add("intro-pending");
+      }
+    }());
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,350..680,-200..150,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FAFAFA;
+      --ink: #111111;
+      --muted: rgba(17, 17, 17, 0.58);
+      --quiet: rgba(17, 17, 17, 0.36);
+      --line: rgba(17, 17, 17, 0.12);
+      --glass-fill: rgba(250, 250, 250, 0.4);
+      --glass-border: rgba(17, 17, 17, 0.14);
+      --glass-highlight: rgba(255, 255, 255, 0.78);
+      --glass-shadow: rgba(17, 17, 17, 0.14);
+      --glass-tint: linear-gradient(135deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.18));
+      --activity: #EC622C;
+      --font: "Roboto Flex", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --ease-composed: cubic-bezier(0.22, 1, 0.36, 1);
+      --motion-quick: 180ms;
+      --motion-steady: 280ms;
+      --motion-reveal: 720ms;
+      color-scheme: light;
+    }
+
+    html[data-theme="dark"] {
+      --paper: #111111;
+      --ink: #FAFAFA;
+      --muted: rgba(250, 250, 250, 0.62);
+      --quiet: rgba(250, 250, 250, 0.38);
+      --line: rgba(250, 250, 250, 0.14);
+      --glass-fill: rgba(24, 24, 24, 0.42);
+      --glass-border: rgba(250, 250, 250, 0.16);
+      --glass-highlight: rgba(250, 250, 250, 0.08);
+      --glass-shadow: rgba(0, 0, 0, 0.46);
+      --glass-tint: linear-gradient(135deg, rgba(250, 250, 250, 0.08), rgba(250, 250, 250, 0.02));
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @keyframes calm-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    html.intro-pending,
+    html.intro-pending body {
+      overflow: hidden;
+    }
+
+    html {
+      background: var(--paper);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font);
+      font-variation-settings: "opsz" 18, "wght" 405, "GRAD" 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--motion-quick) var(--ease-composed);
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--activity);
+      outline: none;
+    }
+
+    .page {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 76px 24px 88px;
+    }
+
+    header {
+      --intro-reveal-delay: 60ms;
+      animation: calm-reveal var(--motion-reveal) var(--ease-composed) backwards;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding-bottom: 116px;
+    }
+
+    .site-mark {
+      align-items: center;
+      color: var(--ink);
+      display: inline-flex;
+      height: 30px;
+      justify-content: center;
+      width: 30px;
+    }
+
+    .site-mark-logo {
+      display: block;
+      height: 28px;
+      transition: color var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
+      width: 28px;
+    }
+
+    .site-mark:hover,
+    .site-mark:focus-visible {
+      color: var(--activity);
+      outline: none;
+    }
+
+    .site-mark:hover .site-mark-logo,
+    .site-mark:focus-visible .site-mark-logo {
+      transform: scale(1.18);
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .theme-toggle {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: grid;
+      height: 36px;
+      padding: 0;
+      place-items: center;
+      width: 22px;
+    }
+
+    .toggle-track {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      height: 18px;
+      position: relative;
+      transform: rotate(90deg);
+      transition: border-color var(--motion-quick) var(--ease-composed);
+      width: 32px;
+    }
+
+    .toggle-thumb {
+      background: var(--muted);
+      border-radius: 50%;
+      height: 8px;
+      left: 4px;
+      position: absolute;
+      top: 4px;
+      transition: background-color var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
+      width: 8px;
+    }
+
+    html[data-theme="dark"] .toggle-thumb {
+      background: var(--ink);
+      transform: translateX(14px);
+    }
+
+    .theme-toggle:hover .toggle-track,
+    .theme-toggle:focus-visible .toggle-track {
+      border-color: var(--activity);
+    }
+
+    .theme-toggle:hover .toggle-thumb,
+    .theme-toggle:focus-visible .toggle-thumb {
+      background: var(--activity);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: none;
+    }
+
+    .intro {
+      animation: calm-reveal var(--motion-reveal) var(--ease-composed) 100ms backwards;
+      margin-bottom: 118px;
+      --intro-reveal-delay: 0ms;
+    }
+
+    .eyebrow {
+      color: var(--ink);
+      font-size: 19px;
+      line-height: 1.35;
+      margin: 0 0 10px;
+      font-variation-settings: "wght" 430, "opsz" 19;
+    }
+
+    h1 {
+      margin: 0 0 26px;
+      font-size: clamp(28px, 4.2vw, 36px);
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-variation-settings: "wght" 520, "opsz" 36, "XTRA" 460;
+    }
+
+    .intro-type-text {
+      transition: color var(--motion-quick) var(--ease-composed);
+    }
+
+    html.intro-pending:not(.intro-started) .intro-type-text {
+      color: transparent;
+    }
+
+    .typing-cursor {
+      background: var(--activity);
+      border-radius: 50%;
+      display: inline-block;
+      height: 0.42em;
+      margin-left: 0.16em;
+      transform: translateY(0.05em);
+      vertical-align: baseline;
+      width: 0.42em;
+    }
+
+    h1 .typing-cursor {
+      height: 0.22em;
+      margin-left: 0.1em;
+      transform: translateY(0.03em);
+      width: 0.22em;
+    }
+
+    .typing-cursor[hidden] {
+      display: none;
+    }
+
+    .intro-copy {
+      display: grid;
+      gap: 18px;
+      color: var(--muted);
+      --intro-reveal-delay: 190ms;
+    }
+
+    .initiative {
+      display: inline-block;
+      position: relative;
+    }
+
+    .initiative:hover::after,
+    .initiative:focus-within::after,
+    .initiative.is-pinned::after {
+      content: "";
+      display: block;
+      height: 14px;
+      left: 0;
+      position: absolute;
+      top: 100%;
+      width: min(340px, calc(100vw - 36px));
+      z-index: 39;
+    }
+
+    @keyframes dwell-title-shimmer {
+      from {
+        background-position: 180% 0;
+      }
+
+      to {
+        background-position: -80% 0;
+      }
+    }
+
+    .initiative-link {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      display: inline;
+      font: inherit;
+      padding: 0 0 2px;
+    }
+
+    .initiative-link:hover,
+    .initiative-link:focus-visible {
+      color: inherit;
+      outline: none;
+    }
+
+    .initiative-card {
+      -webkit-backdrop-filter: blur(34px) saturate(165%) contrast(1.02);
+      backdrop-filter: blur(34px) saturate(165%) contrast(1.02);
+      background: var(--glass-tint), var(--glass-fill);
+      background-clip: padding-box;
+      border: 0;
+      border-radius: 28px;
+      box-shadow: 0 20px 58px var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+      color: var(--ink);
+      isolation: isolate;
+      left: 0;
+      max-width: min(340px, calc(100vw - 36px));
+      opacity: 0;
+      overflow: hidden;
+      padding: 18px;
+      pointer-events: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      transform: translateY(8px) scale(0.965);
+      transform-origin: 26px 0;
+      transition: background var(--motion-steady) var(--ease-composed), border-radius var(--motion-steady) var(--ease-composed), box-shadow var(--motion-steady) var(--ease-composed), height var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed), padding var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), visibility var(--motion-steady) var(--ease-composed), width var(--motion-steady) var(--ease-composed);
+      visibility: hidden;
+      width: 320px;
+      z-index: 40;
+    }
+
+    .initiative-card::before {
+      background: linear-gradient(135deg, rgba(60, 60, 60, 0.42), rgba(17, 17, 17, 0.18)), rgba(17, 17, 17, 0.42);
+      content: "";
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: opacity 520ms var(--ease-composed);
+      z-index: 0;
+    }
+
+    html[data-theme="dark"] .initiative-card::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(250, 250, 250, 0.2)), rgba(250, 250, 250, 0.48);
+    }
+
+    .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):hover .initiative-card,
+    .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):focus-within .initiative-card {
+      --ink: #FAFAFA;
+      --muted: rgba(250, 250, 250, 0.66);
+      --quiet: rgba(250, 250, 250, 0.4);
+      --line: rgba(250, 250, 250, 0.16);
+    }
+
+    html[data-theme="dark"] .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):hover .initiative-card,
+    html[data-theme="dark"] .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):focus-within .initiative-card {
+      --ink: #111111;
+      --muted: rgba(17, 17, 17, 0.62);
+      --quiet: rgba(17, 17, 17, 0.36);
+      --line: rgba(17, 17, 17, 0.12);
+    }
+
+    .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):hover .initiative-card::before,
+    .initiative:not(.is-pinned):not(.is-detail):not(.is-dismissed):focus-within .initiative-card::before {
+      opacity: 1;
+    }
+
+    .initiative:not(.is-dismissed):hover .initiative-card,
+    .initiative:not(.is-dismissed):focus-within .initiative-card,
+    .initiative.is-pinned .initiative-card {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      visibility: visible;
+    }
+
+    .initiative-close {
+      appearance: none;
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
+      background: color-mix(in srgb, var(--glass-fill) 82%, transparent);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      color: var(--muted);
+      cursor: pointer;
+      display: grid;
+      height: 24px;
+      opacity: 0;
+      padding: 0;
+      place-items: center;
+      pointer-events: none;
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      transform: scale(0.82);
+      transition: opacity var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), border-color var(--motion-quick) var(--ease-composed), color var(--motion-quick) var(--ease-composed);
+      width: 24px;
+      z-index: 3;
+    }
+
+    .initiative-close::before {
+      content: "+";
+      display: block;
+      font-size: 17px;
+      line-height: 1;
+      transform: rotate(45deg);
+    }
+
+    .initiative.is-pinned .initiative-close {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+      transition-delay: 80ms, 80ms, 0ms, 0ms;
+    }
+
+    .initiative-close:hover,
+    .initiative-close:focus-visible {
+      border-color: var(--activity);
+      color: var(--activity);
+      outline: none;
+    }
+
+    .initiative-title,
+    .initiative-body {
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .initiative-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      padding-right: 34px;
+      transform: translateY(5px);
+      transition: color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+      opacity: 0;
+      font-variation-settings: "wght" 560, "opsz" 15;
+    }
+
+    .initiative.is-dwelling .initiative-title {
+      animation: dwell-title-shimmer 3000ms linear forwards;
+      background: linear-gradient(90deg, var(--ink) 0%, var(--ink) 38%, var(--activity) 50%, var(--ink) 62%, var(--ink) 100%);
+      background-clip: text;
+      background-size: 260% 100%;
+      color: transparent;
+      -webkit-background-clip: text;
+    }
+
+    .initiative-body {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+    }
+
+    .initiative-detail {
+      color: var(--ink);
+      display: none;
+      font-size: 16px;
+      line-height: 1.62;
+      margin-bottom: 22px;
+      max-width: 680px;
+      opacity: 0;
+      position: relative;
+      transform: translateY(5px);
+      transition: color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+      font-variation-settings: "wght" 405, "opsz" 16;
+      z-index: 1;
+    }
+
+    .initiative-more {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-size: 13px;
+      gap: 5px;
+      line-height: 1.4;
+      margin-right: 18px;
+      padding: 0;
+      position: relative;
+      transition: color var(--motion-quick) var(--ease-composed), transform var(--motion-quick) var(--ease-composed);
+      z-index: 1;
+    }
+
+    .initiative-more svg {
+      display: block;
+      height: 13px;
+      stroke-width: 2;
+      width: 13px;
+    }
+
+    .initiative-more:hover,
+    .initiative-more:focus-visible {
+      color: var(--activity);
+      outline: none;
+      transform: translateX(1px);
+    }
+
+    .initiative-action-row {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 2px;
+      opacity: 0;
+      position: relative;
+      transform: translateY(5px);
+      transition: opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+      z-index: 1;
+    }
+
+    .initiative-action-row .initiative-more {
+      margin-right: 0;
+    }
+
+    .initiative-action-row a {
+      margin-left: 0 !important;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-card {
+      border-radius: 34px;
+      bottom: auto;
+      box-shadow: 0 34px 90px var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+      height: 80vh;
+      left: 50%;
+      max-height: calc(100vh - 32px);
+      max-width: calc(100vw - 32px);
+      opacity: 1;
+      overflow-y: auto;
+      padding: 34px;
+      pointer-events: auto;
+      position: fixed;
+      right: auto;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      visibility: visible;
+      width: 80vw;
+      z-index: 80;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-title {
+      font-size: 24px;
+      line-height: 1.18;
+      margin-bottom: 18px;
+      font-variation-settings: "wght" 570, "opsz" 24;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-body,
+    .initiative[data-detail-card="product"].is-detail .initiative-more {
+      display: none;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-detail {
+      display: block;
+    }
+
+    .initiative-detail-link {
+      display: none !important;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-detail-link {
+      display: inline-flex !important;
+      margin-right: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-action-row {
+      margin-bottom: 14px;
+    }
+
+    .initiative-card a {
+      color: var(--muted);
+      display: inline-block;
+      font-size: 13px;
+      line-height: 1.4;
+      padding-bottom: 2px;
+      pointer-events: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .initiative-card > a {
+      opacity: 0;
+      transform: translateY(5px);
+      transition: background-size var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+    }
+
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-title,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-title,
+    .initiative.is-pinned .initiative-card .initiative-title {
+      --card-content-delay: 40ms;
+      opacity: 1;
+      transform: none;
+    }
+
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-body,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-body,
+    .initiative.is-pinned .initiative-card .initiative-body,
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-detail,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-detail,
+    .initiative.is-pinned .initiative-card .initiative-detail {
+      --card-content-delay: 120ms;
+      opacity: 1;
+      transform: none;
+    }
+
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-action-row,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-action-row,
+    .initiative.is-pinned .initiative-card .initiative-action-row,
+    .initiative:not(.is-dismissed):hover .initiative-card > a,
+    .initiative:not(.is-dismissed):focus-within .initiative-card > a,
+    .initiative.is-pinned .initiative-card > a {
+      --card-content-delay: 190ms;
+      opacity: 1;
+      transform: none;
+    }
+
+    .initiative-card a:hover,
+    .initiative-card a:focus-visible {
+      color: var(--muted);
+    }
+
+    .initiative-card a + a {
+      margin-left: 12px;
+    }
+
+    .initiative-more + a {
+      margin-left: 6px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.68;
+      letter-spacing: 0;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    section {
+      --intro-reveal-delay: 500ms;
+      animation: calm-reveal var(--motion-reveal) var(--ease-composed) 180ms backwards;
+      padding-bottom: 74px;
+    }
+
+    section + section {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      color: var(--quiet);
+      font-size: 11px;
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-variation-settings: "wght" 620, "opsz" 11;
+    }
+
+    #career,
+    #writing {
+      margin-left: calc((100% - min(900px, calc(100vw - 48px))) / 2);
+      width: min(900px, calc(100vw - 48px));
+    }
+
+    #index {
+      animation-delay: 260ms;
+      --intro-reveal-delay: 650ms;
+    }
+
+    #writing {
+      animation-delay: 300ms;
+      --intro-reveal-delay: 800ms;
+    }
+
+    #contact {
+      animation-delay: 380ms;
+      --intro-reveal-delay: 940ms;
+    }
+
+    .career-columns {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .career-column {
+      min-width: 0;
+    }
+
+    .career-column + .career-column {
+      padding-left: 28px;
+    }
+
+    .career-column-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+      margin: 0 0 11px;
+      font-variation-settings: "wght" 500, "opsz" 15;
+    }
+
+    .career-group + .career-group {
+      margin-top: 14px;
+    }
+
+    .career-subtitle {
+      color: var(--quiet);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 650, "opsz" 10;
+    }
+
+    .career-column-text {
+      color: var(--ink);
+      display: grid;
+      gap: 7px;
+      font-size: 15px;
+      line-height: 1.38;
+      font-variation-settings: "wght" 365, "opsz" 15;
+    }
+
+    .career-column-text p {
+      font-size: inherit;
+      line-height: inherit;
+      font-variation-settings: inherit;
+    }
+
+    .career-list {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.34;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-variation-settings: "wght" 365, "opsz" 15;
+    }
+
+    .career-list li + li {
+      margin-top: 5px;
+    }
+
+    .career-related,
+    #career .initiative-link {
+      background-clip: text;
+      background-image: linear-gradient(var(--activity), var(--activity)), linear-gradient(var(--ink), var(--ink));
+      background-position: 0 0, 0 0;
+      background-repeat: no-repeat;
+      background-size: 0 100%, 100% 100%;
+      color: transparent;
+      display: inline;
+      transition: background-size var(--motion-steady) var(--ease-composed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #career .initiative-link {
+      font-variation-settings: "wght" 390, "opsz" 15;
+      padding-bottom: 0;
+      text-align: left;
+    }
+
+    #career .initiative.career-related {
+      background-image: none;
+      color: inherit;
+      transition: none;
+      -webkit-text-fill-color: currentColor;
+    }
+
+    #career .initiative-link:hover,
+    #career .initiative-link:focus-visible,
+    #career [data-company].is-related-highlight .initiative-link,
+    #career .career-related.is-related-highlight {
+      background-size: 100% 100%, 100% 100%;
+    }
+
+    .rows {
+      display: grid;
+      gap: 0;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 24px;
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+    }
+
+    .row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .row-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.45;
+      font-variation-settings: "wght" 535, "opsz" 15;
+    }
+
+    .row-text {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.56;
+    }
+
+    .row-detail {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .writing-list {
+      display: grid;
+      align-items: stretch;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .writing-post {
+      display: flex;
+      min-width: 0;
+    }
+
+    .writing-post-link {
+      display: grid;
+      flex: 1;
+      gap: 0;
+      grid-template-rows: auto 1fr;
+      height: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      overflow: hidden;
+      transition: box-shadow var(--motion-steady) var(--ease-composed), transform var(--motion-quick) var(--ease-composed);
+    }
+
+    .writing-post-cover {
+      aspect-ratio: 16 / 10;
+      background: var(--line);
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .writing-post-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: opacity var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
+    }
+
+    .writing-post-content {
+      align-content: start;
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+      padding: 14px 16px 16px;
+    }
+
+    .writing-post-meta {
+      color: var(--quiet);
+      font-size: 12px;
+      line-height: 1.35;
+      font-variation-settings: "wght" 405, "opsz" 12;
+    }
+
+    .writing-post-title {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.42;
+      transition: color var(--motion-quick) var(--ease-composed);
+      font-variation-settings: "wght" 405, "opsz" 14;
+    }
+
+    .writing-post-description {
+      color: var(--muted);
+      display: -webkit-box;
+      font-size: 14px;
+      line-height: 1.44;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-variation-settings: "wght" 405, "opsz" 14;
+    }
+
+    .writing-post-link:hover,
+    .writing-post-link:focus-visible {
+      box-shadow: 0 14px 34px color-mix(in srgb, var(--ink) 9%, transparent);
+      transform: translateY(-1px);
+    }
+
+    .writing-post-link:hover .writing-post-cover img,
+    .writing-post-link:focus-visible .writing-post-cover img {
+      transform: scale(1.025);
+    }
+
+    .writing-footer {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    .writing-footer a {
+      padding-bottom: 2px;
+    }
+
+    .writing-footer a:hover,
+    .writing-footer a:focus-visible {
+      color: var(--muted);
+    }
+
+    .copy {
+      display: grid;
+      gap: 18px;
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .contact-links a {
+      padding-bottom: 2px;
+    }
+
+    .contact-links a:hover,
+    .contact-links a:focus-visible {
+      color: var(--muted);
+    }
+
+    .initiative-link,
+    .initiative-card a,
+    .writing-footer a,
+    .contact-links a {
+      background-image: linear-gradient(var(--activity), var(--activity)), linear-gradient(var(--line), var(--line));
+      background-position: 0 100%, 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0 1px, 100% 1px;
+      transition: background-size var(--motion-steady) var(--ease-composed), color var(--motion-quick) var(--ease-composed);
+    }
+
+    .initiative-link:hover,
+    .initiative-link:focus-visible,
+    .initiative-card a:hover,
+    .initiative-card a:focus-visible,
+    .writing-footer a:hover,
+    .writing-footer a:focus-visible,
+    .contact-links a:hover,
+    .contact-links a:focus-visible {
+      background-size: 100% 1px, 100% 1px;
+    }
+
+    .initiative-card > a {
+      transition: background-size var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+    }
+
+    .note {
+      --intro-reveal-delay: 1080ms;
+      margin-top: 28px;
+      color: var(--quiet);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    [data-after-intro] {
+      transition: opacity var(--motion-reveal) var(--ease-composed), transform var(--motion-reveal) var(--ease-composed), visibility var(--motion-reveal) var(--ease-composed);
+    }
+
+    html.intro-pending [data-after-intro] {
+      animation: none;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      visibility: hidden;
+    }
+
+    html.intro-pending.intro-revealed [data-after-intro] {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+      transition-delay: var(--intro-reveal-delay);
+      visibility: visible;
+    }
+
+    html.intro-complete header,
+    html.intro-complete .intro,
+    html.intro-complete section {
+      animation: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+
+      header,
+      .intro,
+      section,
+      [data-after-intro] {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        visibility: visible;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 34px 18px 64px;
+      }
+
+      header {
+        display: grid;
+        gap: 22px;
+        padding-bottom: 88px;
+      }
+
+      nav {
+        gap: 16px;
+      }
+
+      .header-actions {
+        justify-content: space-between;
+      }
+
+      .intro {
+        margin-bottom: 96px;
+      }
+
+      h1 {
+        font-size: clamp(28px, 8vw, 34px);
+        line-height: 1.2;
+      }
+
+      section {
+        padding-bottom: 60px;
+      }
+
+      #career {
+        margin-left: 0;
+        transform: none;
+        width: auto;
+      }
+
+      #writing {
+        margin-left: 0;
+        width: auto;
+      }
+
+      .career-columns {
+        gap: 0;
+        grid-template-columns: 1fr;
+      }
+
+      .career-column {
+        padding: 16px 0;
+      }
+
+      .career-column:first-child {
+        padding-top: 0;
+      }
+
+      .career-column + .career-column {
+        padding-left: 0;
+      }
+
+      .career-column-title {
+        margin-bottom: 4px;
+      }
+
+      .career-group + .career-group {
+        margin-top: 14px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 16px 0;
+      }
+
+      .writing-list {
+        grid-auto-columns: minmax(246px, 82%);
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        margin: 0 -18px;
+        overflow-x: auto;
+        padding: 0 18px 8px;
+        scroll-snap-type: x proximity;
+      }
+
+      .writing-post {
+        scroll-snap-align: start;
+      }
+
+      .writing-post-content {
+        padding: 12px 14px 14px;
+      }
+
+      .initiative {
+        position: static;
+      }
+
+      .initiative:hover::after,
+      .initiative:focus-within::after,
+      .initiative.is-pinned::after {
+        display: none;
+      }
+
+      .initiative-card {
+        bottom: 18px;
+        left: 18px;
+        right: 18px;
+        max-width: none;
+        position: fixed;
+        top: auto;
+        width: auto;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-card {
+        bottom: auto;
+        height: 82vh;
+        left: 50%;
+        right: auto;
+        top: 50%;
+        width: 92vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header data-after-intro>
+      <a class="site-mark" href="#" aria-label="Dr. Ax Ali">
+        <svg class="site-mark-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" aria-hidden="true" focusable="false">
+          <path d="M 23.494 19.13 C 23.257 17.705 22.882 16.167 22.378 14.558 C 21.521 11.824 20.574 9.796 20.564 9.776 C 20.445 9.521 20.143 9.377 19.846 9.436 C 19.542 9.495 19.331 9.745 19.342 10.03 C 19.343 10.054 19.431 12.323 19.027 15.003 C 19.019 14.991 19.012 14.98 19.004 14.969 C 18.018 13.486 17.055 12.333 16.142 11.54 C 14.966 10.518 13.814 10.047 12.72 10.139 C 12.073 10.193 11.527 10.357 11.098 10.626 C 10.656 10.902 10.347 11.279 10.18 11.744 C 9.528 13.563 10.717 15.807 13.445 17.899 L 13.487 17.932 L 15.492 17.941 L 14.753 17.375 C 13.496 16.41 12.513 15.36 11.91 14.338 C 11.382 13.442 11.197 12.651 11.391 12.111 C 11.559 11.642 12.045 11.37 12.836 11.304 C 14.223 11.187 15.979 12.666 17.916 15.579 C 18.168 15.958 18.427 16.367 18.686 16.797 C 18.414 17.964 18.063 19.005 17.643 19.895 C 16.958 21.344 16.083 22.398 15.044 23.027 C 14.19 23.544 13.061 23.539 12.099 23.013 C 11.371 22.615 10.794 21.955 10.431 21.105 C 9.991 20.075 9.875 18.82 10.086 17.375 L 10.174 16.772 L 8.872 16.762 L 8.823 17.219 C 8.583 18.864 8.724 20.316 9.244 21.533 C 9.711 22.627 10.472 23.486 11.445 24.018 C 12.121 24.387 12.875 24.582 13.626 24.582 C 14.388 24.582 15.12 24.382 15.746 24.003 C 16.997 23.246 18.03 22.019 18.815 20.355 C 19.101 19.749 19.358 19.078 19.58 18.355 C 20.539 20.103 21.339 21.809 21.829 22.853 C 22.023 23.266 22.177 23.592 22.293 23.825 C 22.359 23.958 22.41 24.053 22.452 24.122 C 22.486 24.178 22.516 24.222 22.547 24.26 C 22.776 24.536 23.087 24.517 23.176 24.505 C 23.477 24.464 23.698 24.245 23.727 23.961 C 23.872 22.553 23.793 20.928 23.494 19.13 Z M 22.475 21.279 C 21.809 19.887 20.976 18.222 20.028 16.61 C 20.09 16.319 20.148 16.017 20.201 15.713 C 20.349 14.858 20.459 13.964 20.531 13.046 C 20.756 13.664 20.966 14.283 21.156 14.893 C 21.644 16.452 22.007 17.939 22.235 19.313 C 22.349 19.994 22.429 20.652 22.475 21.279 Z" fill="currentColor"></path>
+          <path d="M 40.597 17.225 L 40.547 16.762 L 39.245 16.771 L 39.333 17.374 C 39.543 18.819 39.428 20.074 38.988 21.104 C 38.625 21.954 38.048 22.614 37.32 23.012 C 36.358 23.538 35.229 23.543 34.375 23.026 C 33.335 22.397 32.461 21.343 31.775 19.894 C 31.355 19.004 31.004 17.963 30.733 16.796 C 30.992 16.366 31.25 15.957 31.502 15.578 C 33.439 12.665 35.196 11.186 36.582 11.303 C 37.373 11.369 37.86 11.641 38.027 12.11 C 38.221 12.65 38.037 13.441 37.508 14.337 C 36.905 15.359 35.922 16.409 34.665 17.374 L 33.927 17.94 L 35.931 17.931 L 35.974 17.898 C 38.701 15.806 39.891 13.563 39.238 11.743 C 39.071 11.278 38.763 10.902 38.321 10.625 C 37.891 10.356 37.345 10.192 36.699 10.138 C 35.604 10.046 34.453 10.517 33.276 11.539 C 32.363 12.332 31.4 13.486 30.414 14.968 C 30.407 14.979 30.4 14.991 30.392 15.002 C 29.987 12.322 30.075 10.053 30.076 10.029 C 30.088 9.744 29.876 9.494 29.572 9.435 C 29.276 9.376 28.974 9.52 28.854 9.775 C 28.844 9.795 27.897 11.823 27.041 14.557 C 26.537 16.166 26.161 17.704 25.924 19.129 C 25.625 20.926 25.547 22.551 25.691 23.959 C 25.72 24.244 25.942 24.462 26.242 24.503 C 26.331 24.515 26.642 24.534 26.871 24.258 C 26.902 24.22 26.933 24.176 26.967 24.12 C 27.008 24.051 27.059 23.956 27.126 23.823 C 27.242 23.591 27.395 23.264 27.589 22.85 C 28.079 21.807 28.879 20.102 29.839 18.353 C 30.061 19.076 30.317 19.747 30.603 20.353 C 31.389 22.017 32.422 23.244 33.672 24.002 C 34.298 24.38 35.031 24.58 35.792 24.58 C 36.543 24.58 37.297 24.385 37.973 24.016 C 38.946 23.484 39.707 22.624 40.174 21.531 C 40.694 20.314 40.836 18.862 40.597 17.224 Z M 29.391 16.61 C 28.444 18.222 27.61 19.887 26.944 21.279 C 26.99 20.652 27.071 19.994 27.184 19.313 C 27.412 17.939 27.775 16.452 28.263 14.893 C 28.454 14.283 28.663 13.664 28.888 13.046 C 28.96 13.964 29.071 14.858 29.219 15.713 C 29.271 16.017 29.329 16.318 29.391 16.61 Z" fill="currentColor"></path>
+          <path d="M 23.727 26.883 C 23.698 26.599 23.477 26.381 23.177 26.34 C 23.087 26.327 22.777 26.309 22.548 26.584 C 22.516 26.622 22.486 26.666 22.452 26.722 C 22.41 26.792 22.359 26.887 22.293 27.02 C 22.177 27.252 22.023 27.579 21.829 27.992 C 21.339 29.036 20.539 30.741 19.58 32.49 C 19.358 31.767 19.101 31.095 18.815 30.49 C 18.029 28.826 16.997 27.598 15.746 26.841 C 15.12 26.462 14.387 26.262 13.626 26.262 C 12.876 26.262 12.121 26.457 11.446 26.827 C 10.473 27.359 9.711 28.218 9.244 29.312 C 8.725 30.529 8.583 31.98 8.822 33.619 L 8.872 34.082 L 10.174 34.072 L 10.086 33.47 C 9.875 32.024 9.991 30.769 10.431 29.74 C 10.794 28.889 11.371 28.23 12.099 27.831 C 13.061 27.306 14.19 27.3 15.044 27.817 C 16.084 28.447 16.958 29.501 17.643 30.95 C 18.064 31.839 18.415 32.881 18.686 34.048 C 18.427 34.477 18.168 34.887 17.917 35.265 C 15.98 38.179 14.223 39.658 12.837 39.541 C 12.046 39.474 11.559 39.203 11.391 38.734 C 11.198 38.194 11.382 37.403 11.911 36.507 C 12.514 35.484 13.497 34.434 14.754 33.47 L 15.492 32.903 L 13.488 32.913 L 13.445 32.945 C 10.718 35.038 9.528 37.281 10.181 39.101 C 10.348 39.566 10.656 39.942 11.098 40.219 C 11.528 40.487 12.074 40.651 12.72 40.706 C 13.814 40.797 14.966 40.326 16.143 39.305 C 17.056 38.512 18.019 37.358 19.004 35.875 C 19.012 35.864 19.019 35.853 19.027 35.842 C 19.432 38.521 19.344 40.791 19.343 40.815 C 19.331 41.1 19.543 41.349 19.846 41.409 C 19.891 41.417 19.935 41.422 19.979 41.422 C 20.229 41.422 20.463 41.286 20.565 41.069 C 20.574 41.049 21.521 39.021 22.378 36.286 C 22.882 34.678 23.258 33.14 23.495 31.715 C 23.794 29.918 23.872 28.292 23.728 26.884 Z M 22.475 29.565 C 22.429 30.191 22.349 30.849 22.236 31.531 C 22.007 32.905 21.644 34.392 21.157 35.951 C 20.966 36.56 20.756 37.179 20.531 37.798 C 20.459 36.879 20.348 35.985 20.201 35.131 C 20.148 34.826 20.09 34.525 20.028 34.233 C 20.976 32.622 21.81 30.957 22.476 29.565 Z" fill="currentColor"></path>
+          <path d="M 40.175 29.311 C 39.708 28.217 38.946 27.358 37.974 26.826 C 37.298 26.457 36.544 26.262 35.793 26.262 C 35.031 26.262 34.299 26.462 33.673 26.841 C 32.422 27.598 31.389 28.825 30.604 30.489 C 30.318 31.095 30.061 31.766 29.839 32.489 C 28.88 30.741 28.08 29.036 27.59 27.991 C 27.396 27.578 27.242 27.252 27.126 27.019 C 27.06 26.886 27.009 26.791 26.967 26.722 C 26.933 26.666 26.903 26.622 26.871 26.584 C 26.643 26.308 26.332 26.327 26.243 26.339 C 25.942 26.38 25.721 26.599 25.692 26.883 C 25.547 28.291 25.626 29.916 25.925 31.714 C 26.162 33.139 26.537 34.676 27.041 36.285 C 27.898 39.02 28.845 41.047 28.855 41.067 C 28.956 41.284 29.19 41.42 29.44 41.42 C 29.484 41.42 29.529 41.416 29.573 41.407 C 29.877 41.348 30.088 41.098 30.077 40.813 C 30.076 40.789 29.988 38.52 30.392 35.84 C 30.4 35.852 30.407 35.863 30.415 35.874 C 31.401 37.357 32.363 38.51 33.277 39.303 C 34.453 40.324 35.605 40.795 36.699 40.704 C 37.346 40.65 37.891 40.486 38.321 40.217 C 38.763 39.94 39.072 39.564 39.239 39.099 C 39.891 37.279 38.701 35.036 35.974 32.944 L 35.931 32.911 L 33.927 32.902 L 34.666 33.468 C 35.923 34.433 36.906 35.483 37.509 36.505 C 38.037 37.401 38.222 38.192 38.028 38.732 C 37.859 39.201 37.373 39.472 36.582 39.539 C 35.196 39.656 33.439 38.177 31.502 35.264 C 31.25 34.885 30.992 34.475 30.733 34.046 C 31.004 32.879 31.355 31.837 31.775 30.948 C 32.461 29.499 33.336 28.445 34.375 27.816 C 35.229 27.298 36.358 27.304 37.32 27.83 C 38.048 28.228 38.625 28.888 38.988 29.738 C 39.427 30.768 39.543 32.023 39.333 33.468 L 39.245 34.071 L 40.547 34.08 L 40.596 33.623 C 40.836 31.979 40.694 30.527 40.175 29.31 Z M 29.392 34.233 C 29.33 34.525 29.272 34.826 29.219 35.131 C 29.071 35.985 28.961 36.879 28.889 37.797 C 28.664 37.179 28.454 36.56 28.263 35.95 C 27.776 34.391 27.413 32.904 27.184 31.53 C 27.071 30.849 26.991 30.191 26.945 29.565 C 27.611 30.956 28.444 32.621 29.392 34.233 Z" fill="currentColor"></path>
+        </svg>
+      </a>
+      <div class="header-actions">
+        <nav aria-label="Page sections">
+          <a href="#career">Career</a>
+          <a href="#writing">Writing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" data-theme-toggle>
+          <span class="toggle-track" aria-hidden="true">
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <div class="intro">
+      <p class="eyebrow"><span class="intro-type-text" data-type-eyebrow data-intro-formal="Hi, I'm Dr. Abdullah &quot;Ax&quot; Ali." data-intro-short="Hi, I'm Ax,">Hi, I'm Ax,</span><span class="typing-cursor" data-typing-cursor hidden aria-hidden="true"></span></p>
+      <h1 aria-label="Creative Scientist &amp; Entrepreneur."><span class="intro-type-text" data-type-title data-intro-title="Creative Scientist &amp; Entrepreneur">Creative Scientist &amp; Entrepreneur.</span></h1>
+      <div class="intro-copy" data-after-intro>
+        <p>I live in New York City. My career has taken many shapes: a human-computer interaction research scientist and developer, designer, product leader, and entrepreneur. The throughline has been working on 0-to-1 applied AI products.</p>
+        <p>Right now, I'm building <span class="initiative" data-company="seena"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs"><span class="initiative-title">Seena Labs</span><span class="initiative-body">I'm the founder and CEO of Seena Labs, a human-centered applied AI lab focused on building products for understanding human-AI behavior and helping businesses build better products.</span><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span></span>, teaching and advising through <span class="initiative" data-company="studio89"><button class="initiative-link" type="button" aria-haspopup="dialog">Studio89 Design</button><span class="initiative-card" role="dialog" aria-label="About Studio89 Design"><span class="initiative-title">Studio89 Design</span><span class="initiative-body">I run Studio89 Design as my consulting and teaching studio, where I help companies design and build applied AI products, workflows, and human-centered product strategies.</span><a href="mailto:ax@studio89.design">Let's work together</a><a href="https://studio89.design" target="_blank" rel="noreferrer">Visit Studio89</a></span></span>, and writing <span class="initiative"><button class="initiative-link" type="button" aria-haspopup="dialog">Everything is Designed</button><span class="initiative-card" role="dialog" aria-label="About Everything is Designed"><span class="initiative-title">Everything is Designed</span><span class="initiative-body">A newsletter about AI, design, systems, creativity, and behavior.</span><a href="https://axali.substack.com" target="_blank" rel="noreferrer">Read Everything is Designed</a></span></span>.</p>
+      </div>
+    </div>
+
+    <section id="career" data-after-intro>
+      <h2>My career at a glance</h2>
+      <div class="career-columns">
+        <article class="career-column">
+          <h3 class="career-column-title">Companies and institutions</h3>
+          <div class="career-group">
+            <h4 class="career-subtitle">Worked at</h4>
+            <ul class="career-list">
+              <li><span class="initiative" data-company="seena"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs"><span class="initiative-title">Seena Labs</span><span class="initiative-body">I'm the founder and CEO of Seena Labs, a human-centered applied AI lab focused on building products for understanding human-AI behavior and helping businesses build better products.</span><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span></span></li>
+              <li><span class="initiative" data-company="studio89"><button class="initiative-link" type="button" aria-haspopup="dialog">Studio89 Design</button><span class="initiative-card" role="dialog" aria-label="About Studio89 Design"><span class="initiative-title">Studio89 Design</span><span class="initiative-body">I run Studio89 Design as my consulting and teaching studio, where I help companies design and build applied AI products, workflows, and human-centered product strategies.</span><a href="mailto:ax@studio89.design">Let's work together</a><a href="https://studio89.design" target="_blank" rel="noreferrer">Visit Studio89</a></span></span></li>
+              <li><span class="initiative" data-company="adobe"><button class="initiative-link" type="button" aria-haspopup="dialog">Adobe</button><span class="initiative-card" role="dialog" aria-label="About Adobe"><span class="initiative-title">Adobe</span><span class="initiative-body">I work with Adobe as an AI and creativity expert for their enterprise clients, giving workshops on how to use AI tools in creative workflows.</span></span></span></li>
+              <li><span class="initiative" data-company="third-brain"><button class="initiative-link" type="button" aria-haspopup="dialog">3rd Brain</button><span class="initiative-card" role="dialog" aria-label="About 3rd Brain"><span class="initiative-title">3rd Brain</span><span class="initiative-body">I was the founder and CEO of 3rd Brain, where I led the company from idea through product strategy, design, development, and launch. The work gave me hands-on experience building a consumer AI company end to end: defining the product vision, shipping mobile apps, learning from users, and translating a personal productivity thesis into a real product in market.</span></span></span></li>
+              <li><span class="initiative" data-company="bilt"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Rewards</button><span class="initiative-card" role="dialog" aria-label="About Bilt Rewards"><span class="initiative-title">Bilt Rewards</span><span class="initiative-body">I led the loyalty products pod as a technical product leader, where I helped ship consumer rewards experiences and partner integrations that connected rent, travel, dining, payments, and loyalty into everyday financial products.</span></span></span></li>
+              <li><span class="initiative" data-company="amazon"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon</button><span class="initiative-card" role="dialog" aria-label="About Amazon"><span class="initiative-title">Amazon</span><span class="initiative-body">I worked on product at Amazon, where I helped build shopping experiences and pricing systems for grocery customers. My work included low-price bundling and promotional surfaces designed to help customers discover better value, while leading cross-org design sprints that embodied Amazon's Think Big and innovation leadership principles.</span></span></span></li>
+              <li><span class="initiative" data-company="aws itau johnson-johnson abb"><button class="initiative-link" type="button" aria-haspopup="dialog">AWS - Clients include: Itau Bank, Johnson &amp; Johnson, ABB</button><span class="initiative-card" role="dialog" aria-label="About AWS"><span class="initiative-title">AWS</span><span class="initiative-body">At AWS, I worked on product innovation with enterprise clients, helping teams prototype and design new products across finance, healthcare, and industrial systems.</span></span></span></li>
+              <li><span class="initiative" data-company="apple"><button class="initiative-link" type="button" aria-haspopup="dialog">Apple</button><span class="initiative-card" role="dialog" aria-label="About Apple"><span class="initiative-title">Apple</span><span class="initiative-body">At Apple, I worked on early multimodal interaction research and prototyping for Apple Vision Pro.</span></span></span></li>
+              <li hidden>Accenture</li>
+              <li><span class="initiative" data-company="microsoft-research"><button class="initiative-link" type="button" aria-haspopup="dialog">Microsoft Research</button><span class="initiative-card" role="dialog" aria-label="About Microsoft Research"><span class="initiative-title">Microsoft Research</span><span class="initiative-body">At Microsoft Research, I worked on accessibility and dyslexia-focused research, exploring how technology can better support search and help people find the most dyslexia-friendly results.</span></span></span></li>
+              <li><span class="initiative" data-company="uw"><button class="initiative-link" type="button" aria-haspopup="dialog">University of Washington</button><span class="initiative-card" role="dialog" aria-label="About University of Washington"><span class="initiative-title">University of Washington</span><span class="initiative-body">At the University of Washington, I completed my Ph.D. in Human-Computer Interaction, advised by Prof. Jake Wobbrock. My research focused on Distributed Interaction Design: using the web, machine learning, and human computation to design technologies across devices, contexts, and human abilities.</span></span></span></li>
+              <li><span class="initiative" data-company="cmu"><button class="initiative-link" type="button" aria-haspopup="dialog">Carnegie Mellon University</button><span class="initiative-card" role="dialog" aria-label="About Carnegie Mellon University"><span class="initiative-title">Carnegie Mellon University</span><span class="initiative-body">I was one of four scientists who co-invented Dytective, a game that uses AI to detect dyslexia.</span></span></span></li>
+              <li><span class="initiative" data-company="umbc"><button class="initiative-link" type="button" aria-haspopup="dialog">University of Maryland Baltimore County</button><span class="initiative-card" role="dialog" aria-label="About University of Maryland Baltimore County"><span class="initiative-title">University of Maryland Baltimore County</span><span class="initiative-body">While completing my master's in Human-Centered Computing and my bachelor's in Information Systems, I worked as an accessibility researcher creating self-adapting interfaces using machine learning, and developed novel gesture-based authentication systems for mobile and wearable devices.</span></span></span></li>
+              <li><span class="initiative" data-company="johns-hopkins"><button class="initiative-link" type="button" aria-haspopup="dialog">Johns Hopkins</button><span class="initiative-card" role="dialog" aria-label="About Johns Hopkins"><span class="initiative-title">Johns Hopkins</span><span class="initiative-body">I worked as an interpreter at Johns Hopkins while I was in college. That job inspired me to build my first piece of software, Insterpreter.</span></span></span></li>
+            </ul>
+          </div>
+          <div class="career-group">
+            <h4 class="career-subtitle">Guest lectures and affiliations</h4>
+            <ul class="career-list">
+              <li>NYU Abilities Project</li>
+              <li>Columbia University</li>
+              <li>Harvard University</li>
+              <li>University of Michigan</li>
+              <li>Towson University</li>
+              <li>Carnegie Mellon University / Apple</li>
+              <li>Microsoft</li>
+              <li>DUB Group</li>
+            </ul>
+          </div>
+        </article>
+        <article class="career-column">
+          <h3 class="career-column-title">Research and academia</h3>
+          <div class="career-group">
+            <h4 class="career-subtitle">Education</h4>
+            <ul class="career-list">
+              <li>Ph.D. Human-Computer Interaction, University of Washington</li>
+              <li>M.S. Information Science, University of Washington</li>
+              <li>M.S. Human-Centered Computing, UMBC</li>
+              <li>B.S. Information Systems, UMBC</li>
+            </ul>
+          </div>
+          <div class="career-group">
+            <h4 class="career-subtitle">Research</h4>
+            <div class="career-column-text">
+              <p>Advised by Prof. Jake Wobbrock.</p>
+              <p>Thesis: Distributed Interaction Design. Using the web, Machine Learning, and Human Computation to design technologies across the world.</p>
+              <p>20+ peer-reviewed publications across HCI, accessibility, and adaptive interfaces.</p>
+            </div>
+          </div>
+          <div class="career-group">
+            <h4 class="career-subtitle">Awards and honors</h4>
+            <ul class="career-list">
+              <li>CHI Best Paper Award, Top 1%</li>
+              <li>ASSETS Best Demo Award</li>
+              <li>W4A Best Paper Nomination</li>
+              <li>NSF LSAMP Bridge Fellowship</li>
+              <li>Microsoft Research Grant</li>
+              <li>HCOMP Doctoral Consortium Grant</li>
+              <li>7th Place, International AI &amp; Robotics for Good</li>
+            </ul>
+          </div>
+        </article>
+        <article class="career-column">
+          <h3 class="career-column-title">Products and systems</h3>
+          <ul class="career-list">
+            <li><span class="initiative career-related" data-company="seena" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs' AI Ambient Ethnographer</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs' AI Ambient Ethnographer"><span class="initiative-title">Seena Labs' AI Ambient Ethnographer</span><span class="initiative-body">An applied AI research system for understanding human-AI behavior.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span><span class="initiative-detail">Seena Labs is building AI products for understanding how people work with AI in the wild. The ambient ethnographer direction turns conversations, workflows, and behavioral traces into evidence that helps teams see how AI is actually changing work, decisions, and product experience.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="third-brain" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">3rd Brain: AI Organizer</button><span class="initiative-card" role="dialog" aria-label="About 3rd Brain: AI Organizer"><span class="initiative-title">3rd Brain: AI Organizer</span><span class="initiative-body">An AI Organizer for couples.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://www.3rd-brain.com" target="_blank" rel="noreferrer">Try 3rd Brain</a></span><span class="initiative-detail">An AI organizer for couples: a mobile app and capture system that helped people turn thoughts, notes, and tasks into a more structured shared external brain. The work sat at the intersection of AI-assisted organization, mobile product design, mental load, and behavior change, and gave me direct founder experience building a consumer AI product from concept into shipped iOS and Android apps.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Dining Program</button><span class="initiative-card" role="dialog" aria-label="About Bilt Dining Program"><span class="initiative-title">Bilt Dining Program</span><span class="initiative-body">A restaurant rewards program that brought everyday dining into Bilt's loyalty ecosystem.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Bilt, I helped launch Bilt Dining across major metros by shaping the product experience, restaurant discovery surface, and rewards logic. The program connected neighborhood dining to the broader loyalty system and reached about 10% adoption in early rollout.</span><a class="initiative-detail-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Press coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Wallet</button><span class="initiative-card" role="dialog" aria-label="About Bilt Wallet"><span class="initiative-title">Bilt Wallet</span><span class="initiative-body">A card-linking product that let non-Bilt cardholders earn rewards across everyday spend.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped introduce third-party card linking in Bilt Wallet by integrating transaction streaming APIs and designing the account-linking and rewards experience. The work expanded Bilt beyond the Bilt Mastercard and helped users connect multiple cards for rent-adjacent and neighborhood rewards.</span><a class="initiative-detail-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Press coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x Lyft Rewards Integrations</button><span class="initiative-card" role="dialog" aria-label="About Bilt x Lyft Rewards Integrations"><span class="initiative-title">Bilt x Lyft Rewards Integrations</span><span class="initiative-body">A loyalty integration that connected rideshare behavior to the Bilt rewards network.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped launch Bilt's Lyft partnership by defining API contracts, shaping in-app onboarding, and coordinating the consumer rewards experience. The integration drove 89K account linkages in the first 24 hours and connected rent, travel, and daily mobility into one loyalty loop.</span><a class="initiative-detail-link" href="https://www.lyft.com/blog/posts/lyft-teams-up-with-bilt-rewards" target="_blank" rel="noreferrer">Lyft coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x point.me Flight Search</button><span class="initiative-card" role="dialog" aria-label="About Bilt x point.me Flight Search"><span class="initiative-title">Bilt x point.me Flight Search</span><span class="initiative-body">A flight rewards search engine that helped members compare points, miles, and cash.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I led the integration of point.me's flight rewards engine into Bilt's platform, redesigning the UX so members could make clearer miles-versus-cash booking decisions. The product became a high-intent travel surface with about 50K monthly searches.</span><a class="initiative-detail-link" href="https://www.cnbc.com/select/bilt-partners-with-pointme/" target="_blank" rel="noreferrer">CNBC coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Low-Price Bundling Program</button><span class="initiative-card" role="dialog" aria-label="About Amazon Low-Price Bundling Program"><span class="initiative-title">Amazon Low-Price Bundling Program</span><span class="initiative-body">A grocery promotion system that bundled low-priced items to improve value and shipping economics.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Amazon, I led product work for a low-price grocery bundling program across 12 markets. The program packaged small low-priced items into better-value baskets, helping customers discover savings while improving shipping efficiency and generating $55M in incremental sales and $120M in annual shipping savings.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Bundle Tracker and Promo Surfaces</button><span class="initiative-card" role="dialog" aria-label="About Amazon Bundle Tracker and Promo Surfaces"><span class="initiative-title">Amazon Bundle Tracker and Promo Surfaces</span><span class="initiative-body">Shopping UX and promotion surfaces that made grocery bundle progress easier to discover.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped ship customer-facing bundle tracker and promotional surfaces across grocery shopping flows. The work included nine UX features and a U.S. promo page with roughly 100K daily visits, making an operational pricing strategy legible as a simple shopping experience.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="aws itau" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Itau Mobile Loan App</button><span class="initiative-card" role="dialog" aria-label="About Itau Mobile Loan App"><span class="initiative-title">Itau Mobile Loan App</span><span class="initiative-body">A mobile loan-processing prototype for a major banking client through AWS.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Through AWS product innovation work, I helped Itau explore and prototype a mobile loan-processing application. The engagement translated business goals, cloud capabilities, and customer needs into an experience direction the bank could use to modernize loan workflows, expanding the engagement from four pods to 12 and leaving the client with a reusable product-innovation methodology.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="aws johnson-johnson" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">FDA Approval Research Platform</button><span class="initiative-card" role="dialog" aria-label="About FDA Approval Research Platform"><span class="initiative-title">FDA Approval Research Platform</span><span class="initiative-body">A healthcare research platform concept for navigating FDA approval evidence.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">On an AWS healthcare engagement, I helped rescue and reshape a struggling FDA approval research platform by rebuilding stakeholder trust, introducing persona-driven design, and creating daily alignment rituals. The team delivered a validated redesign in six weeks and preserved a critical enterprise relationship.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="aws abb" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">EV Charging Platform Prototype</button><span class="initiative-card" role="dialog" aria-label="About EV Charging Platform Prototype"><span class="initiative-title">EV Charging Platform Prototype</span><span class="initiative-body">A fleet-charging product concept for electric trucks and industrial operations.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Through AWS, I helped prototype a platform for electric truck fleet charging. The work connected operational constraints, driver and fleet-manager needs, energy optimization, and cloud architecture into a product story for managing charging infrastructure at scale, including a 60-second pitch video produced in 48 hours.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="apple" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Apple Vision Pro Multimodal Input Interaction</button><span class="initiative-card" role="dialog" aria-label="About Apple Vision Pro Multimodal Input Interaction"><span class="initiative-title">Apple Vision Pro Multimodal Input Interaction</span><span class="initiative-body">Early multimodal text-input research using voice, gaze, and mid-air gestures.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Apple, I worked on early multimodal interaction research and prototyping for what became Apple Vision Pro. I led product design for a text-input interaction system that combined voice, gaze, and mid-air gestures, then ran co-design studies under secrecy constraints that challenged core assumptions and influenced the feature direction presented to senior AI/ML leadership.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Distributed Interaction Design: Designing Technologies in the Age of Social Distancing</button><span class="initiative-card" role="dialog" aria-label="About Distributed Interaction Design"><span class="initiative-title">Distributed Interaction Design</span><span class="initiative-body">A thesis framework for running design research across distance, devices, and contexts.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Distributed Interaction Design was my Ph.D. thesis direction at the University of Washington. It used the web, machine learning, and human computation to let researchers and designers run elicitation, co-design, and sensemaking work with people across the world, a framing that became especially relevant during social distancing.</span><a class="initiative-detail-link" href="https://interactions.acm.org/archive/view/march-april-2021/distributed-interaction-design" target="_blank" rel="noreferrer">ACM Interactions</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">I am Iron Man: Designing VR Gestures Using Priming with Sci-Fi Movies</button><span class="initiative-card" role="dialog" aria-label="About I am Iron Man"><span class="initiative-title">I am Iron Man</span><span class="initiative-body">A research study on how sci-fi primes the gestures people invent for VR.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">This project investigated how science-fiction imagery shapes the gestures people imagine for virtual reality. By using priming from movies like Iron Man, the study explored how cultural references can influence gesture elicitation and interaction design for emerging modalities.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Anachronism by Design: Reimagining the Desktop Set of Icons</button><span class="initiative-card" role="dialog" aria-label="About Anachronism by Design"><span class="initiative-title">Anachronism by Design</span><span class="initiative-body">A study of how young adults understand inherited computer iconography.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Anachronism by Design examined how young adults interpret desktop icons whose meanings come from older physical metaphors. The work asks what happens when interface symbols outlive the objects that originally made them obvious, and how designers should rethink icon systems for new generations.</span><a class="initiative-detail-link" href="https://doi.org/10.1016/j.ijhcs.2021.102599" target="_blank" rel="noreferrer">Journal article</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdlicit: A Two-Sided System for Running Remote Co-Design Sessions</button><span class="initiative-card" role="dialog" aria-label="About Crowdlicit"><span class="initiative-title">Crowdlicit</span><span class="initiative-body">A distributed co-design platform that scaled end-user elicitation studies online.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Crowdlicit was a two-sided research platform for conducting distributed end-user elicitation and design studies. It let researchers create studies, recruit participants remotely, collect participant-generated interaction ideas, and organize responses at a scale that would be hard to reach in a lab session.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3290605.3300483" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdsensus: ML Approach for Large-Scale Qualitative Data Analysis</button><span class="initiative-card" role="dialog" aria-label="About Crowdsensus"><span class="initiative-title">Crowdsensus</span><span class="initiative-body">A machine-learning-assisted workflow for making sense of large qualitative datasets.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Crowdsensus combined human similarity judgments with unsupervised machine learning to analyze large sets of qualitative design responses. The system helped researchers find agreement patterns in end-user elicitation studies while keeping the human nuance of the data visible.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3242587.3242621" target="_blank" rel="noreferrer">UIST paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="cmu" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Dytective: A Game to Detect Dyslexia</button><span class="initiative-card" role="dialog" aria-label="About Dytective"><span class="initiative-title">Dytective</span><span class="initiative-body">An award-winning game that used AI and player behavior to detect dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Carnegie Mellon, I was one of four scientists who co-invented Dytective, a game that uses AI to detect dyslexia from how children play. I helped design and develop the game experience, translating linguistic error patterns into playful levels whose performance data could predict dyslexia risk with over 90% accuracy. The project won ASSETS Best Demo, placed seventh in the International AI &amp; Robotics for Good competition, and went on to help more than 500,000 children through Change Dyslexia.</span><a class="initiative-detail-link" href="https://hcii.cmu.edu/news/cmu-researchers-earn-honors-assets" target="_blank" rel="noreferrer">CMU coverage</a><a class="initiative-detail-link" href="https://doi.org/10.1145/2700648.2811341" target="_blank" rel="noreferrer">ASSETS demo</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="microsoft-research" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Prototype to Evaluate How Searchers with Dyslexia Search the Web</button><span class="initiative-card" role="dialog" aria-label="About Dyslexia Search Prototype"><span class="initiative-title">Dyslexia Search Prototype</span><span class="initiative-body">A Microsoft Research prototype for studying search accessibility and dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Microsoft Research, I worked on accessibility and dyslexia-focused search research with the Ability group. Building on interviews with people with dyslexia, I ran large surveys, developed a web-based prototype for rating page readability, and helped publish work that informed how search systems could better serve people looking for readable, useful results.</span><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/blog/in-between-the-lines-broadening-access-to-web-search-by-understanding-the-needs-of-people-with-dyslexia/" target="_blank" rel="noreferrer">Microsoft blog</a><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/publication/understanding-needs-searchers-dyslexia/" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">ML-Based Self-Adapting Accessible Interfaces</button><span class="initiative-card" role="dialog" aria-label="About ML-Based Self-Adapting Accessible Interfaces"><span class="initiative-title">ML-Based Self-Adapting Accessible Interfaces</span><span class="initiative-body">Machine-learning interfaces that adapt to changing pointing performance and ability.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At UMBC, I worked as an accessibility researcher while completing my master's in Human-Centered Computing and bachelor's in Information Systems. This project explored adaptive interfaces that respond to user ability, motor performance, and changing needs rather than forcing every person into a fixed interface.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3058555.3058564" target="_blank" rel="noreferrer">W4A paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Mobile Gesture Authentication System</button><span class="initiative-card" role="dialog" aria-label="About Mobile Gesture Authentication System"><span class="initiative-title">Mobile Gesture Authentication System</span><span class="initiative-body">A gesture-based authentication system for mobile devices and accessible input.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">This UMBC research explored mobile gesture authentication as an alternative to conventional passwords. The project investigated how gestures, touch, and mobile sensors could support secure interaction while opening questions about accessibility, memorability, and input performance.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Sequential Gestural Passcodes Using Google Glass</button><span class="initiative-card" role="dialog" aria-label="About Sequential Gestural Passcodes Using Google Glass"><span class="initiative-title">Sequential Gestural Passcodes Using Google Glass</span><span class="initiative-body">A wearable authentication project using gesture sequences on Google Glass.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Sequential Gestural Passcodes extended my gesture-authentication work into wearable computing. Using Google Glass, the project explored how a sequence of gestures could become a passcode system for emerging devices where keyboards and traditional authentication flows do not fit.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="johns-hopkins" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Insterpreter</button><span class="initiative-card" role="dialog" aria-label="About Insterpreter"><span class="initiative-title">Insterpreter</span><span class="initiative-body">My first software project, inspired by working as an interpreter at Johns Hopkins.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">While I was in college, I worked as an interpreter at Johns Hopkins. That job inspired me to build Insterpreter, my first piece of software: an early attempt to turn a lived communication problem into a tool that could help people coordinate interpretation work more effectively.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="index" data-after-intro>
+      <h2>Areas of experience</h2>
+      <div class="rows">
+        <div class="row">
+          <div class="row-title">Applied AI</div>
+          <div class="row-text">Designing and building AI/ML-powered products since 2014.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Product leadership</div>
+          <div class="row-text">Owning 0-to-1 strategy, roadmaps, experiments, launches, partnerships, analytics, and teams.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Product development</div>
+          <div class="row-text">Building prototypes and production systems across software: web and native apps, APIs, AI integration; and physical objects: woodworking, 3D printing, laser cutting.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Human understanding</div>
+          <div class="row-text">Ph.D.-trained researcher with experience in mixed-method experimental design and analysis, co-design protocols, interviews, surveys, and prototype testing to understand human behavior.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Experience Design</div>
+          <div class="row-text">End-to-end experience mapping, design, and execution of technologies centered around human needs, abilities, values, and preferences: from problem definition and journey mapping to pixel-perfect interfaces and brand identities.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Teaching and writing</div>
+          <div class="row-text">Years of experience teaching at the graduate and undergraduate level, speaking at scientific conferences, and running workshops for enterprise clients. My lectures and writing bridge academia and applied industry work.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="writing" data-after-intro data-substack-feed="https://axali.substack.com/feed">
+      <h2>Writing</h2>
+      <div class="writing-list" data-writing-list aria-live="polite">
+        <article class="writing-post">
+          <a class="writing-post-link" href="https://axali.substack.com/p/steal-my-creative-workflow">
+            <span class="writing-post-cover"><img src="https://substack-post-media.s3.amazonaws.com/public/images/31f432ac-cc99-40d0-88f1-64bd7ed4a391_1424x1066.png" alt="" loading="lazy" decoding="async"></span>
+            <span class="writing-post-content">
+              <span class="writing-post-meta">Feb 25, 2026</span>
+              <span class="writing-post-title">Stop Generating AI Slop - Steal My Creative Workflow</span>
+              <span class="writing-post-description">How I used AI to amplify my human creativity and built a cinematic app intro in one evening for a few dollars.</span>
+            </span>
+          </a>
+        </article>
+        <article class="writing-post">
+          <a class="writing-post-link" href="https://axali.substack.com/p/the-1550-problem">
+            <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!ykU1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd2aab8bf-5392-4f58-82d7-59937637bfa2_1208x695.png" alt="" loading="lazy" decoding="async"></span>
+            <span class="writing-post-content">
+              <span class="writing-post-meta">Feb 23, 2026</span>
+              <span class="writing-post-title">The 1:5:50 Problem</span>
+              <span class="writing-post-description">It's everywhere.</span>
+            </span>
+          </a>
+        </article>
+        <article class="writing-post">
+          <a class="writing-post-link" href="https://axali.substack.com/p/everyones-adopting-ai-research">
+            <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!4aaz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F55ee77ef-4f0f-41f9-aba7-3ead46c57849_1200x685.png" alt="" loading="lazy" decoding="async"></span>
+            <span class="writing-post-content">
+              <span class="writing-post-meta">Feb 16, 2026</span>
+              <span class="writing-post-title">Everyone's Adopting AI Research</span>
+              <span class="writing-post-description">Few are doing it right.</span>
+            </span>
+          </a>
+        </article>
+      </div>
+      <p class="writing-footer"><a href="https://axali.substack.com">Read more on Everything is Designed</a></p>
+    </section>
+
+    <section id="contact" data-after-intro>
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <span>hi[at]axali.me</span>
+        <a href="https://linkedin.com/in/theaxali">LinkedIn</a>
+        <a href="https://axali.substack.com">Everything is Designed</a>
+        <a href="https://scholar.google.com/citations?user=6xqfyO8AAAAJ">Google Scholar</a>
+      </div>
+    </section>
+
+    <p class="note" data-after-intro>Prototype v1. Zach/Maddie first; Kenneth-style index emerging below.</p>
+  </main>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var button = document.querySelector("[data-theme-toggle]");
+      var systemThemeQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+      function getSystemTheme() {
+        return systemThemeQuery && systemThemeQuery.matches ? "dark" : "light";
+      }
+
+      function setTheme(theme) {
+        root.dataset.theme = theme;
+        if (button) {
+          button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        }
+      }
+
+      setTheme(getSystemTheme());
+
+      if (systemThemeQuery) {
+        var handleSystemThemeChange = function () {
+          setTheme(getSystemTheme());
+        };
+
+        if (systemThemeQuery.addEventListener) {
+          systemThemeQuery.addEventListener("change", handleSystemThemeChange);
+        } else if (systemThemeQuery.addListener) {
+          systemThemeQuery.addListener(handleSystemThemeChange);
+        }
+      }
+
+      if (button) {
+        button.addEventListener("click", function () {
+          var nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+          setTheme(nextTheme);
+        });
+      }
+
+      var eyebrowTarget = document.querySelector("[data-type-eyebrow]");
+      var titleTarget = document.querySelector("[data-type-title]");
+      var typingCursor = document.querySelector("[data-typing-cursor]");
+
+      function wait(ms) {
+        return new Promise(function (resolve) {
+          window.setTimeout(resolve, ms);
+        });
+      }
+
+      async function typeText(target, text, speed) {
+        var index = 0;
+
+        while (index < text.length) {
+          target.textContent += text.charAt(index);
+          index += 1;
+          await wait(speed);
+        }
+      }
+
+      async function eraseToLength(target, length, speed) {
+        while (target.textContent.length > length) {
+          target.textContent = target.textContent.slice(0, -1);
+          await wait(speed);
+        }
+      }
+
+      async function runIntroSequence() {
+        if (!root.classList.contains("intro-pending") || !eyebrowTarget || !titleTarget || !typingCursor) {
+          return;
+        }
+
+        var formalName = eyebrowTarget.dataset.introFormal || "Hi, I'm Dr. Abdullah \"Ax\" Ali.";
+        var shortName = eyebrowTarget.dataset.introShort || "Hi, I'm Ax,";
+        var prefix = "Hi, I'm ";
+        var titleText = titleTarget.dataset.introTitle || "Creative Scientist & Entrepreneur";
+
+        root.classList.add("intro-started");
+        eyebrowTarget.textContent = "";
+        titleTarget.textContent = "";
+        typingCursor.hidden = false;
+        eyebrowTarget.parentNode.appendChild(typingCursor);
+
+        await wait(260);
+        await typeText(eyebrowTarget, formalName, 34);
+        await wait(680);
+        await eraseToLength(eyebrowTarget, prefix.length, 18);
+        await wait(160);
+        await typeText(eyebrowTarget, shortName.slice(prefix.length), 42);
+        await wait(360);
+
+        titleTarget.parentNode.appendChild(typingCursor);
+        await wait(180);
+        await typeText(titleTarget, titleText, 31);
+        await wait(260);
+
+        root.classList.add("intro-revealed");
+        window.setTimeout(function () {
+          root.classList.add("intro-complete");
+          root.classList.remove("intro-pending");
+          root.classList.remove("intro-started");
+          root.classList.remove("intro-revealed");
+        }, 1800);
+      }
+
+      runIntroSequence();
+
+      var writingSection = document.querySelector("[data-substack-feed]");
+      var writingList = document.querySelector("[data-writing-list]");
+
+      function decodeHtml(value) {
+        var textarea = document.createElement("textarea");
+        textarea.innerHTML = value || "";
+        return textarea.value;
+      }
+
+      function cleanFeedText(value) {
+        return decodeHtml((value || "").replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+      }
+
+      function getFeedValue(block, tagName) {
+        var expression = new RegExp("<" + tagName + ">(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/" + tagName + ">");
+        var match = block.match(expression);
+        return cleanFeedText(match && match[1]);
+      }
+
+      function getFeedAttribute(block, tagName, attributeName) {
+        var expression = new RegExp("<" + tagName + "\\b[^>]*\\b" + attributeName + "=\"([^\"]+)\"", "i");
+        var match = block.match(expression);
+        return decodeHtml(match && match[1]).trim();
+      }
+
+      function formatPostDate(value) {
+        var date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+          return "Everything is Designed";
+        }
+
+        return new Intl.DateTimeFormat("en", {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        }).format(date);
+      }
+
+      function renderWritingPosts(posts) {
+        if (!writingList || !posts.length) {
+          return;
+        }
+
+        while (writingList.firstChild) {
+          writingList.removeChild(writingList.firstChild);
+        }
+
+        posts.forEach(function (post) {
+          var article = document.createElement("article");
+          var link = document.createElement("a");
+          var cover = document.createElement("span");
+          var image = document.createElement("img");
+          var content = document.createElement("span");
+          var meta = document.createElement("span");
+          var title = document.createElement("span");
+          var description = document.createElement("span");
+
+          article.className = "writing-post";
+          link.className = "writing-post-link";
+          link.href = post.link;
+          cover.className = "writing-post-cover";
+
+          if (post.cover) {
+            image.src = post.cover;
+            image.alt = "";
+            image.loading = "lazy";
+            image.decoding = "async";
+            cover.appendChild(image);
+          }
+
+          content.className = "writing-post-content";
+          meta.className = "writing-post-meta";
+          meta.textContent = post.date;
+          title.className = "writing-post-title";
+          title.textContent = post.title;
+          description.className = "writing-post-description";
+          description.textContent = post.description;
+
+          content.appendChild(meta);
+          content.appendChild(title);
+          content.appendChild(description);
+          link.appendChild(cover);
+          link.appendChild(content);
+          article.appendChild(link);
+          writingList.appendChild(article);
+        });
+      }
+
+      async function loadSubstackPosts() {
+        if (!writingSection || !writingList || !window.fetch) {
+          return;
+        }
+
+        try {
+          var response = await window.fetch(writingSection.dataset.substackFeed, { cache: "no-store" });
+
+          if (!response.ok) {
+            return;
+          }
+
+          var xml = await response.text();
+          var posts = [];
+          var itemPattern = /<item>([\s\S]*?)<\/item>/g;
+          var match;
+
+          while ((match = itemPattern.exec(xml)) && posts.length < 3) {
+            var block = match[1];
+            var title = getFeedValue(block, "title");
+            var description = getFeedValue(block, "description");
+            var link = getFeedValue(block, "link");
+
+            if (title && link) {
+              posts.push({
+                cover: getFeedAttribute(block, "enclosure", "url"),
+                date: formatPostDate(getFeedValue(block, "pubDate")),
+                description: description,
+                link: link,
+                title: title
+              });
+            }
+          }
+
+          renderWritingPosts(posts);
+        } catch (error) {
+          // Keep the hand-curated fallback when the static file cannot fetch RSS.
+        }
+      }
+
+      loadSubstackPosts();
+
+      var initiatives = Array.prototype.slice.call(document.querySelectorAll(".initiative"));
+      var dwellDelay = 3000;
+      var activeCompanyKey = null;
+      var hoverCompanyKey = null;
+      var relatedElements = Array.prototype.slice.call(document.querySelectorAll("[data-company]"));
+
+      function getCompanyKeys(value) {
+        return (value || "").split(/\s+/).filter(Boolean);
+      }
+
+      function sharesCompanyKey(elementKey, activeKey) {
+        var elementKeys = getCompanyKeys(elementKey);
+        var activeKeys = getCompanyKeys(activeKey);
+
+        return activeKeys.some(function (key) {
+          return elementKeys.indexOf(key) !== -1;
+        });
+      }
+
+      function applyRelatedHighlight() {
+        var currentCompanyKey = activeCompanyKey || hoverCompanyKey;
+
+        relatedElements.forEach(function (element) {
+          element.classList.toggle("is-related-highlight", Boolean(currentCompanyKey) && sharesCompanyKey(element.dataset.company, currentCompanyKey));
+        });
+      }
+
+      function setExpanded(initiative, expanded) {
+        var trigger = initiative.querySelector(".initiative-link");
+        if (trigger) {
+          trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+        }
+      }
+
+      function cancelDwell(initiative) {
+        if (initiative.dwellTimer) {
+          window.clearTimeout(initiative.dwellTimer);
+          initiative.dwellTimer = null;
+        }
+
+        initiative.classList.remove("is-dwelling");
+      }
+
+      function isProductDetailInitiative(initiative) {
+        return initiative.dataset.detailCard === "product";
+      }
+
+      function closeInitiative(initiative, dismiss) {
+        var card = initiative.querySelector(".initiative-card");
+
+        cancelDwell(initiative);
+        initiative.classList.remove("is-detail");
+        initiative.classList.remove("is-pinned");
+        initiative.classList.toggle("is-dismissed", Boolean(dismiss));
+        if (card) {
+          card.removeAttribute("aria-modal");
+        }
+        if (initiative.dataset.company && activeCompanyKey === initiative.dataset.company) {
+          activeCompanyKey = null;
+          applyRelatedHighlight();
+        }
+        setExpanded(initiative, false);
+      }
+
+      function closeInitiatives(except, dismiss) {
+        initiatives.forEach(function (initiative) {
+          if (initiative !== except) {
+            closeInitiative(initiative, dismiss);
+          }
+        });
+      }
+
+      function pinInitiative(initiative) {
+        cancelDwell(initiative);
+        closeInitiatives(initiative);
+        initiative.classList.remove("is-detail");
+        initiative.classList.add("is-pinned");
+        activeCompanyKey = initiative.dataset.company || null;
+        applyRelatedHighlight();
+        setExpanded(initiative, true);
+      }
+
+      function openDetailInitiative(initiative) {
+        var card = initiative.querySelector(".initiative-card");
+        var closeButton = initiative.querySelector(".initiative-close");
+
+        cancelDwell(initiative);
+        closeInitiatives(initiative);
+        initiative.classList.remove("is-dismissed");
+        initiative.classList.add("is-pinned");
+        initiative.classList.add("is-detail");
+        if (card) {
+          card.setAttribute("aria-modal", "true");
+        }
+        activeCompanyKey = initiative.dataset.company || null;
+        applyRelatedHighlight();
+        setExpanded(initiative, true);
+
+        if (closeButton) {
+          window.setTimeout(function () {
+            closeButton.focus({ preventScroll: true });
+          }, 160);
+        }
+      }
+
+      function startDwell(initiative) {
+        if (initiative.classList.contains("is-pinned") || initiative.dwellTimer) {
+          return;
+        }
+
+        initiative.classList.add("is-dwelling");
+        initiative.dwellTimer = window.setTimeout(function () {
+          pinInitiative(initiative);
+        }, dwellDelay);
+      }
+
+      initiatives.forEach(function (initiative, index) {
+        var trigger = initiative.querySelector(".initiative-link");
+        var card = initiative.querySelector(".initiative-card");
+
+        if (!trigger || !card) {
+          return;
+        }
+
+        if (!card.id) {
+          card.id = "initiative-card-" + (index + 1);
+        }
+
+        trigger.setAttribute("aria-controls", card.id);
+        trigger.setAttribute("aria-expanded", "false");
+
+        var moreButton = card.querySelector(".initiative-more");
+
+        var closeButton = card.querySelector(".initiative-close");
+        if (!closeButton) {
+          closeButton = document.createElement("button");
+          closeButton.className = "initiative-close";
+          closeButton.type = "button";
+          closeButton.setAttribute("aria-label", "Close");
+          card.appendChild(closeButton);
+        }
+
+        initiative.addEventListener("pointerenter", function (event) {
+          if (event.pointerType && event.pointerType !== "mouse" && event.pointerType !== "pen") {
+            return;
+          }
+
+          initiative.classList.remove("is-dismissed");
+          startDwell(initiative);
+        });
+
+        initiative.addEventListener("pointerleave", function () {
+          if (!initiative.classList.contains("is-pinned")) {
+            cancelDwell(initiative);
+          }
+
+          initiative.classList.remove("is-dismissed");
+        });
+
+        trigger.addEventListener("click", function (event) {
+          event.stopPropagation();
+
+          initiative.classList.remove("is-dismissed");
+          if (isProductDetailInitiative(initiative)) {
+            openDetailInitiative(initiative);
+          } else {
+            pinInitiative(initiative);
+          }
+        });
+
+        card.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+
+        Array.prototype.slice.call(card.querySelectorAll("a")).forEach(function (link) {
+          link.addEventListener("pointerdown", function (event) {
+            event.stopPropagation();
+          });
+
+          link.addEventListener("click", function (event) {
+            event.stopPropagation();
+          });
+        });
+
+        if (moreButton) {
+          moreButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            openDetailInitiative(initiative);
+          });
+        }
+
+        closeButton.addEventListener("click", function (event) {
+          event.stopPropagation();
+          closeInitiative(initiative, true);
+
+          if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+          }
+        });
+      });
+
+      Array.prototype.slice.call(document.querySelectorAll("#career .career-related")).forEach(function (item) {
+        item.addEventListener("pointerenter", function () {
+          hoverCompanyKey = item.dataset.company || null;
+          applyRelatedHighlight();
+        });
+
+        item.addEventListener("pointerleave", function () {
+          if (hoverCompanyKey === item.dataset.company) {
+            hoverCompanyKey = null;
+            applyRelatedHighlight();
+          }
+        });
+      });
+
+      document.addEventListener("click", function () {
+        closeInitiatives();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeInitiatives(null, true);
+
+          if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+          }
+        }
+      });
+    }());
+  </script>
+</body>
+</html>

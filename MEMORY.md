@@ -1,0 +1,7 @@
+- [Ax's identity and positioning](ax_identity.md) — Dr. Abdullah "Ax" Ali, creative scientist in NYC, 0→1 AI product builder, "EVERYTHING IS DESIGNED" thesis, PhD HCI (UW), worked at Apple/Amazon/startups.
+- [studio89.design — canonical source for axali.me corpus](reference_studio89.md) — existing portfolio site at studio89.design; fetch for project copy, image URLs, testimonials.
+- [axali.me architecture decisions](axalime_architecture.md) — locked stack: one VPS, Next.js, Ollama+Qwen 2.5 7B, SQLite+sqlite-vec, markdown corpus, Google Cal Appointment Schedules.
+- [axali.me agent UX patterns](axalime_agent_ux.md) — chat is right-side panel (~560px), word-streaming, inline citations, follow-up chips. Not full-screen, not a floating bubble.
+- [Ax's working preferences on axali.me](feedback_workflow.md) — frontend prototype first, then backend. Port from studio89.design, don't recreate.
+- [Memory location convention](feedback_memory_location.md) — HQ/03-Professional/axali.me/ is canonical; system memory path is a mirror. Write HQ first.
+- [Project entry expansion](project_entry_expansion_2026-05-27.md) — products/systems entries now have one-line previews, expanded detail cards, source links, and company-project highlighting metadata.

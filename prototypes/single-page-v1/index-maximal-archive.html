@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dr. Ax Ali - Creative Scientist</title>
+  <meta name="description" content="Dr. Ax Ali is a Creative Scientist building applied AI products and human-centered systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,350..800,-200..150,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FAFAFA;
+      --ink: #090909;
+      --muted: rgba(9, 9, 9, 0.62);
+      --faint: rgba(9, 9, 9, 0.34);
+      --line: rgba(9, 9, 9, 0.16);
+      --charcoal: #141518;
+      --charcoal-2: #221F26;
+      --white-soft: #F6F6F7;
+      --accent: #EC622C;
+      --accent-dark: #BE3F14;
+      --max: 1200px;
+      --font: "Roboto Flex", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-variation-settings: "opsz" 18, "wght" 430, "GRAD" 0;
+      background:
+        linear-gradient(90deg, rgba(9, 9, 9, 0.035) 1px, transparent 1px) 0 0 / 96px 96px,
+        var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 250, 250, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-variation-settings: "wght" 690, "opsz" 16;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-role {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 12px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .nav a:last-child {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 34px 24px 72px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 36px;
+      align-items: stretch;
+      padding: 24px 0 48px;
+    }
+
+    .hero-statement {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: min(650px, calc(100vh - 150px));
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 22px 0 24px;
+    }
+
+    .kicker-row {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 28px;
+      align-items: baseline;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 680, "opsz" 12;
+    }
+
+    .dek {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 840px;
+      font-size: clamp(48px, 6.6vw, 88px);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      font-variation-settings: "wght" 720, "opsz" 80, "XTRA" 520;
+    }
+
+    .headline-accent {
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .carryable {
+      max-width: 610px;
+      margin: 0;
+      font-size: clamp(22px, 2.6vw, 36px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-variation-settings: "wght" 470, "opsz" 36;
+    }
+
+    .dossier {
+      background: var(--charcoal);
+      color: var(--white-soft);
+      min-height: min(650px, calc(100vh - 150px));
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+    }
+
+    .portrait {
+      min-height: 400px;
+      background: #000;
+      position: relative;
+    }
+
+    .portrait img {
+      filter: grayscale(1) contrast(1.04);
+      opacity: 0.92;
+      object-position: center top;
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20,21,24,0) 42%, rgba(20,21,24,0.78) 100%);
+    }
+
+    .bio-card {
+      padding: 24px;
+      display: grid;
+      gap: 22px;
+      border-top: 1px solid rgba(246, 246, 247, 0.16);
+    }
+
+    .bio-card p {
+      margin: 0;
+      color: rgba(246, 246, 247, 0.68);
+      font-size: 14px;
+      line-height: 1.48;
+    }
+
+    .bio-card a {
+      color: var(--white-soft);
+      border-bottom: 1px solid rgba(246, 246, 247, 0.36);
+    }
+
+    .bio-meta {
+      display: grid;
+      gap: 10px;
+      font-size: 11px;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(246, 246, 247, 0.48);
+    }
+
+    .section {
+      border-top: 1px solid var(--ink);
+      padding: 42px 0 54px;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 48px;
+    }
+
+    .section-label {
+      position: sticky;
+      top: 78px;
+      height: max-content;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 700, "opsz" 12;
+    }
+
+    .lead-copy {
+      max-width: 860px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .lead-copy p {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-variation-settings: "wght" 470, "opsz" 44;
+    }
+
+    .lead-copy .secondary {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: -0.018em;
+      font-variation-settings: "wght" 420, "opsz" 18;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .fact {
+      min-height: 150px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .fact strong {
+      font-size: clamp(28px, 4vw, 56px);
+      line-height: 0.9;
+      letter-spacing: -0.055em;
+      font-variation-settings: "wght" 760, "opsz" 56;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .story-cell {
+      background: var(--paper);
+      min-height: 230px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .story-cell .num {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story-cell h3,
+    .work-card h3,
+    .offer h3 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-variation-settings: "wght" 620, "opsz" 22;
+    }
+
+    .story-cell p,
+    .work-card p,
+    .offer p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.48;
+    }
+
+    .work-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px 18px;
+    }
+
+    .work-card {
+      border-top: 1px solid var(--ink);
+      padding-top: 12px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .thumb {
+      aspect-ratio: 1 / 0.72;
+      overflow: hidden;
+      background: #ecebea;
+      border: 1px solid var(--line);
+      position: relative;
+    }
+
+    .thumb img {
+      transition: transform 500ms ease, filter 500ms ease;
+    }
+
+    .work-card:hover .thumb img {
+      transform: scale(1.035);
+      filter: saturate(0.95) contrast(1.04);
+    }
+
+    .thumb.text-thumb {
+      display: grid;
+      place-items: end start;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 78% 28%, rgba(236, 98, 44, 0.95) 0 4px, transparent 5px),
+        linear-gradient(135deg, rgba(9,9,9,0.04), rgba(9,9,9,0.12)),
+        var(--paper);
+    }
+
+    .thumb.text-thumb span {
+      max-width: 180px;
+      font-size: 22px;
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      font-variation-settings: "wght" 720, "opsz" 28;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tags span {
+      padding: 6px 7px 5px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .thesis {
+      background: var(--charcoal-2);
+      color: var(--white-soft);
+      padding: clamp(34px, 6vw, 80px);
+      display: grid;
+      grid-template-columns: 0.9fr 1.2fr;
+      gap: 48px;
+      align-items: end;
+    }
+
+    .thesis h2 {
+      margin: 0;
+      font-size: clamp(56px, 8.5vw, 138px);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+      font-variation-settings: "wght" 780, "opsz" 90, "XTRA" 560;
+    }
+
+    .thesis p {
+      margin: 0;
+      color: rgba(246, 246, 247, 0.72);
+      font-size: clamp(20px, 2.6vw, 34px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      font-variation-settings: "wght" 430, "opsz" 34;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .offer {
+      min-height: 210px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .closing {
+      border-top: 1px solid var(--ink);
+      padding: 42px 0 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: end;
+    }
+
+    .closing h2 {
+      margin: 0;
+      max-width: 860px;
+      font-size: clamp(40px, 6vw, 86px);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      font-variation-settings: "wght" 740, "opsz" 72;
+    }
+
+    .contact-list {
+      min-width: 230px;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-list a {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .fine-print {
+      margin-top: 56px;
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 980px) {
+      .topbar-inner,
+      .hero,
+      .section,
+      .hero-bottom,
+      .kicker-row,
+      .thesis,
+      .closing {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      .hero-statement,
+      .dossier {
+        min-height: 0;
+      }
+
+      .section-label {
+        position: static;
+      }
+
+      .facts,
+      .offer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .story-grid,
+      .work-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 18px 16px 54px;
+      }
+
+      .topbar-inner {
+        padding: 14px 16px;
+      }
+
+      h1 {
+        font-size: clamp(44px, 16vw, 68px);
+      }
+
+      .brand-lockup {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+      }
+
+      .facts,
+      .story-grid,
+      .work-gallery,
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        gap: 24px;
+        padding: 34px 0 42px;
+      }
+
+      .portrait {
+        min-height: 360px;
+      }
+
+      .closing {
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand-lockup" href="#top" aria-label="Dr. Ax Ali">
+          <span class="brand-name">Dr. Ax Ali</span>
+          <span class="brand-role">Creative Scientist / Applied AI product builder / HCI PhD</span>
+        </a>
+        <nav class="nav" aria-label="Page sections">
+          <a href="#story">Story</a>
+          <a href="#proof">Proof</a>
+          <a href="#work">Work</a>
+          <a href="#thinking">Thinking</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="Introduction">
+        <div class="hero-statement">
+          <div class="kicker-row">
+            <div class="eyebrow">Public dossier</div>
+            <p class="dek">For people deciding whether to invest, hire, invite, publish, join, collaborate, or open a door.</p>
+          </div>
+
+          <h1>Creative Scientist building <span class="headline-accent">AI-native</span> systems for human complexity.</h1>
+
+          <div class="hero-bottom">
+            <div class="eyebrow">Carry this</div>
+            <p class="carryable">Dr. Ax Ali translates research, design, and technology into products, companies, stories, and experiences that help people understand, create, and connect.</p>
+          </div>
+        </div>
+
+        <aside class="dossier" aria-label="Ax at a glance">
+          <div class="portrait">
+            <img src="../../../../Unsorted/Dr.AxAli/Resume/me, myself, and AI.png" alt="Black-and-white portrait of Dr. Ax Ali with text reading Me, myself, and A.I.">
+          </div>
+          <div class="bio-card">
+            <p><a href="https://studio89.design">Studio89</a> founder, HCI PhD, and applied AI product builder based in New York City. Work spans Apple, Amazon, Bilt, Itau, accessibility research, AI products, workshops, and Seena.</p>
+            <div class="bio-meta">
+              <span>Known for: Everything is Designed</span>
+              <span>Fields: AI / HCI / Product / Design / Research</span>
+              <span>Mode: 0-to-1 systems, products, and stories</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="story">
+        <div class="section-label">01 / Story</div>
+        <div class="lead-copy">
+          <p>Some people specialize by narrowing. Ax specializes by translating across worlds.</p>
+          <p class="secondary">From a childhood blueprint that became a family home, to interpreter tools, accessibility research, AI-native products, and company building, the pattern is consistent: imagined or unresolved human needs become lived systems.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Story fragments">
+        <div class="section-label">Origin points</div>
+        <div class="story-grid">
+          <article class="story-cell">
+            <span class="num">Age six</span>
+            <div>
+              <h3>Sketches into artifacts</h3>
+              <p>At a kitchen table in Baghdad, clothing designs became the first felt proof that an idea could leave the mind and enter the world.</p>
+            </div>
+          </article>
+          <article class="story-cell">
+            <span class="num">Fifth grade</span>
+            <div>
+              <h3>Blueprint as translation</h3>
+              <p>A child redraws a floor plan to help his parents communicate a spatial idea. The architect builds from it. Design becomes lived reality.</p>
+            </div>
+          </article>
+          <article class="story-cell">
+            <span class="num">College</span>
+            <div>
+              <h3>Language into care</h3>
+              <p>Repeated hospital interpreting trips turn into an app idea: a phone passed between caregiver and patient to reduce friction in care.</p>
+            </div>
+          </article>
+          <article class="story-cell">
+            <span class="num">UMBC</span>
+            <div>
+              <h3>HCI clicks</h3>
+              <p>An elective, a lab, 3D printers, laser cutters, electronics, and accessibility research create a home for making ideas real.</p>
+            </div>
+          </article>
+          <article class="story-cell">
+            <span class="num">Research</span>
+            <div>
+              <h3>Technology that adapts</h3>
+              <p>Projects in Parkinson's, dyslexia, accessible interaction, and machine learning point toward systems that adapt to people.</p>
+            </div>
+          </article>
+          <article class="story-cell">
+            <span class="num">Now</span>
+            <div>
+              <h3>AI for shared understanding</h3>
+              <p>Seena extends the same thesis into AI-native products for insight, customer understanding, and human decision-making.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="proof">
+        <div class="section-label">02 / Proof</div>
+        <div class="facts" aria-label="Proof points">
+          <div class="fact"><strong>25+</strong><span>Product launches across startups, big tech, and founder-led work.</span></div>
+          <div class="fact"><strong>20+</strong><span>Peer-reviewed publications grounded in HCI and accessibility.</span></div>
+          <div class="fact"><strong>3</strong><span>Award-winning papers and a PhD in Human-Computer Interaction.</span></div>
+          <div class="fact"><strong>$100M+</strong><span>Combined revenue generation / cost savings across selected work.</span></div>
+          <div class="fact"><strong>500K+</strong><span>Children diagnosed for free through a dyslexia AI/game project.</span></div>
+          <div class="fact"><strong>10+</strong><span>Years building at the intersection of AI, design, product, and research.</span></div>
+          <div class="fact"><strong>0-to-1</strong><span>Applied AI product development from research insight to market-ready systems.</span></div>
+          <div class="fact"><strong>NYC</strong><span>Based in New York; working across products, workshops, writing, and Seena.</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="work">
+        <div class="section-label">03 / Selected work</div>
+        <div class="work-gallery">
+          <article class="work-card">
+            <div class="thumb text-thumb"><span>Seena Labs</span></div>
+            <h3>Seena</h3>
+            <p>AI-native systems for shared understanding, customer intelligence, and turning human signals into product decisions.</p>
+            <div class="tags"><span>Founder</span><span>AI</span><span>Product</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb"><img src="../../../../Unsorted/Dr.AxAli/Everything is Designed 2025/NYJ-001/Dytective.JPG" alt="Dytective project visual"></div>
+            <h3>Dyslexia AI game</h3>
+            <p>An AI-assisted detection game with 92% accuracy, 500,000+ children diagnosed for free, and four scientific papers.</p>
+            <div class="tags"><span>AI</span><span>Accessibility</span><span>Research</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb"><img src="../../../../Unsorted/Dr.AxAli/Everything is Designed 2025/ETID Intro/Vision Pro.jpg" alt="Apple Vision Pro in a designed interior"></div>
+            <h3>Apple</h3>
+            <p>Multimodal interaction work for mixed reality, connecting input, embodiment, and emerging interface paradigms.</p>
+            <div class="tags"><span>Mixed reality</span><span>Interaction</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb text-thumb"><span>Amazon grocery</span></div>
+            <h3>Amazon</h3>
+            <p>Product work reimagining grocery shopping on Amazon.com through research, systems, and large-scale product execution.</p>
+            <div class="tags"><span>Product</span><span>Scale</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb text-thumb"><span>Bilt x Lyft</span></div>
+            <h3>Bilt x Lyft</h3>
+            <p>Mobile credit card and loyalty rewards integration, described by leadership as one of the company's most thoroughly tested launches.</p>
+            <div class="tags"><span>Mobile</span><span>Fintech</span><span>Loyalty</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb text-thumb"><span>Itau sprint system</span></div>
+            <h3>Itau</h3>
+            <p>Loan-processing app and innovation workshops for a major LATAM bank, turning design sprints into organizational method.</p>
+            <div class="tags"><span>Workshop</span><span>Banking</span><span>Design</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb"><img src="../../../../Unsorted/Dr.AxAli/Everything is Designed 2025/ETID Intro/Other things/Science.jpg" alt="Science and research visual"></div>
+            <h3>Adaptive UI research</h3>
+            <p>Research on interfaces that adapt to users with motor impairments, including work for people with Parkinson's disease.</p>
+            <div class="tags"><span>HCI</span><span>Accessibility</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb"><img src="../../../../Unsorted/Dr.AxAli/Everything is Designed 2025/ETID Intro/IMG_0824.jpeg" alt="Coffee, headphones, and The New Yorker magazine"></div>
+            <h3>Everything is Designed</h3>
+            <p>A public writing and teaching thesis about AI, design, creativity, systems, and the choices that shape how people live and work.</p>
+            <div class="tags"><span>Writing</span><span>Speaking</span><span>Teaching</span></div>
+          </article>
+
+          <article class="work-card">
+            <div class="thumb"><img src="../../../../Unsorted/Dr.AxAli/Ax-seenadots.png" alt="Dot-matrix portrait graphic of Ax"></div>
+            <h3>Creative Scientist</h3>
+            <p>A working identity for bridging research insight, product strategy, interface design, code, story, and market-ready systems.</p>
+            <div class="tags"><span>Positioning</span><span>Systems</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="thesis" id="thinking" aria-label="Everything is Designed">
+        <h2>Everything is Designed.</h2>
+        <p>The question is not whether something is designed. The question is who designed it, for whom, with what assumptions, and what kind of person or behavior it makes possible.</p>
+      </section>
+
+      <section class="section" id="speaking">
+        <div class="section-label">04 / Available for</div>
+        <div class="offer-grid">
+          <article class="offer">
+            <h3>Invest / partner</h3>
+            <p>For people evaluating Seena, founder-market fit, or strategic collaboration.</p>
+          </article>
+          <article class="offer">
+            <h3>Rare roles</h3>
+            <p>Technical PM, applied AI, product/design leadership, MTS-like hybrid work, research-to-product incubation.</p>
+          </article>
+          <article class="offer">
+            <h3>Workshops</h3>
+            <p>AI-native product design, creativity with AI, human-centered AI, and building with intelligent systems.</p>
+          </article>
+          <article class="offer">
+            <h3>Speaking</h3>
+            <p>Universities, conferences, podcasts, internal events, and lecture series on AI, HCI, design, and creativity.</p>
+          </article>
+          <article class="offer">
+            <h3>Publishing</h3>
+            <p>Book, essay, and editorial conversations around Everything is Designed, Creative Scientist, and Human-Centered AI.</p>
+          </article>
+          <article class="offer">
+            <h3>Press / media</h3>
+            <p>Commentary on AI product design, accessibility, creativity, frontier interfaces, and the future of work.</p>
+          </article>
+          <article class="offer">
+            <h3>Join / build</h3>
+            <p>For future teammates who want to build high-taste AI products around shared understanding.</p>
+          </article>
+          <article class="offer">
+            <h3>Introduce</h3>
+            <p>For senior allies deciding which room, lab, fund, publisher, university, or company should know Ax.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="closing" id="contact">
+        <h2>Make the introduction while the story is still early enough to matter.</h2>
+        <div class="contact-list" aria-label="Contact links">
+          <a href="mailto:ax@studio89.design">ax@studio89.design</a>
+          <a href="https://linkedin.com/in/theaxali">LinkedIn</a>
+          <a href="https://axali.substack.com">Everything is Designed</a>
+          <a href="https://scholar.google.com/citations?user=6xqfyO8AAAAJ">Google Scholar</a>
+        </div>
+      </section>
+
+      <p class="fine-print">Prototype v1 / text-first public dossier / built for axali.me MVP review / accent #EC622C / base #FAFAFA / Roboto Flex</p>
+    </main>
+  </div>
+</body>
+</html>
