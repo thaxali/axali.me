@@ -3346,7 +3346,7 @@
         var anchorLine = Math.max(96, viewportHeight * 0.34);
         var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
         var scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-        var activeId = navSections[0].id;
+        var activeId = null;
 
         navSections.forEach(function (item) {
           var rect = item.section.getBoundingClientRect();
