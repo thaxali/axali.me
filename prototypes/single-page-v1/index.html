@@ -3295,10 +3295,33 @@
         return cleanFeedText(match && match[1]);
       }
 
+      function getRawFeedValue(block, tagName) {
+        var expression = new RegExp("<" + tagName + ">(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/" + tagName + ">");
+        var match = block.match(expression);
+        return decodeHtml(match && match[1]);
+      }
+
       function getFeedAttribute(block, tagName, attributeName) {
         var expression = new RegExp("<" + tagName + "\\b[^>]*\\b" + attributeName + "=\"([^\"]+)\"", "i");
         var match = block.match(expression);
         return decodeHtml(match && match[1]).trim();
+      }
+
+      function isFeedImage(value) {
+        return /\.(png|jpe?g|gif|webp)(\?|$)/i.test(value || "") || /\/image\/fetch\//.test(value || "") || /substack-post-media/.test(value || "");
+      }
+
+      function getFeedImage(block) {
+        var enclosure = getFeedAttribute(block, "enclosure", "url");
+        var content = getRawFeedValue(block, "content:encoded") || getRawFeedValue(block, "description");
+        var imageMatch = content.match(/<img[^>]+src=\"([^\"]+)\"/i);
+        var embeddedImage = decodeHtml(imageMatch && imageMatch[1]).trim();
+
+        if (isFeedImage(enclosure)) {
+          return enclosure;
+        }
+
+        return isFeedImage(embeddedImage) ? embeddedImage : "";
       }
 
       function formatPostDate(value) {
@@ -3311,9 +3334,83 @@
         return new Intl.DateTimeFormat("en", {
           day: "numeric",
           month: "short",
+          timeZone: "UTC",
           year: "numeric"
         }).format(date);
       }
+
+      var fallbackWritingPosts = [
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!9VZc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58ec4f13-afb4-48a2-8423-f872d7d1b7f1_1280x800.png",
+          date: "May 31, 2026",
+          description: "Claude can one-shot an app. Now it can one-shot an app you don't need to refine.",
+          link: "https://axali.substack.com/p/design-twice",
+          title: "Design Twice"
+        },
+        {
+          cover: "https://substack-post-media.s3.amazonaws.com/public/images/31f432ac-cc99-40d0-88f1-64bd7ed4a391_1424x1066.png",
+          date: "Feb 25, 2026",
+          description: "How I used AI to amplify my human creativity - and built a cinematic app intro in one evening for a few dollars.",
+          link: "https://axali.substack.com/p/steal-my-creative-workflow",
+          title: "Stop Generating AI Slop - Steal My Creative Workflow"
+        },
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!ykU1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd2aab8bf-5392-4f58-82d7-59937637bfa2_1208x695.png",
+          date: "Feb 23, 2026",
+          description: "It's everywhere.",
+          link: "https://axali.substack.com/p/the-1550-problem",
+          title: "The 1:5:50 Problem"
+        },
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!4aaz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F55ee77ef-4f0f-41f9-aba7-3ead46c57849_1200x685.png",
+          date: "Feb 16, 2026",
+          description: "Few are doing it right.",
+          link: "https://axali.substack.com/p/everyones-adopting-ai-research",
+          title: "Everyone's Adopting AI Research"
+        },
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!jvmY!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F66e6d766-3786-49d2-af18-159e3a4de914_1200x687.png",
+          date: "Feb 13, 2026",
+          description: "AI-generated personas have entered the uncanny valley.",
+          link: "https://axali.substack.com/p/the-uncanny-valley-of-user-research",
+          title: "The Uncanny Valley of User Research"
+        },
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!Xy5T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77b3cd04-7b86-4f74-a420-3da327472d89_1200x687.png",
+          date: "Feb 11, 2026",
+          description: "And that's bad...",
+          link: "https://axali.substack.com/p/your-ai-research-tool-is-a-yes-man",
+          title: "Your AI Research Tool Is a Yes-Man"
+        },
+        {
+          cover: "",
+          date: "Jan 14, 2026",
+          description: "Let me explain.",
+          link: "https://axali.substack.com/p/everything-is-designed-c3f",
+          title: "Everything is Designed"
+        },
+        {
+          cover: "https://substack-post-media.s3.amazonaws.com/public/images/ed158970-4b40-46dc-920e-af9fd532c0f2_1920x1080.png",
+          date: "Dec 11, 2025",
+          description: "I don't want to live in the world of AGI.",
+          link: "https://axali.substack.com/p/many-small-minds",
+          title: "Many Small Minds"
+        },
+        {
+          cover: "https://substack-post-media.s3.amazonaws.com/public/images/a8acd616-f888-46cf-89f5-cb1eabb237aa_1920x1080.png",
+          date: "Dec 5, 2025",
+          description: "UX Research Scientist Reacts to AI Interviewer.",
+          link: "https://axali.substack.com/p/i-tried-claudes-ai-interviewer-so",
+          title: "I tried Claude's AI Interviewer so you don't have to"
+        },
+        {
+          cover: "https://substackcdn.com/image/fetch/$s_!hlDz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1dc7ee6b-b09b-482f-863a-7c5f4b5ce17c_1536x1024.png",
+          date: "Oct 23, 2025",
+          description: "Designing the next interface era, where intelligence adapts, senses collaborate, and technology finally learns to meet us halfway.",
+          link: "https://axali.substack.com/p/the-interface-strikes-back",
+          title: "The Interface Strikes Back"
+        }
+      ];
 
       function updateWritingCarousel() {
         if (!writingList || !writingPrev || !writingNext) {
@@ -3447,7 +3544,7 @@
 
             if (title && link) {
               posts.push({
-                cover: getFeedAttribute(block, "enclosure", "url"),
+                cover: getFeedImage(block),
                 date: formatPostDate(getFeedValue(block, "pubDate")),
                 description: description,
                 link: link,
@@ -3462,6 +3559,7 @@
         }
       }
 
+      renderWritingPosts(fallbackWritingPosts);
       loadSubstackPosts();
 
       async function copyTextToClipboard(text) {
