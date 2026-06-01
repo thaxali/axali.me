@@ -2543,30 +2543,38 @@
 
     @media (max-width: 700px) {
       .page {
-        padding: 34px 18px 64px;
+        padding: 28px 18px 64px;
       }
 
       header {
-        display: grid;
-        gap: 22px;
-        margin-bottom: 88px;
-        padding: 12px;
+        display: flex;
+        gap: 12px;
+        margin-bottom: 72px;
+        padding: 8px 10px;
       }
 
       html.is-scrolled header {
-        border-radius: 28px;
+        border-radius: 999px;
       }
 
       nav {
-        gap: 16px;
+        font-size: 12px;
+        gap: 12px;
       }
 
       .header-actions {
+        gap: 12px;
         justify-content: space-between;
       }
 
+      .theme-toggle {
+        height: 32px;
+        padding-right: 2px;
+        width: 24px;
+      }
+
       .intro {
-        margin-bottom: 96px;
+        margin-bottom: 84px;
       }
 
       h1 {
@@ -2574,8 +2582,21 @@
         line-height: 1.2;
       }
 
+      p {
+        font-size: 15px;
+        line-height: 1.58;
+      }
+
+      .intro-copy {
+        gap: 20px;
+      }
+
       section {
-        padding-bottom: 60px;
+        padding-bottom: 54px;
+      }
+
+      section + section {
+        padding-top: 24px;
       }
 
       #career {
@@ -2640,6 +2661,12 @@
         margin-bottom: 4px;
       }
 
+      .career-list,
+      .career-column-text {
+        font-size: 14px;
+        line-height: 1.38;
+      }
+
       .career-group + .career-group {
         margin-top: 14px;
       }
@@ -2651,7 +2678,8 @@
       }
 
       .writing-list {
-        grid-auto-columns: minmax(176px, 66%);
+        gap: 22px;
+        grid-auto-columns: minmax(190px, 72%);
         margin: 0 -18px;
         padding: 0 18px 8px;
       }
@@ -2690,11 +2718,85 @@
 
       .initiative[data-detail-card="product"].is-detail .initiative-card {
         bottom: auto;
-        height: 82vh;
+        border-radius: 28px;
+        gap: 18px;
+        height: calc(100dvh - 24px);
         left: 50%;
+        max-height: calc(100dvh - 24px);
+        max-width: calc(100vw - 24px);
+        padding: 24px 20px;
         right: auto;
         top: 50%;
-        width: 92vw;
+        width: calc(100vw - 24px);
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-close {
+        height: 48px;
+        right: 10px;
+        top: 10px;
+        width: 48px;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-close-icon {
+        height: 48px;
+        width: 48px;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-meta-line {
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-title {
+        font-size: clamp(26px, 7vw, 31px);
+        line-height: 1.12;
+        padding-right: 44px;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail,
+      .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail {
+        font-size: 15px;
+        line-height: 1.58;
+      }
+
+      .initiative[data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail-extra,
+      .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail-extra {
+        font-size: clamp(24px, 7vw, 30px);
+      }
+
+      .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .bilt-detail-visual {
+        height: auto;
+      }
+
+      .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-card {
+        padding: 28px 22px;
+      }
+
+      .creative-scientist-expanded-title .creative-scientist-small {
+        font-size: clamp(16px, 6vw, 22px);
+      }
+
+      .creative-scientist-expanded-title .creative-scientist-large {
+        font-size: clamp(46px, 16vw, 64px);
+      }
+
+      .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-detail {
+        font-size: 15px;
+        line-height: 1.35;
       }
 
       .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-content {
