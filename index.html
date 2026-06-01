@@ -2610,6 +2610,24 @@
         border-radius: 999px;
       }
 
+      html.is-scrolled .site-mark {
+        color: #FAFAFA;
+      }
+
+      html.is-scrolled .site-mark::before {
+        transform: scaleY(1);
+      }
+
+      html.is-scrolled .site-mark-logo {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% - 18px));
+      }
+
+      html.is-scrolled .site-mark-arrow {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
       nav {
         font-size: 12px;
         gap: 12px;
