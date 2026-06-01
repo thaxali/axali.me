@@ -1810,7 +1810,7 @@
     }
 
     .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-text [data-media-kit-text] {
-      gap: 18px;
+      display: contents;
     }
 
     .media-kit-content {
@@ -1848,8 +1848,7 @@
     }
 
     .media-kit-text [data-media-kit-text] {
-      display: grid;
-      gap: 12px;
+      display: contents;
     }
 
     .media-kit-text strong {
@@ -1871,6 +1870,10 @@
     .media-kit-contact-list {
       display: grid;
       gap: 8px;
+    }
+
+    .media-kit-contact-block {
+      order: 3;
     }
 
     .media-kit-contact-list {
@@ -1898,6 +1901,22 @@
       position: relative;
       transition: border-color var(--motion-quick) var(--ease-composed), color var(--motion-quick) var(--ease-composed), transform var(--motion-quick) var(--ease-composed);
       z-index: 2;
+    }
+
+    .media-kit-contact-copy::before,
+    .media-kit-copy::before {
+      background: currentColor;
+      content: "";
+      display: block;
+      flex: 0 0 auto;
+      height: 13px;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='6' y='3' width='7' height='9' rx='1.5' stroke='black' stroke-width='1.4'/%3E%3Cpath d='M3 6.5V11C3 12.105 3.895 13 5 13H9.5' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='6' y='3' width='7' height='9' rx='1.5' stroke='black' stroke-width='1.4'/%3E%3Cpath d='M3 6.5V11C3 12.105 3.895 13 5 13H9.5' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+      width: 13px;
+    }
+
+    .media-kit-copy {
+      order: 2;
     }
 
     .media-kit-contact-copy {
