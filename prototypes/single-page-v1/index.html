@@ -100,6 +100,42 @@
       transition: background-color var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed);
     }
 
+    @media (pointer: fine) {
+      html.has-custom-cursor,
+      html.has-custom-cursor * {
+        cursor: none !important;
+      }
+
+      .custom-cursor {
+        background: #fff;
+        border: 0 solid #fff;
+        border-radius: 50%;
+        display: block;
+        height: 11px;
+        left: 0;
+        mix-blend-mode: difference;
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        transform: translate3d(-50%, -50%, 0);
+        transition: height var(--motion-steady) var(--ease-composed), width var(--motion-steady) var(--ease-composed), border-width var(--motion-steady) var(--ease-composed), background-color var(--motion-steady) var(--ease-composed), opacity var(--motion-quick) var(--ease-composed);
+        width: 11px;
+        z-index: 2147483647;
+      }
+
+      html.has-custom-cursor.cursor-ready .custom-cursor {
+        opacity: 1;
+      }
+
+      html.has-custom-cursor.cursor-link-hover .custom-cursor {
+        background: transparent;
+        border-width: 2px;
+        height: 34px;
+        width: 34px;
+      }
+    }
+
     a {
       color: inherit;
       text-decoration: none;
@@ -121,38 +157,126 @@
     header {
       --intro-reveal-delay: 60ms;
       animation: calm-reveal var(--motion-reveal) var(--ease-composed) backwards;
+      -webkit-backdrop-filter: blur(0) saturate(100%);
+      backdrop-filter: blur(0) saturate(100%);
+      border: 1px solid transparent;
+      box-sizing: border-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 24px;
-      padding-bottom: 116px;
+      isolation: isolate;
+      margin-bottom: 100px;
+      padding: 12px;
+      position: sticky;
+      top: 18px;
+      border-radius: 999px;
+      transition: background-color var(--motion-steady) var(--ease-composed), border-color var(--motion-steady) var(--ease-composed), box-shadow var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed), padding var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), backdrop-filter var(--motion-steady) var(--ease-composed), -webkit-backdrop-filter var(--motion-steady) var(--ease-composed);
+      z-index: 70;
+    }
+
+    header::before {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.34), rgba(17, 17, 17, 0.12)), rgba(17, 17, 17, 0.42);
+      border-radius: inherit;
+      content: "";
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: opacity var(--motion-steady) var(--ease-composed);
+      z-index: -1;
+    }
+
+    html.is-scrolled header {
+      --ink: #FAFAFA;
+      --muted: rgba(250, 250, 250, 0.68);
+      --line: rgba(250, 250, 250, 0.16);
+      -webkit-backdrop-filter: blur(24px) saturate(145%) contrast(1.01);
+      backdrop-filter: blur(24px) saturate(145%) contrast(1.01);
+      border-color: rgba(250, 250, 250, 0.1);
+      box-shadow: 0 14px 46px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(250, 250, 250, 0.06);
+      color: var(--ink);
+    }
+
+    html.is-scrolled header::before {
+      opacity: 1;
+    }
+
+    html[data-theme="dark"].is-scrolled header {
+      --ink: #111111;
+      --muted: rgba(17, 17, 17, 0.62);
+      --line: rgba(17, 17, 17, 0.12);
+      border-color: rgba(17, 17, 17, 0.08);
+      box-shadow: 0 14px 46px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+    }
+
+    html[data-theme="dark"] header::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(250, 250, 250, 0.16)), rgba(250, 250, 250, 0.42);
     }
 
     .site-mark {
       align-items: center;
+      border-radius: 50%;
       color: var(--ink);
       display: inline-flex;
-      height: 30px;
+      height: 32px;
       justify-content: center;
-      width: 30px;
+      overflow: hidden;
+      position: relative;
+      width: 32px;
     }
 
-    .site-mark-logo {
+    .site-mark::before {
+      background: var(--activity);
+      border-radius: 50%;
+      content: "";
+      inset: 0;
+      position: absolute;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--motion-steady) var(--ease-composed);
+      z-index: 0;
+    }
+
+    .site-mark-logo,
+    .site-mark-arrow {
       display: block;
-      height: 28px;
-      transition: color var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
-      width: 28px;
+      height: 32px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: color var(--motion-quick) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
+      width: 32px;
+      z-index: 1;
+    }
+
+    .site-mark-arrow {
+      opacity: 0;
+      transform: translate(-50%, calc(-50% + 18px));
     }
 
     .site-mark:hover,
     .site-mark:focus-visible {
-      color: var(--activity);
+      color: #FAFAFA;
       outline: none;
+    }
+
+    .site-mark:hover::before,
+    .site-mark:focus-visible::before {
+      transform: scaleY(1);
     }
 
     .site-mark:hover .site-mark-logo,
     .site-mark:focus-visible .site-mark-logo {
-      transform: scale(1.18);
+      opacity: 0;
+      transform: translate(-50%, calc(-50% - 18px));
+    }
+
+    .site-mark:hover .site-mark-arrow,
+    .site-mark:focus-visible .site-mark-arrow {
+      opacity: 1;
+      transform: translate(-50%, -50%);
     }
 
     nav {
@@ -178,9 +302,9 @@
       cursor: pointer;
       display: grid;
       height: 36px;
-      padding: 0;
+      padding: 0 8px 0 0;
       place-items: center;
-      width: 22px;
+      width: 30px;
     }
 
     .toggle-track {
@@ -231,10 +355,10 @@
 
     .eyebrow {
       color: var(--ink);
-      font-size: 19px;
-      line-height: 1.35;
-      margin: 0 0 10px;
-      font-variation-settings: "wght" 430, "opsz" 19;
+      font-size: clamp(28px, 4.2vw, 36px);
+      line-height: 1.18;
+      margin: 0 0 2px;
+      font-variation-settings: "wght" 520, "opsz" 36, "XTRA" 460;
     }
 
     h1 {
@@ -245,11 +369,42 @@
       font-variation-settings: "wght" 520, "opsz" 36, "XTRA" 460;
     }
 
+    .creative-scientist-initiative {
+      max-width: 100%;
+    }
+
+    .creative-scientist-link {
+      background-image: none !important;
+      background-size: 0 0 !important;
+      line-height: inherit;
+      padding-bottom: 0;
+      text-align: left;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-title {
+      max-width: 640px;
+      text-transform: none;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-detail {
+      max-width: 720px;
+    }
+
+    .creative-scientist-bg,
+    .creative-scientist-expanded-title {
+      display: none;
+    }
+
     .intro-type-text {
       transition: color var(--motion-quick) var(--ease-composed);
     }
 
-    html.intro-pending:not(.intro-started) .intro-type-text {
+    .intro-title-rest {
+      transition: color var(--motion-quick) var(--ease-composed);
+    }
+
+    html.intro-pending:not(.intro-started) .intro-type-text,
+    html.intro-pending:not(.intro-started) .intro-title-rest {
       color: transparent;
     }
 
@@ -257,18 +412,11 @@
       background: var(--activity);
       border-radius: 50%;
       display: inline-block;
-      height: 0.42em;
-      margin-left: 0.16em;
-      transform: translateY(0.05em);
-      vertical-align: baseline;
-      width: 0.42em;
-    }
-
-    h1 .typing-cursor {
-      height: 0.22em;
+      height: 0.3em;
       margin-left: 0.1em;
       transform: translateY(0.03em);
-      width: 0.22em;
+      vertical-align: baseline;
+      width: 0.3em;
     }
 
     .typing-cursor[hidden] {
@@ -397,18 +545,28 @@
       visibility: visible;
     }
 
+    .intro .initiative:not(.is-pinned):not(.is-detail):hover .initiative-card,
+    .intro .initiative:not(.is-pinned):not(.is-detail):focus-within .initiative-card,
+    .media-kit-initiative:not(.is-pinned):not(.is-detail):hover .initiative-card,
+    .media-kit-initiative:not(.is-pinned):not(.is-detail):focus-within .initiative-card {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.965);
+      visibility: hidden;
+    }
+
     .initiative-close {
       appearance: none;
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-      backdrop-filter: blur(16px) saturate(140%);
-      background: color-mix(in srgb, var(--glass-fill) 82%, transparent);
-      border: 1px solid var(--glass-border);
-      border-radius: 50%;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
       color: var(--muted);
       cursor: pointer;
       display: grid;
-      height: 24px;
+      height: 32px;
+      isolation: isolate;
       opacity: 0;
+      overflow: hidden;
       padding: 0;
       place-items: center;
       pointer-events: none;
@@ -416,38 +574,99 @@
       right: 12px;
       top: 12px;
       transform: scale(0.82);
-      transition: opacity var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), border-color var(--motion-quick) var(--ease-composed), color var(--motion-quick) var(--ease-composed);
-      width: 24px;
+      transition: opacity var(--motion-quick) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), color var(--motion-quick) var(--ease-composed);
+      width: 32px;
       z-index: 3;
     }
 
     .initiative-close::before {
-      content: "+";
+      background: var(--activity);
+      content: "";
+      inset: 0;
+      position: absolute;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 420ms var(--ease-composed);
+      z-index: -1;
+    }
+
+    .initiative-close-icon {
       display: block;
-      font-size: 17px;
-      line-height: 1;
-      transform: rotate(45deg);
+      height: 28px;
+      pointer-events: none;
+      position: relative;
+      width: 28px;
+      z-index: 1;
+    }
+
+    .initiative-close-icon path {
+      stroke: currentColor;
     }
 
     .initiative.is-pinned .initiative-close {
       opacity: 1;
       pointer-events: auto;
       transform: scale(1);
-      transition-delay: 80ms, 80ms, 0ms, 0ms;
+      transition-delay: 80ms, 80ms, 0ms;
     }
 
     .initiative-close:hover,
     .initiative-close:focus-visible {
-      border-color: var(--activity);
-      color: var(--activity);
+      color: #FAFAFA;
       outline: none;
     }
 
+    .initiative-close:hover::before,
+    .initiative-close:focus-visible::before {
+      transform: scaleY(1);
+    }
+
     .initiative-title,
-    .initiative-body {
+    .initiative-body,
+    .initiative-meta {
       display: block;
       position: relative;
       z-index: 1;
+    }
+
+    .initiative-meta {
+      display: none;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
+    }
+
+    .initiative-meta-line {
+      color: var(--quiet);
+      display: block;
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      font-variation-settings: "wght" 430, "opsz" 12;
+    }
+
+    .initiative-meta-line + .initiative-meta-line {
+      margin-top: 4px;
+    }
+
+    .initiative-meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .initiative-meta-role {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 8px;
+      padding: 1px 7px;
+      font-variation-settings: "wght" 430, "opsz" 12;
     }
 
     .initiative-title {
@@ -493,6 +712,23 @@
       transform: translateY(5px);
       transition: color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
       font-variation-settings: "wght" 405, "opsz" 16;
+      z-index: 1;
+    }
+
+    .initiative-detail-paragraph {
+      display: block;
+    }
+
+    .initiative-detail-paragraph + .initiative-detail-paragraph {
+      margin-top: 14px;
+    }
+
+    .initiative-detail-extra {
+      display: none;
+      opacity: 0;
+      position: relative;
+      transform: translateY(5px);
+      transition: opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
       z-index: 1;
     }
 
@@ -546,35 +782,120 @@
     }
 
     .initiative-action-row a {
+      align-items: center;
+      display: inline-flex;
+      gap: 5px;
       margin-left: 0 !important;
     }
 
+    .initiative-action-row a svg {
+      display: block;
+      height: 12px;
+      stroke-width: 1.8;
+      width: 12px;
+    }
+
     .initiative[data-detail-card="product"].is-detail .initiative-card {
-      border-radius: 34px;
+      --ink: #FAFAFA;
+      --muted: rgba(250, 250, 250, 0.66);
+      --quiet: rgba(250, 250, 250, 0.42);
+      --line: rgba(250, 250, 250, 0.16);
+      --glass-border: rgba(250, 250, 250, 0.16);
+      --glass-fill: rgba(17, 17, 17, 0.72);
+      --glass-highlight: rgba(250, 250, 250, 0.08);
+      --glass-shadow: rgba(0, 0, 0, 0.5);
+      --glass-tint: linear-gradient(135deg, rgba(42, 42, 42, 0.58), rgba(17, 17, 17, 0.3));
+      -webkit-backdrop-filter: blur(34px) saturate(165%) contrast(1.02);
+      backdrop-filter: blur(34px) saturate(165%) contrast(1.02);
+      background: var(--glass-tint), var(--glass-fill);
+      border-radius: 32px;
       bottom: auto;
       box-shadow: 0 34px 90px var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-      height: 80vh;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      height: min(80vh, calc(100vh - 32px));
       left: 50%;
       max-height: calc(100vh - 32px);
       max-width: calc(100vw - 32px);
+      min-height: 0;
       opacity: 1;
       overflow-y: auto;
-      padding: 34px;
+      padding: 32px;
       pointer-events: auto;
       position: fixed;
       right: auto;
       top: 50%;
       transform: translate(-50%, -50%);
       visibility: visible;
-      width: 80vw;
+      width: min(80vw, calc(100vw - 32px));
       z-index: 80;
     }
 
+    html[data-theme="dark"] .initiative[data-detail-card="product"].is-detail .initiative-card {
+      --ink: #111111;
+      --muted: rgba(17, 17, 17, 0.62);
+      --quiet: rgba(17, 17, 17, 0.4);
+      --line: rgba(17, 17, 17, 0.12);
+      --glass-border: rgba(17, 17, 17, 0.12);
+      --glass-fill: rgba(250, 250, 250, 0.74);
+      --glass-highlight: rgba(255, 255, 255, 0.86);
+      --glass-shadow: rgba(0, 0, 0, 0.34);
+      --glass-tint: linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(250, 250, 250, 0.36));
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-card::before {
+      opacity: 0;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-close {
+      color: var(--ink);
+      height: 56px;
+      right: 18px;
+      top: 18px;
+      width: 56px;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-close-icon {
+      height: 56px;
+      width: 56px;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 0;
+      order: 1;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-meta-line {
+      color: var(--muted);
+      display: block;
+      font-size: 16px;
+      line-height: 1.5;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-meta-line + .initiative-meta-line {
+      margin-top: 0;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-meta-role {
+      color: var(--ink);
+      margin-top: 0;
+    }
+
     .initiative[data-detail-card="product"].is-detail .initiative-title {
-      font-size: 24px;
-      line-height: 1.18;
-      margin-bottom: 18px;
-      font-variation-settings: "wght" 570, "opsz" 24;
+      font-size: clamp(30px, 5vw, 36px);
+      line-height: 1.11;
+      margin-bottom: 0;
+      max-width: 520px;
+      order: 2;
+      padding-right: 0;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
     }
 
     .initiative[data-detail-card="product"].is-detail .initiative-body,
@@ -584,6 +905,658 @@
 
     .initiative[data-detail-card="product"].is-detail .initiative-detail {
       display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.68;
+      margin-bottom: 0;
+      max-width: 680px;
+      order: 4;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-detail-extra {
+      color: var(--quiet);
+      display: block;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.11;
+      max-width: 900px;
+      order: 5;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-card {
+      --ink: #F1F1F1;
+      --muted: rgba(241, 241, 241, 0.82);
+      --quiet: rgba(241, 241, 241, 0.66);
+      align-items: flex-start;
+      background: #2f3d32;
+      box-shadow: 0 34px 90px rgba(17, 17, 17, 0.42);
+      gap: 28px;
+      justify-content: flex-start;
+      padding: clamp(34px, 5vw, 72px);
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-card::before {
+      background: linear-gradient(90deg, rgba(24, 24, 18, 0.46), rgba(24, 24, 18, 0.12) 58%, rgba(24, 24, 18, 0));
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .creative-scientist-bg {
+      display: block;
+      inset: 0;
+      order: 0;
+      position: absolute;
+      z-index: 0;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .creative-scientist-bg img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-title {
+      display: none;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .creative-scientist-expanded-title {
+      color: #FAFAFA;
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 0.92;
+      max-width: 390px;
+      mix-blend-mode: luminosity;
+      order: 2;
+      opacity: 0.8;
+      position: relative;
+      text-shadow: 0 1px 24px rgba(0, 0, 0, 0.22);
+      z-index: 2;
+    }
+
+    .creative-scientist-expanded-title .creative-scientist-small {
+      display: block;
+      font-size: clamp(18px, 2.4vw, 28px);
+      line-height: 1.05;
+    }
+
+    .creative-scientist-expanded-title .creative-scientist-large {
+      display: block;
+      font-size: clamp(54px, 8.4vw, 92px);
+      letter-spacing: -0.045em;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-detail {
+      color: #F1F1F1;
+      display: flex;
+      flex-direction: column;
+      font-size: clamp(16px, 1.7vw, 20px);
+      gap: 16px;
+      line-height: 1.28;
+      margin-top: auto;
+      max-width: 760px;
+      order: 4;
+      position: relative;
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.22);
+      z-index: 2;
+      font-variation-settings: "wght" 500, "opsz" 20;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-detail p {
+      margin: 0;
+    }
+
+    .initiative[data-product-id="creative-scientist"][data-detail-card="product"].is-detail .initiative-close {
+      color: #F1F1F1;
+      z-index: 3;
+    }
+
+    .bilt-detail-visual,
+    .bilt-detail-press,
+    .did-detail-diagram,
+    .did-detail-publications,
+    .amazon-grocery-section,
+    .amazon-grocery-callout {
+      display: none;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-card,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-card {
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-meta,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-meta {
+      gap: 0;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-title,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-title {
+      max-width: 540px;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 538 / 284;
+      background: #FAFAFA;
+      display: block;
+      flex: 0 0 auto;
+      max-width: 538px;
+      order: 3;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .bilt-detail-visual img,
+    .bilt-detail-visual video {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bilt-detail-visual video {
+      background: #000;
+      object-fit: contain;
+    }
+
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 538 / 338;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 4032 / 3024;
+    }
+
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 1 / 1;
+      max-width: 436px;
+    }
+
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 16 / 9;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 1400 / 787;
+      background: transparent;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .bilt-detail-visual img {
+      object-fit: contain;
+    }
+
+    .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .initiative-card {
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .bilt-detail-visual {
+      aspect-ratio: 3138 / 2066;
+      background: transparent;
+      display: block;
+      flex: 0 0 auto;
+      height: clamp(220px, 32vw, 420px);
+      max-width: none;
+      order: 3;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .bilt-detail-visual img {
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="seena-ethnographer"][data-detail-card="product"].is-detail .initiative-detail-extra {
+      align-self: stretch;
+      max-width: none;
+      width: 100%;
+    }
+
+    .did-detail-content {
+      display: contents;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.68;
+      max-width: 680px;
+      order: 4;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail-extra {
+      color: var(--ink);
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.11;
+      max-width: 560px;
+      order: 5;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
+    }
+
+    .bilt-metric-muted {
+      color: var(--muted);
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section {
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      gap: 12px;
+      line-height: 1.6;
+      max-width: 680px;
+      order: 6;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section > span {
+      display: block;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-workshop {
+      order: 7;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section-two {
+      order: 8;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-callout {
+      color: var(--quiet);
+      display: block;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.11;
+      max-width: 860px;
+      order: 9;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
+    }
+
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section-three {
+      order: 10;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .bilt-detail-press,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .bilt-detail-press,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .bilt-detail-press {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 538px;
+      order: 6;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="bilt-dining"][data-detail-card="product"].is-detail .bilt-detail-press,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="bilt-lyft"][data-detail-card="product"].is-detail .bilt-detail-press,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="bilt-pointme"][data-detail-card="product"].is-detail .bilt-detail-press,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-callout,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-diagram,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-publications {
+      align-self: stretch;
+      max-width: none;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-low-price"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-bundle"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-section,
+    .initiative[data-product-id="amazon-grocery"][data-detail-card="product"].is-detail .amazon-grocery-callout,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="apple-vision-pro"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="iron-man"][data-detail-card="product"].is-detail .initiative-detail-extra,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .bilt-detail-visual,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .initiative-detail,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-diagram,
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-publications {
+      align-self: stretch !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-diagram {
+      display: block;
+      order: 5;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-content {
+      align-self: stretch;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 257px);
+      order: 4;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-content .initiative-detail {
+      order: initial;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-content .did-detail-diagram {
+      order: initial;
+    }
+
+    .did-detail-diagram img {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+
+    .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-publications {
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      gap: 8px;
+      line-height: 1.5;
+      order: 6;
+      text-transform: none;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .did-detail-publications-title {
+      border-bottom: 1px solid var(--muted);
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      line-height: 1.5;
+      padding-bottom: 2px;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 620, "opsz" 12;
+    }
+
+    .bilt-press-heading {
+      border-bottom: 1px solid var(--muted);
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      line-height: 1.5;
+      padding-bottom: 2px;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 620, "opsz" 12;
+    }
+
+    .bilt-press-link {
+      align-items: center;
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 12px;
+      gap: 4px;
+      line-height: 1;
+      text-decoration: none;
+      width: fit-content;
+      font-variation-settings: "wght" 280, "opsz" 12;
+    }
+
+    .bilt-press-link svg {
+      height: 12px;
+      stroke-width: 1.8;
+      width: 12px;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-card {
+      align-items: stretch;
+      gap: 24px;
+      scroll-padding: 32px;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-meta {
+      gap: 0;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-title {
+      max-width: 460px;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-action-row {
+      display: flex;
+      margin: -6px 0 0;
+      order: 4;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-action-row a {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.2;
+      font-variation-settings: "wght" 405, "opsz" 14;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-detail {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.68;
+      max-width: 680px;
+      order: 5;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .initiative-detail-extra {
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      gap: 24px;
+      line-height: 1.68;
+      max-width: none;
+      order: 6;
+      text-transform: none;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .third-brain-media {
+      border-radius: 0;
+      display: none;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .initiative[data-company="third-brain"][data-detail-card="product"].is-detail .third-brain-media {
+      display: block;
+    }
+
+    .third-brain-hero {
+      aspect-ratio: 3534 / 1723;
+      height: clamp(220px, 36vw, 420px);
+      order: 3;
+    }
+
+    .third-brain-media img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .third-brain-hero img {
+      height: 100%;
+    }
+
+    .third-brain-section-title {
+      color: var(--ink);
+      display: block;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.11;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
+    }
+
+    .third-brain-prose {
+      display: block;
+      max-width: 100%;
+    }
+
+    .third-brain-prose > span {
+      display: block;
+    }
+
+    .third-brain-prose > span + span {
+      margin-top: 18px;
+    }
+
+    .third-brain-prose em {
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .third-brain-bullets {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .third-brain-bullets span {
+      display: block;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .third-brain-bullets span + span {
+      margin-top: 6px;
+    }
+
+    .third-brain-bullets span::before {
+      background: var(--muted);
+      border-radius: 50%;
+      content: "";
+      height: 3px;
+      left: 2px;
+      position: absolute;
+      top: 0.72em;
+      width: 3px;
+    }
+
+    .third-brain-image-row {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .third-brain-image-row .third-brain-media {
+      aspect-ratio: 956 / 720;
+    }
+
+    .third-brain-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .third-brain-quote {
+      align-items: stretch;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: minmax(0, 1fr) minmax(160px, 240px);
+    }
+
+    .third-brain-quote-text {
+      color: var(--quiet);
+      display: block;
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.11;
+      text-transform: uppercase;
+      font-variation-settings: "wght" 405, "opsz" 36;
+    }
+
+    .third-brain-quote-text strong {
+      color: var(--ink);
+      font-weight: inherit;
+    }
+
+    .third-brain-quote .third-brain-media {
+      aspect-ratio: 1;
+      align-self: stretch;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-proof strong {
+      color: var(--ink);
+      font-weight: inherit;
     }
 
     .initiative-detail-link {
@@ -592,13 +1565,21 @@
 
     .initiative[data-detail-card="product"].is-detail .initiative-detail-link {
       display: inline-flex !important;
+      margin-top: 18px;
       margin-right: 14px;
+      order: 4;
       position: relative;
       z-index: 2;
     }
 
     .initiative[data-detail-card="product"].is-detail .initiative-action-row {
-      margin-bottom: 14px;
+      display: none;
+      margin: -10px 0 0;
+      order: 3;
+    }
+
+    .initiative[data-detail-card="product"].is-detail .initiative-action-row:has(a) {
+      display: flex;
     }
 
     .initiative-card a {
@@ -612,12 +1593,25 @@
       z-index: 2;
     }
 
+    .initiative-card .initiative-action-row a {
+      align-items: center;
+      display: inline-flex;
+      gap: 5px;
+    }
+
+    .initiative-card .initiative-action-row a svg {
+      flex: 0 0 auto;
+    }
+
     .initiative-card > a {
       opacity: 0;
       transform: translateY(5px);
       transition: background-size var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
     }
 
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-meta,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-meta,
+    .initiative.is-pinned .initiative-card .initiative-meta,
     .initiative:not(.is-dismissed):hover .initiative-card .initiative-title,
     .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-title,
     .initiative.is-pinned .initiative-card .initiative-title {
@@ -633,6 +1627,14 @@
     .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-detail,
     .initiative.is-pinned .initiative-card .initiative-detail {
       --card-content-delay: 120ms;
+      opacity: 1;
+      transform: none;
+    }
+
+    .initiative:not(.is-dismissed):hover .initiative-card .initiative-detail-extra,
+    .initiative:not(.is-dismissed):focus-within .initiative-card .initiative-detail-extra,
+    .initiative.is-pinned .initiative-card .initiative-detail-extra {
+      --card-content-delay: 170ms;
       opacity: 1;
       transform: none;
     }
@@ -691,7 +1693,8 @@
     }
 
     #career,
-    #writing {
+    #writing,
+    #press {
       margin-left: calc((100% - min(900px, calc(100vw - 48px))) / 2);
       width: min(900px, calc(100vw - 48px));
     }
@@ -704,6 +1707,267 @@
     #writing {
       animation-delay: 300ms;
       --intro-reveal-delay: 800ms;
+    }
+
+    #press {
+      animation-delay: 340ms;
+      --intro-reveal-delay: 870ms;
+    }
+
+    .section-heading-row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .section-heading-row h2 {
+      margin-bottom: 0;
+    }
+
+    button.media-kit-button {
+      background: transparent;
+      background-image: none;
+      background-size: auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 13px;
+      line-height: 1.3;
+      padding: 7px 13px;
+      transition: border-color var(--motion-quick) var(--ease-composed);
+      font-variation-settings: "wght" 430, "opsz" 13;
+    }
+
+    .media-kit-button span {
+      color: var(--ink);
+      display: block;
+      position: relative;
+    }
+
+    .media-kit-button span::after {
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 36%, var(--activity) 50%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 100%);
+      background-position: 100% 0;
+      background-repeat: no-repeat;
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      content: attr(data-label);
+      inset: 0;
+      position: absolute;
+    }
+
+    .media-kit-initiative .initiative-card {
+      left: auto;
+      right: 0;
+      width: min(620px, calc(100vw - 36px));
+      transform-origin: calc(100% - 26px) 0;
+    }
+
+    .media-kit-initiative:not(.is-detail):hover .initiative-card,
+    .media-kit-initiative:not(.is-detail):focus-within .initiative-card {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.965);
+      visibility: hidden;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .initiative-card {
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .initiative-title {
+      max-width: 640px;
+      text-transform: none;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-content {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 0.58fr);
+      order: 3;
+      width: 100%;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-asset,
+    .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-portrait {
+      width: 100%;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-text {
+      color: var(--ink);
+      display: grid;
+      font-size: 16px;
+      gap: 18px;
+      line-height: 1.58;
+      margin-bottom: 0;
+      max-width: none;
+      font-variation-settings: "wght" 405, "opsz" 16;
+    }
+
+    .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-text [data-media-kit-text] {
+      gap: 18px;
+    }
+
+    .media-kit-content {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 132px minmax(0, 1fr);
+      position: relative;
+      z-index: 1;
+    }
+
+    .media-kit-asset {
+      align-content: start;
+      display: grid;
+      gap: 10px;
+    }
+
+    .media-kit-portrait {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: block;
+      overflow: hidden;
+      width: 132px;
+    }
+
+    .media-kit-portrait img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .media-kit-text {
+      display: grid;
+      gap: 12px;
+    }
+
+    .media-kit-text [data-media-kit-text] {
+      display: grid;
+      gap: 12px;
+    }
+
+    .media-kit-text strong {
+      color: var(--ink);
+      display: block;
+      font-variation-settings: "wght" 560, "opsz" 14;
+    }
+
+    .media-kit-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .media-kit-copy {
+      appearance: none;
+      align-self: start;
+      justify-self: start;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-size: 13px;
+      gap: 7px;
+      align-items: center;
+      line-height: 1.3;
+      padding: 7px 13px;
+      position: relative;
+      transition: border-color var(--motion-quick) var(--ease-composed), color var(--motion-quick) var(--ease-composed), transform var(--motion-quick) var(--ease-composed);
+      z-index: 2;
+    }
+
+    .media-kit-download {
+      align-items: center;
+      background-image: none !important;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink) !important;
+      display: inline-flex !important;
+      font-size: 13px !important;
+      gap: 7px;
+      line-height: 1.3 !important;
+      padding: 7px 13px !important;
+    }
+
+    .media-kit-format-icon {
+      border: 1px solid currentColor;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .media-kit-format-icon-square {
+      height: 10px;
+      width: 10px;
+    }
+
+    .media-kit-format-icon-wide {
+      height: 8px;
+      width: 14px;
+    }
+
+    .media-kit-copy:hover,
+    .media-kit-copy:focus-visible {
+      border-color: var(--activity);
+      color: var(--activity) !important;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .media-kit-download:hover,
+    .media-kit-download:focus-visible {
+      border-color: var(--line);
+      color: var(--ink) !important;
+      outline: none;
+      transform: none;
+    }
+
+    .media-kit-download-label {
+      color: var(--ink);
+      display: block;
+      position: relative;
+    }
+
+    .media-kit-download-label::after {
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 36%, var(--activity) 50%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 100%);
+      background-position: 100% 0;
+      background-repeat: no-repeat;
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      content: attr(data-label);
+      inset: 0;
+      position: absolute;
+    }
+
+    .media-kit-download:hover .media-kit-download-label::after,
+    .media-kit-download:focus-visible .media-kit-download-label::after {
+      animation: dwell-title-shimmer 1200ms var(--ease-composed) forwards;
+    }
+
+    button.media-kit-button:hover,
+    button.media-kit-button:focus-visible {
+      background-image: none;
+      background-size: auto;
+      border-color: var(--line);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .media-kit-button:hover span::after,
+    .media-kit-button:focus-visible span::after {
+      animation: dwell-title-shimmer 1200ms var(--ease-composed) forwards;
     }
 
     #contact {
@@ -774,6 +2038,19 @@
 
     .career-list li + li {
       margin-top: 5px;
+    }
+
+    .career-list .career-item-spaced {
+      padding-bottom: 12px;
+      position: relative;
+    }
+
+    .career-list .career-item-spaced::after {
+      border-bottom: 1px solid var(--line);
+      content: "";
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 12px;
     }
 
     .career-related,
@@ -847,37 +2124,172 @@
       margin-top: 8px;
     }
 
+    .press-link {
+      padding-bottom: 2px;
+    }
+
+    .press-columns {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .press-group + .press-group {
+      margin-top: 0;
+    }
+
+    .press-group-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+      margin: 0 0 11px;
+      font-variation-settings: "wght" 500, "opsz" 15;
+    }
+
+    .press-group .rows + .press-group-title {
+      margin-top: 28px;
+    }
+
+    #press .rows {
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.32;
+      font-variation-settings: "wght" 365, "opsz" 13;
+    }
+
+    #press .row {
+      border-top: 0;
+      display: block;
+      padding: 0;
+    }
+
+    #press .row + .row {
+      margin-top: 6px;
+    }
+
+    #press .row-title {
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.32;
+      margin-bottom: 1px;
+      font-variation-settings: "wght" 430, "opsz" 13;
+    }
+
+    #press .row-text {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.32;
+      font-variation-settings: "wght" 365, "opsz" 13;
+    }
+
     .writing-list {
+      scroll-behavior: smooth;
+      scrollbar-width: none;
       display: grid;
       align-items: stretch;
-      gap: 18px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      grid-auto-columns: 190px;
+      grid-auto-flow: column;
+      grid-template-columns: none;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+    }
+
+    .writing-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .writing-carousel {
+      position: relative;
+    }
+
+    .writing-carousel-button {
+      -webkit-backdrop-filter: blur(18px) saturate(145%);
+      backdrop-filter: blur(18px) saturate(145%);
+      background: color-mix(in srgb, var(--glass-fill) 86%, transparent);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 18px 44px color-mix(in srgb, var(--glass-shadow) 32%, transparent);
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      height: 42px;
+      opacity: 0;
+      padding: 0;
+      place-items: center;
+      pointer-events: none;
+      position: absolute;
+      top: 95px;
+      transform: translateY(-50%) scale(0.92);
+      transition: opacity var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed), background-color var(--motion-quick) var(--ease-composed), color var(--motion-quick) var(--ease-composed);
+      width: 42px;
+      z-index: 2;
+    }
+
+    .writing-carousel-button::after {
+      background: var(--glass-tint);
+      border-radius: inherit;
+      content: "";
+      inset: 1px;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .writing-carousel-button svg {
+      height: 18px;
+      position: relative;
+      width: 18px;
+      z-index: 1;
+    }
+
+    .writing-carousel-button.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(-50%) scale(1);
+    }
+
+    .writing-carousel-button:hover,
+    .writing-carousel-button:focus-visible {
+      background: var(--activity);
+      color: #FAFAFA;
+      outline: none;
+    }
+
+    .writing-carousel-button-prev {
+      left: -21px;
+    }
+
+    .writing-carousel-button-next {
+      right: -21px;
     }
 
     .writing-post {
       display: flex;
       min-width: 0;
+      scroll-snap-align: start;
     }
 
     .writing-post-link {
       display: grid;
       flex: 1;
-      gap: 0;
+      gap: 11px;
       grid-template-rows: auto 1fr;
       height: 100%;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-      overflow: hidden;
-      transition: box-shadow var(--motion-steady) var(--ease-composed), transform var(--motion-quick) var(--ease-composed);
+      min-height: 334px;
+      min-width: 0;
+      transition: color var(--motion-quick) var(--ease-composed);
     }
 
     .writing-post-cover {
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 1 / 1;
       background: var(--line);
+      border-radius: 0;
       display: block;
       overflow: hidden;
       position: relative;
+      transition: border-radius var(--motion-steady) var(--ease-composed);
     }
 
     .writing-post-cover img {
@@ -885,16 +2297,15 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1);
-      transition: opacity var(--motion-steady) var(--ease-composed), transform var(--motion-steady) var(--ease-composed);
+      transition: opacity var(--motion-steady) var(--ease-composed);
     }
 
     .writing-post-content {
       align-content: start;
       display: grid;
       gap: 4px;
+      grid-template-rows: auto auto auto 1fr;
       min-width: 0;
-      padding: 14px 16px 16px;
     }
 
     .writing-post-meta {
@@ -923,22 +2334,39 @@
       font-variation-settings: "wght" 405, "opsz" 14;
     }
 
-    .writing-post-link:hover,
-    .writing-post-link:focus-visible {
-      box-shadow: 0 14px 34px color-mix(in srgb, var(--ink) 9%, transparent);
-      transform: translateY(-1px);
+    .writing-post-read {
+      align-items: center;
+      color: var(--muted);
+      display: inline-flex;
+      gap: 4px;
+      font-size: 12px;
+      line-height: 1.3;
+      margin-top: 14px;
+      place-self: end start;
+      transition: color var(--motion-quick) var(--ease-composed);
+      font-variation-settings: "wght" 405, "opsz" 12;
     }
 
-    .writing-post-link:hover .writing-post-cover img,
-    .writing-post-link:focus-visible .writing-post-cover img {
-      transform: scale(1.025);
+    .writing-post-read svg {
+      height: 12px;
+      width: 12px;
+    }
+
+    .writing-post-link:hover .writing-post-read,
+    .writing-post-link:focus-visible .writing-post-read {
+      color: var(--activity);
+    }
+
+    .writing-post-link:hover .writing-post-cover,
+    .writing-post-link:focus-visible .writing-post-cover {
+      border-radius: 14px;
     }
 
     .writing-footer {
       color: var(--muted);
       font-size: 15px;
       line-height: 1.5;
-      margin-top: 18px;
+      margin-top: 24px;
     }
 
     .writing-footer a {
@@ -948,6 +2376,58 @@
     .writing-footer a:hover,
     .writing-footer a:focus-visible {
       color: var(--muted);
+    }
+
+    .writing-subsection-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+      margin: 34px 0 11px;
+      font-variation-settings: "wght" 500, "opsz" 15;
+    }
+
+    .writing-publications {
+      max-width: none;
+    }
+
+    .publication-columns {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .publication-group-title {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+      margin: 0 0 11px;
+      font-variation-settings: "wght" 500, "opsz" 15;
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    .publication-entry {
+      display: block;
+    }
+
+    .publication-venue {
+      color: var(--ink);
+      display: inline;
+      font-size: 12px;
+      line-height: 1.32;
+      margin-right: 5px;
+      font-variation-settings: "wght" 430, "opsz" 13;
+    }
+
+    .publication-citation {
+      color: var(--muted);
+      display: inline;
+      font-size: 12px;
+      line-height: 1.32;
+      font-variation-settings: "wght" 365, "opsz" 13;
     }
 
     .copy {
@@ -976,6 +2456,7 @@
 
     .initiative-link,
     .initiative-card a,
+    .press-link,
     .writing-footer a,
     .contact-links a {
       background-image: linear-gradient(var(--activity), var(--activity)), linear-gradient(var(--line), var(--line));
@@ -989,6 +2470,8 @@
     .initiative-link:focus-visible,
     .initiative-card a:hover,
     .initiative-card a:focus-visible,
+    .press-link:hover,
+    .press-link:focus-visible,
     .writing-footer a:hover,
     .writing-footer a:focus-visible,
     .contact-links a:hover,
@@ -1000,7 +2483,7 @@
       transition: background-size var(--motion-steady) var(--ease-composed), color var(--motion-steady) var(--ease-composed), opacity var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms), transform var(--motion-steady) var(--ease-composed) var(--card-content-delay, 0ms);
     }
 
-    .note {
+    .site-footer {
       --intro-reveal-delay: 1080ms;
       margin-top: 28px;
       color: var(--quiet);
@@ -1066,7 +2549,12 @@
       header {
         display: grid;
         gap: 22px;
-        padding-bottom: 88px;
+        margin-bottom: 88px;
+        padding: 12px;
+      }
+
+      html.is-scrolled header {
+        border-radius: 28px;
       }
 
       nav {
@@ -1096,14 +2584,44 @@
         width: auto;
       }
 
-      #writing {
+      #writing,
+      #press {
         margin-left: 0;
         width: auto;
       }
 
-      .career-columns {
+      .career-columns,
+      .press-columns,
+      .publication-columns {
         gap: 0;
         grid-template-columns: 1fr;
+      }
+
+      .press-group,
+      .publication-group {
+        padding: 16px 0;
+      }
+
+      .press-group:first-child,
+      .publication-group:first-child {
+        padding-top: 0;
+      }
+
+      .section-heading-row {
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .media-kit-content {
+        grid-template-columns: 1fr;
+      }
+
+      .media-kit-initiative[data-detail-card="product"].is-detail .media-kit-content {
+        grid-template-columns: 1fr;
+      }
+
+      .media-kit-portrait {
+        width: min(160px, 100%);
       }
 
       .career-column {
@@ -1133,21 +2651,21 @@
       }
 
       .writing-list {
-        grid-auto-columns: minmax(246px, 82%);
-        grid-auto-flow: column;
-        grid-template-columns: none;
+        grid-auto-columns: minmax(176px, 66%);
         margin: 0 -18px;
-        overflow-x: auto;
         padding: 0 18px 8px;
-        scroll-snap-type: x proximity;
       }
 
-      .writing-post {
-        scroll-snap-align: start;
+      .writing-carousel-button-prev {
+        left: -6px;
       }
 
-      .writing-post-content {
-        padding: 12px 14px 14px;
+      .writing-carousel-button-next {
+        right: -6px;
+      }
+
+      .writing-post-read {
+        margin-top: 10px;
       }
 
       .initiative {
@@ -1178,24 +2696,39 @@
         top: 50%;
         width: 92vw;
       }
+
+      .initiative[data-product-id="distributed-interaction-design"][data-detail-card="product"].is-detail .did-detail-content {
+        grid-template-columns: 1fr;
+      }
+
+      .third-brain-image-row,
+      .third-brain-quote {
+        grid-template-columns: 1fr;
+      }
+
+      .third-brain-quote .third-brain-media {
+        max-width: 220px;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header data-after-intro>
-      <a class="site-mark" href="#" aria-label="Dr. Ax Ali">
-        <svg class="site-mark-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" aria-hidden="true" focusable="false">
-          <path d="M 23.494 19.13 C 23.257 17.705 22.882 16.167 22.378 14.558 C 21.521 11.824 20.574 9.796 20.564 9.776 C 20.445 9.521 20.143 9.377 19.846 9.436 C 19.542 9.495 19.331 9.745 19.342 10.03 C 19.343 10.054 19.431 12.323 19.027 15.003 C 19.019 14.991 19.012 14.98 19.004 14.969 C 18.018 13.486 17.055 12.333 16.142 11.54 C 14.966 10.518 13.814 10.047 12.72 10.139 C 12.073 10.193 11.527 10.357 11.098 10.626 C 10.656 10.902 10.347 11.279 10.18 11.744 C 9.528 13.563 10.717 15.807 13.445 17.899 L 13.487 17.932 L 15.492 17.941 L 14.753 17.375 C 13.496 16.41 12.513 15.36 11.91 14.338 C 11.382 13.442 11.197 12.651 11.391 12.111 C 11.559 11.642 12.045 11.37 12.836 11.304 C 14.223 11.187 15.979 12.666 17.916 15.579 C 18.168 15.958 18.427 16.367 18.686 16.797 C 18.414 17.964 18.063 19.005 17.643 19.895 C 16.958 21.344 16.083 22.398 15.044 23.027 C 14.19 23.544 13.061 23.539 12.099 23.013 C 11.371 22.615 10.794 21.955 10.431 21.105 C 9.991 20.075 9.875 18.82 10.086 17.375 L 10.174 16.772 L 8.872 16.762 L 8.823 17.219 C 8.583 18.864 8.724 20.316 9.244 21.533 C 9.711 22.627 10.472 23.486 11.445 24.018 C 12.121 24.387 12.875 24.582 13.626 24.582 C 14.388 24.582 15.12 24.382 15.746 24.003 C 16.997 23.246 18.03 22.019 18.815 20.355 C 19.101 19.749 19.358 19.078 19.58 18.355 C 20.539 20.103 21.339 21.809 21.829 22.853 C 22.023 23.266 22.177 23.592 22.293 23.825 C 22.359 23.958 22.41 24.053 22.452 24.122 C 22.486 24.178 22.516 24.222 22.547 24.26 C 22.776 24.536 23.087 24.517 23.176 24.505 C 23.477 24.464 23.698 24.245 23.727 23.961 C 23.872 22.553 23.793 20.928 23.494 19.13 Z M 22.475 21.279 C 21.809 19.887 20.976 18.222 20.028 16.61 C 20.09 16.319 20.148 16.017 20.201 15.713 C 20.349 14.858 20.459 13.964 20.531 13.046 C 20.756 13.664 20.966 14.283 21.156 14.893 C 21.644 16.452 22.007 17.939 22.235 19.313 C 22.349 19.994 22.429 20.652 22.475 21.279 Z" fill="currentColor"></path>
-          <path d="M 40.597 17.225 L 40.547 16.762 L 39.245 16.771 L 39.333 17.374 C 39.543 18.819 39.428 20.074 38.988 21.104 C 38.625 21.954 38.048 22.614 37.32 23.012 C 36.358 23.538 35.229 23.543 34.375 23.026 C 33.335 22.397 32.461 21.343 31.775 19.894 C 31.355 19.004 31.004 17.963 30.733 16.796 C 30.992 16.366 31.25 15.957 31.502 15.578 C 33.439 12.665 35.196 11.186 36.582 11.303 C 37.373 11.369 37.86 11.641 38.027 12.11 C 38.221 12.65 38.037 13.441 37.508 14.337 C 36.905 15.359 35.922 16.409 34.665 17.374 L 33.927 17.94 L 35.931 17.931 L 35.974 17.898 C 38.701 15.806 39.891 13.563 39.238 11.743 C 39.071 11.278 38.763 10.902 38.321 10.625 C 37.891 10.356 37.345 10.192 36.699 10.138 C 35.604 10.046 34.453 10.517 33.276 11.539 C 32.363 12.332 31.4 13.486 30.414 14.968 C 30.407 14.979 30.4 14.991 30.392 15.002 C 29.987 12.322 30.075 10.053 30.076 10.029 C 30.088 9.744 29.876 9.494 29.572 9.435 C 29.276 9.376 28.974 9.52 28.854 9.775 C 28.844 9.795 27.897 11.823 27.041 14.557 C 26.537 16.166 26.161 17.704 25.924 19.129 C 25.625 20.926 25.547 22.551 25.691 23.959 C 25.72 24.244 25.942 24.462 26.242 24.503 C 26.331 24.515 26.642 24.534 26.871 24.258 C 26.902 24.22 26.933 24.176 26.967 24.12 C 27.008 24.051 27.059 23.956 27.126 23.823 C 27.242 23.591 27.395 23.264 27.589 22.85 C 28.079 21.807 28.879 20.102 29.839 18.353 C 30.061 19.076 30.317 19.747 30.603 20.353 C 31.389 22.017 32.422 23.244 33.672 24.002 C 34.298 24.38 35.031 24.58 35.792 24.58 C 36.543 24.58 37.297 24.385 37.973 24.016 C 38.946 23.484 39.707 22.624 40.174 21.531 C 40.694 20.314 40.836 18.862 40.597 17.224 Z M 29.391 16.61 C 28.444 18.222 27.61 19.887 26.944 21.279 C 26.99 20.652 27.071 19.994 27.184 19.313 C 27.412 17.939 27.775 16.452 28.263 14.893 C 28.454 14.283 28.663 13.664 28.888 13.046 C 28.96 13.964 29.071 14.858 29.219 15.713 C 29.271 16.017 29.329 16.318 29.391 16.61 Z" fill="currentColor"></path>
-          <path d="M 23.727 26.883 C 23.698 26.599 23.477 26.381 23.177 26.34 C 23.087 26.327 22.777 26.309 22.548 26.584 C 22.516 26.622 22.486 26.666 22.452 26.722 C 22.41 26.792 22.359 26.887 22.293 27.02 C 22.177 27.252 22.023 27.579 21.829 27.992 C 21.339 29.036 20.539 30.741 19.58 32.49 C 19.358 31.767 19.101 31.095 18.815 30.49 C 18.029 28.826 16.997 27.598 15.746 26.841 C 15.12 26.462 14.387 26.262 13.626 26.262 C 12.876 26.262 12.121 26.457 11.446 26.827 C 10.473 27.359 9.711 28.218 9.244 29.312 C 8.725 30.529 8.583 31.98 8.822 33.619 L 8.872 34.082 L 10.174 34.072 L 10.086 33.47 C 9.875 32.024 9.991 30.769 10.431 29.74 C 10.794 28.889 11.371 28.23 12.099 27.831 C 13.061 27.306 14.19 27.3 15.044 27.817 C 16.084 28.447 16.958 29.501 17.643 30.95 C 18.064 31.839 18.415 32.881 18.686 34.048 C 18.427 34.477 18.168 34.887 17.917 35.265 C 15.98 38.179 14.223 39.658 12.837 39.541 C 12.046 39.474 11.559 39.203 11.391 38.734 C 11.198 38.194 11.382 37.403 11.911 36.507 C 12.514 35.484 13.497 34.434 14.754 33.47 L 15.492 32.903 L 13.488 32.913 L 13.445 32.945 C 10.718 35.038 9.528 37.281 10.181 39.101 C 10.348 39.566 10.656 39.942 11.098 40.219 C 11.528 40.487 12.074 40.651 12.72 40.706 C 13.814 40.797 14.966 40.326 16.143 39.305 C 17.056 38.512 18.019 37.358 19.004 35.875 C 19.012 35.864 19.019 35.853 19.027 35.842 C 19.432 38.521 19.344 40.791 19.343 40.815 C 19.331 41.1 19.543 41.349 19.846 41.409 C 19.891 41.417 19.935 41.422 19.979 41.422 C 20.229 41.422 20.463 41.286 20.565 41.069 C 20.574 41.049 21.521 39.021 22.378 36.286 C 22.882 34.678 23.258 33.14 23.495 31.715 C 23.794 29.918 23.872 28.292 23.728 26.884 Z M 22.475 29.565 C 22.429 30.191 22.349 30.849 22.236 31.531 C 22.007 32.905 21.644 34.392 21.157 35.951 C 20.966 36.56 20.756 37.179 20.531 37.798 C 20.459 36.879 20.348 35.985 20.201 35.131 C 20.148 34.826 20.09 34.525 20.028 34.233 C 20.976 32.622 21.81 30.957 22.476 29.565 Z" fill="currentColor"></path>
-          <path d="M 40.175 29.311 C 39.708 28.217 38.946 27.358 37.974 26.826 C 37.298 26.457 36.544 26.262 35.793 26.262 C 35.031 26.262 34.299 26.462 33.673 26.841 C 32.422 27.598 31.389 28.825 30.604 30.489 C 30.318 31.095 30.061 31.766 29.839 32.489 C 28.88 30.741 28.08 29.036 27.59 27.991 C 27.396 27.578 27.242 27.252 27.126 27.019 C 27.06 26.886 27.009 26.791 26.967 26.722 C 26.933 26.666 26.903 26.622 26.871 26.584 C 26.643 26.308 26.332 26.327 26.243 26.339 C 25.942 26.38 25.721 26.599 25.692 26.883 C 25.547 28.291 25.626 29.916 25.925 31.714 C 26.162 33.139 26.537 34.676 27.041 36.285 C 27.898 39.02 28.845 41.047 28.855 41.067 C 28.956 41.284 29.19 41.42 29.44 41.42 C 29.484 41.42 29.529 41.416 29.573 41.407 C 29.877 41.348 30.088 41.098 30.077 40.813 C 30.076 40.789 29.988 38.52 30.392 35.84 C 30.4 35.852 30.407 35.863 30.415 35.874 C 31.401 37.357 32.363 38.51 33.277 39.303 C 34.453 40.324 35.605 40.795 36.699 40.704 C 37.346 40.65 37.891 40.486 38.321 40.217 C 38.763 39.94 39.072 39.564 39.239 39.099 C 39.891 37.279 38.701 35.036 35.974 32.944 L 35.931 32.911 L 33.927 32.902 L 34.666 33.468 C 35.923 34.433 36.906 35.483 37.509 36.505 C 38.037 37.401 38.222 38.192 38.028 38.732 C 37.859 39.201 37.373 39.472 36.582 39.539 C 35.196 39.656 33.439 38.177 31.502 35.264 C 31.25 34.885 30.992 34.475 30.733 34.046 C 31.004 32.879 31.355 31.837 31.775 30.948 C 32.461 29.499 33.336 28.445 34.375 27.816 C 35.229 27.298 36.358 27.304 37.32 27.83 C 38.048 28.228 38.625 28.888 38.988 29.738 C 39.427 30.768 39.543 32.023 39.333 33.468 L 39.245 34.071 L 40.547 34.08 L 40.596 33.623 C 40.836 31.979 40.694 30.527 40.175 29.31 Z M 29.392 34.233 C 29.33 34.525 29.272 34.826 29.219 35.131 C 29.071 35.985 28.961 36.879 28.889 37.797 C 28.664 37.179 28.454 36.56 28.263 35.95 C 27.776 34.391 27.413 32.904 27.184 31.53 C 27.071 30.849 26.991 30.191 26.945 29.565 C 27.611 30.956 28.444 32.621 29.392 34.233 Z" fill="currentColor"></path>
+      <a class="site-mark" href="#hero" aria-label="Back to hero">
+        <svg class="site-mark-logo" width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <rect x="0.5" y="0.5" width="15" height="15" rx="7.5" stroke="currentColor"></rect>
+          <path d="M4.17969 12.3752L7.4668 3.7854H8.52148L11.8145 12.3752H10.6074L8.24023 5.95923C8.18945 5.82642 8.14453 5.69751 8.10547 5.57251C8.07031 5.44751 8.03906 5.3186 8.01172 5.18579H7.94727C7.91992 5.3186 7.88672 5.44751 7.84766 5.57251C7.8125 5.69751 7.76953 5.82642 7.71875 5.95923L5.32812 12.3752H4.17969ZM5.5918 10.1663L5.94922 9.21118L10.0273 9.21704L10.3789 10.1721L5.5918 10.1663Z" fill="currentColor"></path>
+        </svg>
+        <svg class="site-mark-arrow" width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M8 12V4M4.75 7.25 8 4l3.25 3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       </a>
       <div class="header-actions">
         <nav aria-label="Page sections">
           <a href="#career">Career</a>
           <a href="#writing">Writing</a>
+          <a href="#press">Press</a>
           <a href="#contact">Contact</a>
         </nav>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" data-theme-toggle>
@@ -1206,9 +2739,9 @@
       </div>
     </header>
 
-    <div class="intro">
+    <div class="intro" id="hero">
       <p class="eyebrow"><span class="intro-type-text" data-type-eyebrow data-intro-formal="Hi, I'm Dr. Abdullah &quot;Ax&quot; Ali." data-intro-short="Hi, I'm Ax,">Hi, I'm Ax,</span><span class="typing-cursor" data-typing-cursor hidden aria-hidden="true"></span></p>
-      <h1 aria-label="Creative Scientist &amp; Entrepreneur."><span class="intro-type-text" data-type-title data-intro-title="Creative Scientist &amp; Entrepreneur">Creative Scientist &amp; Entrepreneur.</span></h1>
+      <h1 aria-label="Creative Scientist &amp; Entrepreneur."><span data-title-line><span class="initiative creative-scientist-initiative" data-detail-card="product" data-product-id="creative-scientist"><button class="initiative-link creative-scientist-link" type="button" aria-haspopup="dialog"><span class="intro-type-text" data-type-title data-intro-title="Creative Scientist">Creative Scientist</span></button><span class="initiative-card" role="dialog" aria-label="What is a Creative Scientist?"><span class="initiative-title">What is a Creative Scientist?</span><span class="initiative-action-row"><button class="initiative-more" type="button">Find out<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="creative-scientist-bg" aria-hidden="true"><img src="assets/creative-scientist-card-bg.png" alt=""></span><span class="creative-scientist-expanded-title" aria-hidden="true"><span class="creative-scientist-small">What is a</span><span class="creative-scientist-large">Creative</span><span class="creative-scientist-large">Scientist?</span></span><span class="initiative-detail"><p>I've worn many hats: Founder, Product Manager, Designer, Developer, and Research Scientist, which is why I call myself a Creative Scientist.</p><p>I can bridge every seat at the product table, taking ideas from research insight to design, code, and market-ready products used by hundreds of thousands.</p><p>This makes me a rare asset: accelerating product cycles, uncovering opportunities, and raising the bar for user experience.</p></span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span><span class="intro-title-rest" data-type-title-rest data-intro-title-rest=" &amp; Entrepreneur"> &amp; Entrepreneur</span></span></h1>
       <div class="intro-copy" data-after-intro>
         <p>I live in New York City. My career has taken many shapes: a human-computer interaction research scientist and developer, designer, product leader, and entrepreneur. The throughline has been working on 0-to-1 applied AI products.</p>
         <p>Right now, I'm building <span class="initiative" data-company="seena"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs"><span class="initiative-title">Seena Labs</span><span class="initiative-body">I'm the founder and CEO of Seena Labs, a human-centered applied AI lab focused on building products for understanding human-AI behavior and helping businesses build better products.</span><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span></span>, teaching and advising through <span class="initiative" data-company="studio89"><button class="initiative-link" type="button" aria-haspopup="dialog">Studio89 Design</button><span class="initiative-card" role="dialog" aria-label="About Studio89 Design"><span class="initiative-title">Studio89 Design</span><span class="initiative-body">I run Studio89 Design as my consulting and teaching studio, where I help companies design and build applied AI products, workflows, and human-centered product strategies.</span><a href="mailto:ax@studio89.design">Let's work together</a><a href="https://studio89.design" target="_blank" rel="noreferrer">Visit Studio89</a></span></span>, and writing <span class="initiative"><button class="initiative-link" type="button" aria-haspopup="dialog">Everything is Designed</button><span class="initiative-card" role="dialog" aria-label="About Everything is Designed"><span class="initiative-title">Everything is Designed</span><span class="initiative-body">A newsletter about AI, design, systems, creativity, and behavior.</span><a href="https://axali.substack.com" target="_blank" rel="noreferrer">Read Everything is Designed</a></span></span>.</p>
@@ -1288,29 +2821,30 @@
         <article class="career-column">
           <h3 class="career-column-title">Products and systems</h3>
           <ul class="career-list">
-            <li><span class="initiative career-related" data-company="seena" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs' AI Ambient Ethnographer</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs' AI Ambient Ethnographer"><span class="initiative-title">Seena Labs' AI Ambient Ethnographer</span><span class="initiative-body">An applied AI research system for understanding human-AI behavior.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span><span class="initiative-detail">Seena Labs is building AI products for understanding how people work with AI in the wild. The ambient ethnographer direction turns conversations, workflows, and behavioral traces into evidence that helps teams see how AI is actually changing work, decisions, and product experience.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="third-brain" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">3rd Brain: AI Organizer</button><span class="initiative-card" role="dialog" aria-label="About 3rd Brain: AI Organizer"><span class="initiative-title">3rd Brain: AI Organizer</span><span class="initiative-body">An AI Organizer for couples.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://www.3rd-brain.com" target="_blank" rel="noreferrer">Try 3rd Brain</a></span><span class="initiative-detail">An AI organizer for couples: a mobile app and capture system that helped people turn thoughts, notes, and tasks into a more structured shared external brain. The work sat at the intersection of AI-assisted organization, mobile product design, mental load, and behavior change, and gave me direct founder experience building a consumer AI product from concept into shipped iOS and Android apps.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Dining Program</button><span class="initiative-card" role="dialog" aria-label="About Bilt Dining Program"><span class="initiative-title">Bilt Dining Program</span><span class="initiative-body">A restaurant rewards program that brought everyday dining into Bilt's loyalty ecosystem.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Bilt, I helped launch Bilt Dining across major metros by shaping the product experience, restaurant discovery surface, and rewards logic. The program connected neighborhood dining to the broader loyalty system and reached about 10% adoption in early rollout.</span><a class="initiative-detail-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Press coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Wallet</button><span class="initiative-card" role="dialog" aria-label="About Bilt Wallet"><span class="initiative-title">Bilt Wallet</span><span class="initiative-body">A card-linking product that let non-Bilt cardholders earn rewards across everyday spend.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped introduce third-party card linking in Bilt Wallet by integrating transaction streaming APIs and designing the account-linking and rewards experience. The work expanded Bilt beyond the Bilt Mastercard and helped users connect multiple cards for rent-adjacent and neighborhood rewards.</span><a class="initiative-detail-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Press coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x Lyft Rewards Integrations</button><span class="initiative-card" role="dialog" aria-label="About Bilt x Lyft Rewards Integrations"><span class="initiative-title">Bilt x Lyft Rewards Integrations</span><span class="initiative-body">A loyalty integration that connected rideshare behavior to the Bilt rewards network.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped launch Bilt's Lyft partnership by defining API contracts, shaping in-app onboarding, and coordinating the consumer rewards experience. The integration drove 89K account linkages in the first 24 hours and connected rent, travel, and daily mobility into one loyalty loop.</span><a class="initiative-detail-link" href="https://www.lyft.com/blog/posts/lyft-teams-up-with-bilt-rewards" target="_blank" rel="noreferrer">Lyft coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x point.me Flight Search</button><span class="initiative-card" role="dialog" aria-label="About Bilt x point.me Flight Search"><span class="initiative-title">Bilt x point.me Flight Search</span><span class="initiative-body">A flight rewards search engine that helped members compare points, miles, and cash.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I led the integration of point.me's flight rewards engine into Bilt's platform, redesigning the UX so members could make clearer miles-versus-cash booking decisions. The product became a high-intent travel surface with about 50K monthly searches.</span><a class="initiative-detail-link" href="https://www.cnbc.com/select/bilt-partners-with-pointme/" target="_blank" rel="noreferrer">CNBC coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Low-Price Bundling Program</button><span class="initiative-card" role="dialog" aria-label="About Amazon Low-Price Bundling Program"><span class="initiative-title">Amazon Low-Price Bundling Program</span><span class="initiative-body">A grocery promotion system that bundled low-priced items to improve value and shipping economics.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Amazon, I led product work for a low-price grocery bundling program across 12 markets. The program packaged small low-priced items into better-value baskets, helping customers discover savings while improving shipping efficiency and generating $55M in incremental sales and $120M in annual shipping savings.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Bundle Tracker and Promo Surfaces</button><span class="initiative-card" role="dialog" aria-label="About Amazon Bundle Tracker and Promo Surfaces"><span class="initiative-title">Amazon Bundle Tracker and Promo Surfaces</span><span class="initiative-body">Shopping UX and promotion surfaces that made grocery bundle progress easier to discover.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped ship customer-facing bundle tracker and promotional surfaces across grocery shopping flows. The work included nine UX features and a U.S. promo page with roughly 100K daily visits, making an operational pricing strategy legible as a simple shopping experience.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="seena" data-detail-card="product" data-product-id="seena-ethnographer"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs' AI Ambient Ethnographer</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs' AI Ambient Ethnographer"><span class="initiative-title">Seena Labs' AI Ambient Ethnographer</span><span class="initiative-body">An ambient, always-on, AI-powered UX researcher that can be embedded in products with a single line of code.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a><a href="https://seenalabs.io/releases/this-is-seena-labs" target="_blank" rel="noreferrer">Read the launch<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/seena-widget-on-product-page.png" alt=""></span><span class="initiative-detail"><span class="initiative-detail-paragraph">Seena Labs is building AI products for understanding how people work with AI and software in general. Our products aim to understand the relationship and interactions between three entities: the people building intelligent software, the software itself, and the people using it.</span><span class="initiative-detail-paragraph">Our first product is the AI Ambient Ethnographer. Installed with a single line of code on software products, it observes and understands the user's journey and interviews the user during moments of interest throughout their interactions to provide a qualitative explanation to the quantitative behavior collected with usage analytics data.</span></span><span class="initiative-detail-extra"><span class="initiative-proof">1 line of code install. <strong>Autonomous</strong>. Proactive insight generation. <strong>Contextual</strong>.</span></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="third-brain" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">3rd Brain: AI Organizer</button><span class="initiative-card" role="dialog" aria-label="About 3rd Brain: Couple's AI Organizer"><span class="initiative-title">3rd Brain:<br>Couple's AI Organizer</span><span class="initiative-body">An AI Organizer for couples.</span><span class="third-brain-media third-brain-hero" aria-hidden="true"><img src="assets/third-brain-hero.png" alt=""></span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><a href="https://www.3rd-brain.com" target="_blank" rel="noreferrer">Try 3rd Brain<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span><span class="initiative-detail">An AI organizer for couples: a mobile app and capture system that helped people turn thoughts, notes, and tasks into a more structured shared external brain. The work sat at the intersection of AI-assisted organization, mobile product design, mental load, and behavior change, and gave me direct founder experience building a consumer AI product from concept into shipped iOS and Android apps.</span><span class="initiative-detail-extra"><span class="third-brain-section-title">What if couples had a 3rd Brain?</span><span class="third-brain-prose"><span>When my wife and I were planning our wedding, we were both overwhelmed by scattered tools, fragmented thoughts, and invisible work. Sticky notes, shared docs, endless texts: none of it was enough. As two product leaders, we came up with an idea for a product, a third brain to help our two tired brains.</span><span>But was it an us problem? Turns out, no. We started seeing patterns among our friends, dug deeper online, including reports from the UN, and found that mental load in relationships, especially among women, is a global, trillion-dollar problem. At the time, generative AI APIs were becoming ubiquitous, easy to call, and cheap. So we asked: <em>What if AI could act as a third brain?</em></span><span>A shared cognitive layer to reduce invisible labor and improve communication between partners.</span><span>I got to work and built the MVP in three weeks around one hypothesis: use AI to reduce the load of data entry. By having users simply speak to the app, the AI should be able to identify tasks from the brain dump and assign them to the appropriate partner based on some user data we pass along. That is how we came up with the Brain Dump feature.</span><span>We tested this prototype with 20 users, observing real-world behaviors in context. Seeing users' eyes widen when the app turned their messy brain dumps into structured tasks and notes shared with their partner in seconds was the green light we needed to build 3rd Brain.</span></span><span class="third-brain-image-row"><span class="third-brain-media"><img src="assets/third-brain-brain-dump.gif" alt="3rd Brain brain dump flow"></span><span class="third-brain-media"><img src="assets/third-brain-give-bubble.gif" alt="3rd Brain appreciation flow"></span></span><span class="third-brain-prose"><span>Talking to users, we noticed a constant theme: work is going unnoticed and unappreciated by both partners. So we made invisible work visible. We redesigned the app's home page to show tasks completed and notes added by the user's partner, and added the ability to send appreciation reactions. This was not about gamifying relationships. It was about validating effort and creating shared awareness.</span><span>The next few months were a blur. During that time I:</span><span class="third-brain-bullets"><span>Built a waitlist through direct outreach and community events.</span><span>Launched a 100-user closed beta, then opened up to the App Store.</span><span>Hired and managed a developer and onboarded a contract GTM expert.</span><span>Grew to 500 registered users over six months through organic acquisition.</span></span></span><span class="third-brain-quote"><span class="third-brain-quote-text"><strong>&ldquo;This app is essential to my life now!&rdquo;</strong> Diana, 43. New York.</span><span class="third-brain-media"><img src="assets/third-brain-quote.png" alt="3rd Brain user keepsake"></span></span><span class="third-brain-prose"><span>Shipped fast, iterated intelligently.</span><span>Being the chief designer and user researcher, I stayed in constant contact with our users and even started offering free video calls to onboard couples onto the app. Along the way, I was able to:</span><span class="third-brain-bullets"><span>Double partner adoption through a redesigned onboarding flow that made partner invites feel essential, not optional.</span><span>Reduce day-one churn by creating an onboarding email journey that guided users with behavioral nudges and practical examples.</span><span>Identify key feature gaps, like integrated calendars, as high-priority.</span></span><span>This was not just a productivity tool. It was an AI-native design exercise in emotional UX: about how people think, forget, remember, and relate.</span><span>It required me to:</span><span class="third-brain-bullets"><span>Design interfaces that feel more like co-thinking than task apps.</span><span>Build logic and UX atop generative AI.</span><span>Think deeply about fairness, equity, and explainability inside the interface.</span></span></span></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product" data-product-id="bilt-dining" data-product-org="BILT Rewards" data-product-date="2023" data-product-role="Technical Product Leader"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Dining Program</button><span class="initiative-card" role="dialog" aria-label="About Bilt Dining Program"><span class="initiative-title">Bilt Dining Program</span><span class="initiative-body">A restaurant rewards program that brought everyday dining into Bilt's loyalty ecosystem.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/bilt-dining-iphone.png" alt=""></span><span class="initiative-detail">At Bilt, I helped launch Bilt Dining across major metros by shaping the product experience, restaurant discovery surface, and rewards logic. The program connected neighborhood dining to the broader loyalty system and reached about 10% adoption in early rollout.</span><span class="initiative-detail-extra"><span>10% </span><span class="bilt-metric-muted">user base adoption within the first </span><span>24 hours. </span><span class="bilt-metric-muted">And </span><span>zero</span><span class="bilt-metric-muted"> bugs reported.</span></span><span class="bilt-detail-press"><span class="bilt-press-heading">Press coverage</span><a class="bilt-press-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Article<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product" data-product-id="bilt-wallet"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt Wallet</button><span class="initiative-card" role="dialog" aria-label="About Bilt Wallet"><span class="initiative-title">Bilt Wallet</span><span class="initiative-body">A card-linking product that let non-Bilt cardholders earn rewards across everyday spend.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">I helped introduce third-party card linking in Bilt Wallet by integrating transaction streaming APIs and designing the account-linking and rewards experience. The work expanded Bilt beyond the Bilt Mastercard and helped users connect multiple cards for rent-adjacent and neighborhood rewards.</span><a class="initiative-detail-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Press coverage</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="bilt" data-detail-card="product" data-product-id="bilt-lyft" data-product-org="BILT Rewards" data-product-date="2023" data-product-role="Technical Product Leader"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x Lyft Rewards Integrations</button><span class="initiative-card" role="dialog" aria-label="About Bilt x Lyft Rewards Integrations"><span class="initiative-title">Bilt x Lyft Rewards Integrations</span><span class="initiative-body">A partner rewards integration connecting Bilt members to Lyft account linking and mobility rewards.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/bilt-lyft-rewards.png" alt=""></span><span class="initiative-detail">I helped launch Bilt's Lyft partnership by defining API contracts, shaping in-app onboarding, and coordinating the consumer rewards experience. The integration drove 89K account linkages in the first 24 hours and connected rent, travel, and daily mobility into one loyalty loop.</span><span class="initiative-detail-extra"><span>89,000 </span><span class="bilt-metric-muted">accounts linked in </span><span>24 hours. </span><span class="bilt-metric-muted">&ldquo;This was the most thoroughly tested product launch in the history of the company.&rdquo; </span><span>- Bilt Head of Product</span><span class="bilt-metric-muted"> during company-wide all hands meeting.</span></span><span class="bilt-detail-press"><span class="bilt-press-heading">Press coverage</span><a class="bilt-press-link" href="https://www.lyft.com/blog/posts/lyft-teams-up-with-bilt-rewards" target="_blank" rel="noreferrer">Lyft Coverage<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="bilt" data-detail-card="product" data-product-id="bilt-pointme" data-product-org="BILT Rewards" data-product-date="2023" data-product-role="Technical Product Leader"><button class="initiative-link" type="button" aria-haspopup="dialog">Bilt x point.me Flight Search</button><span class="initiative-card" role="dialog" aria-label="About Bilt x point.me Flight Search Portal"><span class="initiative-title">Bilt x point.me Flight Search Portal</span><span class="initiative-body">A flight rewards search portal that helped members compare points, miles, and cash.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/bilt-pointme-flight-search.png" alt=""></span><span class="initiative-detail">I led the integration of point.me's flight rewards engine into Bilt's platform, redesigning the UX so members could make clearer miles-versus-cash booking decisions. The product became a high-intent travel surface with about 50K monthly searches.</span><span class="initiative-detail-extra"><span>50,000 </span><span class="bilt-metric-muted">monthly searches.</span></span><span class="bilt-detail-press"><span class="bilt-press-heading">Press coverage</span><a class="bilt-press-link" href="https://www.cnbc.com/select/bilt-partners-with-pointme/" target="_blank" rel="noreferrer">Article<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span></span></span></li>
+            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product" data-product-id="amazon-low-price" data-product-org="Amazon" data-product-date="2022" data-product-role="Technical Product Leader"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Low-Price Bundling Program</button><span class="initiative-card" role="dialog" aria-label="About Amazon Low-Price Bundling Program"><span class="initiative-title">Amazon Low-Price Bundling Program</span><span class="initiative-body">A grocery bundling program that helped customers find better value while improving shipping economics.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/amazon-low-price-bundling.png" alt=""></span><span class="initiative-detail">At Amazon, I led product work for a low-price grocery bundling program across 12 markets. The program packaged small low-priced items into better-value baskets, helping customers discover savings while improving shipping efficiency and generating $55M in incremental sales and $120M in annual shipping savings.</span><span class="initiative-detail-extra"><span>9 </span><span class="bilt-metric-muted">products launched. </span><span>12 </span><span class="bilt-metric-muted">global markets. </span><span>$120M </span><span class="bilt-metric-muted">in savings. </span><span>$55M </span><span class="bilt-metric-muted">in sales.</span></span></span></span></li>
+            <li><span class="initiative career-related" data-company="amazon" data-detail-card="product" data-product-id="amazon-bundle" data-product-org="Amazon" data-product-date="2022" data-product-role="Technical Product Leader"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Bundle Tracker and Promo Surfaces</button><span class="initiative-card" role="dialog" aria-label="About Amazon Bundle Tracker and Promo Surfaces"><span class="initiative-title">Amazon Bundle Tracker and Promo Surfaces</span><span class="initiative-body">Shopping UX and promotion surfaces that made grocery bundle progress easier to discover.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/amazon-bundle-tracker.png" alt=""></span><span class="initiative-detail">I helped ship customer-facing bundle tracker and promotional surfaces across grocery shopping flows. The work included nine UX features and a U.S. promo page with roughly 100K daily visits, making an operational pricing strategy legible as a simple shopping experience.</span><span class="initiative-detail-extra"><span>100,000 </span><span class="bilt-metric-muted">DAU. </span><span>5 </span><span class="bilt-metric-muted">global markets.</span></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="amazon" data-detail-card="product" data-product-id="amazon-grocery" data-product-org="Amazon" data-product-date="2022" data-product-role="Technical Product Leader, Workshop Facilitator"><button class="initiative-link" type="button" aria-haspopup="dialog">Amazon Grocery Shopping Experience</button><span class="initiative-card" role="dialog" aria-label="About Amazon Grocery Shopping Experience"><span class="initiative-title">Reimagining Grocery Shopping on Amazon.com</span><span class="initiative-body">A cross-org innovation workshop to reimagine Amazon's fragmented grocery shopping experience.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/amazon-grocery-cover.png" alt=""></span><span class="initiative-detail">I led a week-long cross-org innovation workshop to reimagine the fragmented user experience of grocery shopping on Amazon.com.</span><span class="initiative-detail-extra"><span>3 </span><span class="bilt-metric-muted">orgs. </span><span>25 </span><span class="bilt-metric-muted">participants from engineering, leadership, finance, and legal. </span><span>1 </span><span class="bilt-metric-muted">week. </span><span>20 </span><span class="bilt-metric-muted">user interviews. </span><span>5 </span><span class="bilt-metric-muted">product proposals presented to senior leadership.</span></span><span class="amazon-grocery-section amazon-grocery-section-one"><span>Amazon&rsquo;s grocery ecosystem was deeply fragmented. Shoppers encountered disjointed experiences between Amazon Fresh, Amazon.com, and Whole Foods, each with its own workflows, interfaces, and fulfillment quirks. Despite having the infrastructure to serve millions of grocery customers, the experience failed to feel unified, intentional, or even intuitive.</span><span>Leadership challenged our team to &ldquo;Think Big&rdquo; and reimagine the grocery experience at Amazon from the ground up.</span><span>But the real challenge wasn&rsquo;t just the problem. It was the scale and silos. Designers, PMs, engineers, and scientists all had different tools, processes, and communication styles. Innovation couldn&rsquo;t happen in documents alone. It needed to be designed as an experience.</span></span><span class="bilt-detail-visual amazon-grocery-workshop" aria-hidden="true"><img src="assets/amazon-grocery-workshop.png" alt=""></span><span class="amazon-grocery-section amazon-grocery-section-two"><span>As the Product Manager and Design Manager leading this initiative, I made a proposal: a three-day innovation offsite that blended Amazon&rsquo;s &ldquo;Working Backwards&rdquo; with Design Thinking.</span><span>I created a hybrid experience for 35 cross-functional stakeholders across design, engineering, science, and product. Some participants were in the room in New York, some in Seattle, and we even had a participant calling in from Pakistan.</span><span>I built a bespoke process blending my background teaching Design Thinking classes at the University of Washington with Amazon&rsquo;s PRFAQ framework. I crafted virtual whiteboards that guided participants to work in groups through multi-phased challenges:</span><span>1. Pick from a list of problem statements I generated ahead of the workshop, informed by 20 user interviews with grocery shoppers that I conducted in partnership with the Amazon UX research team.</span><span>2. Generate 100 ideas in 10 minutes.</span><span>3. Pick a solution to assess problem-solution fit.</span><span>4. Design how the user would use the proposed solution by telling a story.</span><span>5. Communicate the idea using Amazon-native press release docs, PRFAQs.</span><span>The collaborative and fun nature of the workshop created an inclusive space for technical team members to become storytellers, teaching engineers and scientists how to frame product ideas in user-first language.</span></span><span class="amazon-grocery-callout">I participated in the workshop myself, contributing my own ideas while facilitating, guiding, clarifying, and giving feedback to participants, both in person and online.</span><span class="amazon-grocery-section amazon-grocery-section-three"><span>By the end of the third day, the team had eight PRFAQs written in three days, representing bold product proposals across personalization, grocery discovery, bundling, and fulfillment.</span><span>Workshop outcomes fed directly into Amazon&rsquo;s annual planning cycle, giving leadership tangible proposals ready for roadmap integration.</span><span>The team also left with a repeatable innovation process, a template for future 0-to-1 product strategy efforts inside the org.</span><span>This high-stakes project required me to facilitate vision without ego, translate user pain into product opportunities at scale, blend structured creativity with organizational literacy, and teach technical teams how to pitch like product thinkers.</span><span>It&rsquo;s a reflection of how I lead: designing not just the product, but the process that makes great products possible. Because Everything is designed.</span></span></span></span></li>
             <li><span class="initiative career-related" data-company="aws itau" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Itau Mobile Loan App</button><span class="initiative-card" role="dialog" aria-label="About Itau Mobile Loan App"><span class="initiative-title">Itau Mobile Loan App</span><span class="initiative-body">A mobile loan-processing prototype for a major banking client through AWS.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Through AWS product innovation work, I helped Itau explore and prototype a mobile loan-processing application. The engagement translated business goals, cloud capabilities, and customer needs into an experience direction the bank could use to modernize loan workflows, expanding the engagement from four pods to 12 and leaving the client with a reusable product-innovation methodology.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
             <li><span class="initiative career-related" data-company="aws johnson-johnson" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">FDA Approval Research Platform</button><span class="initiative-card" role="dialog" aria-label="About FDA Approval Research Platform"><span class="initiative-title">FDA Approval Research Platform</span><span class="initiative-body">A healthcare research platform concept for navigating FDA approval evidence.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">On an AWS healthcare engagement, I helped rescue and reshape a struggling FDA approval research platform by rebuilding stakeholder trust, introducing persona-driven design, and creating daily alignment rituals. The team delivered a validated redesign in six weeks and preserved a critical enterprise relationship.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="aws abb" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">EV Charging Platform Prototype</button><span class="initiative-card" role="dialog" aria-label="About EV Charging Platform Prototype"><span class="initiative-title">EV Charging Platform Prototype</span><span class="initiative-body">A fleet-charging product concept for electric trucks and industrial operations.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Through AWS, I helped prototype a platform for electric truck fleet charging. The work connected operational constraints, driver and fleet-manager needs, energy optimization, and cloud architecture into a product story for managing charging infrastructure at scale, including a 60-second pitch video produced in 48 hours.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="apple" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Apple Vision Pro Multimodal Input Interaction</button><span class="initiative-card" role="dialog" aria-label="About Apple Vision Pro Multimodal Input Interaction"><span class="initiative-title">Apple Vision Pro Multimodal Input Interaction</span><span class="initiative-body">Early multimodal text-input research using voice, gaze, and mid-air gestures.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Apple, I worked on early multimodal interaction research and prototyping for what became Apple Vision Pro. I led product design for a text-input interaction system that combined voice, gaze, and mid-air gestures, then ran co-design studies under secrecy constraints that challenged core assumptions and influenced the feature direction presented to senior AI/ML leadership.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Distributed Interaction Design: Designing Technologies in the Age of Social Distancing</button><span class="initiative-card" role="dialog" aria-label="About Distributed Interaction Design"><span class="initiative-title">Distributed Interaction Design</span><span class="initiative-body">A thesis framework for running design research across distance, devices, and contexts.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Distributed Interaction Design was my Ph.D. thesis direction at the University of Washington. It used the web, machine learning, and human computation to let researchers and designers run elicitation, co-design, and sensemaking work with people across the world, a framing that became especially relevant during social distancing.</span><a class="initiative-detail-link" href="https://interactions.acm.org/archive/view/march-april-2021/distributed-interaction-design" target="_blank" rel="noreferrer">ACM Interactions</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">I am Iron Man: Designing VR Gestures Using Priming with Sci-Fi Movies</button><span class="initiative-card" role="dialog" aria-label="About I am Iron Man"><span class="initiative-title">I am Iron Man</span><span class="initiative-body">A research study on how sci-fi primes the gestures people invent for VR.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">This project investigated how science-fiction imagery shapes the gestures people imagine for virtual reality. By using priming from movies like Iron Man, the study explored how cultural references can influence gesture elicitation and interaction design for emerging modalities.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="aws abb" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">EV Charging Platform Prototype</button><span class="initiative-card" role="dialog" aria-label="About EV Charging Platform Prototype"><span class="initiative-title">EV Charging Platform Prototype</span><span class="initiative-body">A fleet-charging product concept for electric trucks and industrial operations.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Through AWS, I helped prototype a platform for electric truck fleet charging. The work connected operational constraints, driver and fleet-manager needs, energy optimization, and cloud architecture into a product story for managing charging infrastructure at scale, including a 60-second pitch video produced in 48 hours.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="apple" data-detail-card="product" data-product-id="apple-vision-pro" data-product-org="Apple" data-product-date="2019" data-product-role="Novel Interaction Design Project Lead"><button class="initiative-link" type="button" aria-haspopup="dialog">Apple Vision Pro Multimodal Input Interaction</button><span class="initiative-card" role="dialog" aria-label="About Apple Vision Pro Multimodal Input Interaction"><span class="initiative-title">Apple Vision Pro Multimodal Input Interaction</span><span class="initiative-body">Early multimodal interaction research for Apple Vision Pro using voice, gaze, and mid-air gestures.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual" aria-hidden="true"><img src="assets/apple-vision-pro.png" alt=""></span><span class="initiative-detail">At Apple, I worked on early multimodal interaction research and prototyping for what became Apple Vision Pro. I led product design for a text-input interaction system that combined voice, gaze, and mid-air gestures, then ran co-design studies under secrecy constraints that challenged core assumptions and influenced the feature direction presented to senior AI/ML leadership.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product" data-product-id="distributed-interaction-design" data-product-org="University of Washington" data-product-date="2016-2020" data-product-role="Project Leader, Research Scientist, Designer, Developer"><button class="initiative-link" type="button" aria-haspopup="dialog">Distributed Interaction Design</button><span class="initiative-card" role="dialog" aria-label="About Distributed Interaction Design"><span class="initiative-title">Distributed Interaction Design</span><span class="initiative-body">A thesis framework for running design research across distance, devices, and contexts.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual did-detail-visual" aria-hidden="true"><img src="assets/distributed-interaction-glove.png" alt=""></span><span class="did-detail-content"><span class="initiative-detail">Distributed Interaction Design was my Ph.D. thesis direction at the University of Washington. It used the web, machine learning, and human computation to let researchers and designers run elicitation, co-design, and sensemaking work with people across the world, a framing that became especially relevant during social distancing.</span><span class="did-detail-diagram" aria-hidden="true"><img src="assets/distributed-interaction-diagram.png" alt=""></span></span><span class="initiative-detail-extra did-detail-publications"><span class="did-detail-publications-title">Publications</span><a class="bilt-press-link" href="https://interactions.acm.org/archive/view/march-april-2021/distributed-interaction-design" target="_blank" rel="noreferrer">Interaction magazine Article<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11l6-6M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a><a class="bilt-press-link" href="https://www.proquest.com/openview/a3d474832803fe6363a5dd0d49fbf4d4/1?pq-origsite=gscholar&amp;cbl=44156" target="_blank" rel="noreferrer">Full Dissertation<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11l6-6M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product" data-product-id="iron-man" data-product-org="University of Washington" data-product-date="2016-2020" data-product-role="HCI Research"><button class="initiative-link" type="button" aria-haspopup="dialog">I am Iron Man: Designing VR Gestures Using Priming with Sci-Fi Movies</button><span class="initiative-card" role="dialog" aria-label="About I am Iron Man"><span class="initiative-title">I am Iron Man</span><span class="initiative-body">A research study on how sci-fi primes the gestures people invent for VR.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual iron-man-detail-visual" aria-label="I Am Iron Man teaser video"><video src="assets/i-am-iron-man-teaser.mp4" autoplay muted loop playsinline controls preload="metadata"></video></span><span class="initiative-detail">This project investigated how science-fiction imagery shapes the gestures people imagine for virtual reality. By using priming from movies like Iron Man, the study explored how cultural references can influence gesture elicitation and interaction design for emerging modalities.</span><span class="initiative-detail-extra"><span class="did-detail-publications-title">Publications</span><a class="bilt-press-link" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=6xqfyO8AAAAJ&amp;citation_for_view=6xqfyO8AAAAJ:0EnyYjriUFMC" target="_blank" rel="noreferrer">CHI 2021 Article<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11l6-6M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></span></span></span></li>
             <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Anachronism by Design: Reimagining the Desktop Set of Icons</button><span class="initiative-card" role="dialog" aria-label="About Anachronism by Design"><span class="initiative-title">Anachronism by Design</span><span class="initiative-body">A study of how young adults understand inherited computer iconography.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Anachronism by Design examined how young adults interpret desktop icons whose meanings come from older physical metaphors. The work asks what happens when interface symbols outlive the objects that originally made them obvious, and how designers should rethink icon systems for new generations.</span><a class="initiative-detail-link" href="https://doi.org/10.1016/j.ijhcs.2021.102599" target="_blank" rel="noreferrer">Journal article</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdlicit: A Two-Sided System for Running Remote Co-Design Sessions</button><span class="initiative-card" role="dialog" aria-label="About Crowdlicit"><span class="initiative-title">Crowdlicit</span><span class="initiative-body">A distributed co-design platform that scaled end-user elicitation studies online.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Crowdlicit was a two-sided research platform for conducting distributed end-user elicitation and design studies. It let researchers create studies, recruit participants remotely, collect participant-generated interaction ideas, and organize responses at a scale that would be hard to reach in a lab session.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3290605.3300483" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="uw" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdsensus: ML Approach for Large-Scale Qualitative Data Analysis</button><span class="initiative-card" role="dialog" aria-label="About Crowdsensus"><span class="initiative-title">Crowdsensus</span><span class="initiative-body">A machine-learning-assisted workflow for making sense of large qualitative datasets.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Crowdsensus combined human similarity judgments with unsupervised machine learning to analyze large sets of qualitative design responses. The system helped researchers find agreement patterns in end-user elicitation studies while keeping the human nuance of the data visible.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3242587.3242621" target="_blank" rel="noreferrer">UIST paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="cmu" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Dytective: A Game to Detect Dyslexia</button><span class="initiative-card" role="dialog" aria-label="About Dytective"><span class="initiative-title">Dytective</span><span class="initiative-body">An award-winning game that used AI and player behavior to detect dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Carnegie Mellon, I was one of four scientists who co-invented Dytective, a game that uses AI to detect dyslexia from how children play. I helped design and develop the game experience, translating linguistic error patterns into playful levels whose performance data could predict dyslexia risk with over 90% accuracy. The project won ASSETS Best Demo, placed seventh in the International AI &amp; Robotics for Good competition, and went on to help more than 500,000 children through Change Dyslexia.</span><a class="initiative-detail-link" href="https://hcii.cmu.edu/news/cmu-researchers-earn-honors-assets" target="_blank" rel="noreferrer">CMU coverage</a><a class="initiative-detail-link" href="https://doi.org/10.1145/2700648.2811341" target="_blank" rel="noreferrer">ASSETS demo</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="microsoft-research" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Prototype to Evaluate How Searchers with Dyslexia Search the Web</button><span class="initiative-card" role="dialog" aria-label="About Dyslexia Search Prototype"><span class="initiative-title">Dyslexia Search Prototype</span><span class="initiative-body">A Microsoft Research prototype for studying search accessibility and dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Microsoft Research, I worked on accessibility and dyslexia-focused search research with the Ability group. Building on interviews with people with dyslexia, I ran large surveys, developed a web-based prototype for rating page readability, and helped publish work that informed how search systems could better serve people looking for readable, useful results.</span><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/blog/in-between-the-lines-broadening-access-to-web-search-by-understanding-the-needs-of-people-with-dyslexia/" target="_blank" rel="noreferrer">Microsoft blog</a><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/publication/understanding-needs-searchers-dyslexia/" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="uw" data-detail-card="product" data-product-id="crowdlicit"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdlicit: A Two-Sided System for Running Remote Co-Design Sessions</button><span class="initiative-card" role="dialog" aria-label="About Crowdlicit"><span class="initiative-title">Crowdlicit</span><span class="initiative-body">A distributed co-design platform that scaled end-user elicitation studies online.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual crowdlicit-detail-visual" aria-label="Crowdlicit demo video"><video src="assets/CROWDLICIT.m4v" autoplay muted loop playsinline controls preload="metadata"></video></span><span class="initiative-detail">Crowdlicit was a two-sided research platform for conducting distributed end-user elicitation and design studies. It let researchers create studies, recruit participants remotely, collect participant-generated interaction ideas, and organize responses at a scale that would be hard to reach in a lab session.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3290605.3300483" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="uw" data-detail-card="product" data-product-id="crowdsensus"><button class="initiative-link" type="button" aria-haspopup="dialog">Crowdsensus: ML Approach for Large-Scale Qualitative Data Analysis</button><span class="initiative-card" role="dialog" aria-label="About Crowdsensus"><span class="initiative-title">Crowdsensus</span><span class="initiative-body">A machine-learning-assisted workflow for making sense of large qualitative datasets.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="bilt-detail-visual crowdsensus-detail-visual" aria-label="Crowdsensus demo video"><video src="assets/CROWDSENSUS.m4v" autoplay muted loop playsinline controls preload="metadata"></video></span><span class="initiative-detail">Crowdsensus combined human similarity judgments with unsupervised machine learning to analyze large sets of qualitative design responses. The system helped researchers find agreement patterns in end-user elicitation studies while keeping the human nuance of the data visible.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3242587.3242621" target="_blank" rel="noreferrer">UIST paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="cmu" data-detail-card="product" data-product-id="dytective"><button class="initiative-link" type="button" aria-haspopup="dialog">Dytective: A Game to Detect Dyslexia</button><span class="initiative-card" role="dialog" aria-label="About Dytective"><span class="initiative-title">Dytective</span><span class="initiative-body">An award-winning game that used AI and player behavior to detect dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Carnegie Mellon, I was one of four scientists who co-invented Dytective, a game that uses AI to detect dyslexia from how children play. I helped design and develop the game experience, translating linguistic error patterns into playful levels whose performance data could predict dyslexia risk with over 90% accuracy. The project won ASSETS Best Demo, placed seventh in the International AI &amp; Robotics for Good competition, and went on to help more than 500,000 children through Change Dyslexia.</span><a class="initiative-detail-link" href="https://hcii.cmu.edu/news/cmu-researchers-earn-honors-assets" target="_blank" rel="noreferrer">CMU coverage</a><a class="initiative-detail-link" href="https://doi.org/10.1145/2700648.2811341" target="_blank" rel="noreferrer">ASSETS demo</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="microsoft-research" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Prototype to Evaluate How Searchers with Dyslexia Search the Web</button><span class="initiative-card" role="dialog" aria-label="About Dyslexia Search Prototype"><span class="initiative-title">Dyslexia Search Prototype</span><span class="initiative-body">A Microsoft Research prototype for studying search accessibility and dyslexia.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At Microsoft Research, I worked on accessibility and dyslexia-focused search research with the Ability group. Building on interviews with people with dyslexia, I ran large surveys, developed a web-based prototype for rating page readability, and helped publish work that informed how search systems could better serve people looking for readable, useful results.</span><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/blog/in-between-the-lines-broadening-access-to-web-search-by-understanding-the-needs-of-people-with-dyslexia/" target="_blank" rel="noreferrer">Microsoft blog</a><a class="initiative-detail-link" href="https://www.microsoft.com/en-us/research/publication/understanding-needs-searchers-dyslexia/" target="_blank" rel="noreferrer">CHI paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
             <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">ML-Based Self-Adapting Accessible Interfaces</button><span class="initiative-card" role="dialog" aria-label="About ML-Based Self-Adapting Accessible Interfaces"><span class="initiative-title">ML-Based Self-Adapting Accessible Interfaces</span><span class="initiative-body">Machine-learning interfaces that adapt to changing pointing performance and ability.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">At UMBC, I worked as an accessibility researcher while completing my master's in Human-Centered Computing and bachelor's in Information Systems. This project explored adaptive interfaces that respond to user ability, motor performance, and changing needs rather than forcing every person into a fixed interface.</span><a class="initiative-detail-link" href="https://doi.org/10.1145/3058555.3058564" target="_blank" rel="noreferrer">W4A paper</a><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
             <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Mobile Gesture Authentication System</button><span class="initiative-card" role="dialog" aria-label="About Mobile Gesture Authentication System"><span class="initiative-title">Mobile Gesture Authentication System</span><span class="initiative-body">A gesture-based authentication system for mobile devices and accessible input.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">This UMBC research explored mobile gesture authentication as an alternative to conventional passwords. The project investigated how gestures, touch, and mobile sensors could support secure interaction while opening questions about accessibility, memorability, and input performance.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Sequential Gestural Passcodes Using Google Glass</button><span class="initiative-card" role="dialog" aria-label="About Sequential Gestural Passcodes Using Google Glass"><span class="initiative-title">Sequential Gestural Passcodes Using Google Glass</span><span class="initiative-body">A wearable authentication project using gesture sequences on Google Glass.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Sequential Gestural Passcodes extended my gesture-authentication work into wearable computing. Using Google Glass, the project explored how a sequence of gestures could become a passcode system for emerging devices where keyboards and traditional authentication flows do not fit.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
-            <li><span class="initiative career-related" data-company="johns-hopkins" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Insterpreter</button><span class="initiative-card" role="dialog" aria-label="About Insterpreter"><span class="initiative-title">Insterpreter</span><span class="initiative-body">My first software project, inspired by working as an interpreter at Johns Hopkins.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">While I was in college, I worked as an interpreter at Johns Hopkins. That job inspired me to build Insterpreter, my first piece of software: an early attempt to turn a lived communication problem into a tool that could help people coordinate interpretation work more effectively.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li class="career-item-spaced"><span class="initiative career-related" data-company="umbc" data-detail-card="product"><button class="initiative-link" type="button" aria-haspopup="dialog">Sequential Gestural Passcodes Using Google Glass</button><span class="initiative-card" role="dialog" aria-label="About Sequential Gestural Passcodes Using Google Glass"><span class="initiative-title">Sequential Gestural Passcodes Using Google Glass</span><span class="initiative-body">A wearable authentication project using gesture sequences on Google Glass.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">Sequential Gestural Passcodes extended my gesture-authentication work into wearable computing. Using Google Glass, the project explored how a sequence of gestures could become a passcode system for emerging devices where keyboards and traditional authentication flows do not fit.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
+            <li><span class="initiative career-related" data-company="johns-hopkins" data-detail-card="product" data-product-id="insterpreter"><button class="initiative-link" type="button" aria-haspopup="dialog">Insterpreter</button><span class="initiative-card" role="dialog" aria-label="About Insterpreter"><span class="initiative-title">Insterpreter</span><span class="initiative-body">My first software project, inspired by working as an interpreter at Johns Hopkins.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">While I was in college, I worked as an interpreter at Johns Hopkins. That job inspired me to build Insterpreter, my first piece of software: an early attempt to turn a lived communication problem into a tool that could help people coordinate interpretation work more effectively.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
           </ul>
         </article>
       </div>
@@ -1348,39 +2882,205 @@
 
     <section id="writing" data-after-intro data-substack-feed="https://axali.substack.com/feed">
       <h2>Writing</h2>
-      <div class="writing-list" data-writing-list aria-live="polite">
-        <article class="writing-post">
-          <a class="writing-post-link" href="https://axali.substack.com/p/steal-my-creative-workflow">
-            <span class="writing-post-cover"><img src="https://substack-post-media.s3.amazonaws.com/public/images/31f432ac-cc99-40d0-88f1-64bd7ed4a391_1424x1066.png" alt="" loading="lazy" decoding="async"></span>
-            <span class="writing-post-content">
-              <span class="writing-post-meta">Feb 25, 2026</span>
-              <span class="writing-post-title">Stop Generating AI Slop - Steal My Creative Workflow</span>
-              <span class="writing-post-description">How I used AI to amplify my human creativity and built a cinematic app intro in one evening for a few dollars.</span>
-            </span>
-          </a>
-        </article>
-        <article class="writing-post">
-          <a class="writing-post-link" href="https://axali.substack.com/p/the-1550-problem">
-            <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!ykU1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd2aab8bf-5392-4f58-82d7-59937637bfa2_1208x695.png" alt="" loading="lazy" decoding="async"></span>
-            <span class="writing-post-content">
-              <span class="writing-post-meta">Feb 23, 2026</span>
-              <span class="writing-post-title">The 1:5:50 Problem</span>
-              <span class="writing-post-description">It's everywhere.</span>
-            </span>
-          </a>
-        </article>
-        <article class="writing-post">
-          <a class="writing-post-link" href="https://axali.substack.com/p/everyones-adopting-ai-research">
-            <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!4aaz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F55ee77ef-4f0f-41f9-aba7-3ead46c57849_1200x685.png" alt="" loading="lazy" decoding="async"></span>
-            <span class="writing-post-content">
-              <span class="writing-post-meta">Feb 16, 2026</span>
-              <span class="writing-post-title">Everyone's Adopting AI Research</span>
-              <span class="writing-post-description">Few are doing it right.</span>
-            </span>
-          </a>
-        </article>
+      <div class="writing-carousel" data-writing-carousel>
+        <button class="writing-carousel-button writing-carousel-button-prev" type="button" data-writing-prev aria-label="Previous writing posts">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+        <div class="writing-list" data-writing-list aria-live="polite">
+          <article class="writing-post">
+            <a class="writing-post-link" href="https://axali.substack.com/p/steal-my-creative-workflow">
+              <span class="writing-post-cover"><img src="https://substack-post-media.s3.amazonaws.com/public/images/31f432ac-cc99-40d0-88f1-64bd7ed4a391_1424x1066.png" alt="" loading="lazy" decoding="async"></span>
+              <span class="writing-post-content">
+                <span class="writing-post-meta">Feb 25, 2026</span>
+                <span class="writing-post-title">Stop Generating AI Slop - Steal My Creative Workflow</span>
+                <span class="writing-post-description">How I used AI to amplify my human creativity and built a cinematic app intro in one evening for a few dollars.</span>
+                <span class="writing-post-read">Read<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+              </span>
+            </a>
+          </article>
+          <article class="writing-post">
+            <a class="writing-post-link" href="https://axali.substack.com/p/the-1550-problem">
+              <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!ykU1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd2aab8bf-5392-4f58-82d7-59937637bfa2_1208x695.png" alt="" loading="lazy" decoding="async"></span>
+              <span class="writing-post-content">
+                <span class="writing-post-meta">Feb 23, 2026</span>
+                <span class="writing-post-title">The 1:5:50 Problem</span>
+                <span class="writing-post-description">It's everywhere.</span>
+                <span class="writing-post-read">Read<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+              </span>
+            </a>
+          </article>
+          <article class="writing-post">
+            <a class="writing-post-link" href="https://axali.substack.com/p/everyones-adopting-ai-research">
+              <span class="writing-post-cover"><img src="https://substackcdn.com/image/fetch/$s_!4aaz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F55ee77ef-4f0f-41f9-aba7-3ead46c57849_1200x685.png" alt="" loading="lazy" decoding="async"></span>
+              <span class="writing-post-content">
+                <span class="writing-post-meta">Feb 16, 2026</span>
+                <span class="writing-post-title">Everyone's Adopting AI Research</span>
+                <span class="writing-post-description">Few are doing it right.</span>
+                <span class="writing-post-read">Read<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+              </span>
+            </a>
+          </article>
+        </div>
+        <button class="writing-carousel-button writing-carousel-button-next" type="button" data-writing-next aria-label="Next writing posts">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
       </div>
       <p class="writing-footer"><a href="https://axali.substack.com">Read more on Everything is Designed</a></p>
+      <h3 class="writing-subsection-title">Publications</h3>
+      <div class="publication-columns writing-publications">
+        <div class="publication-group">
+          <h4 class="publication-group-title">Journal Articles</h4>
+          <div class="publication-list">
+            <span class="publication-entry"><span class="publication-venue">Interactions 2021</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Distributed interaction design: designing human-centered interactions in a time of social distancing. interactions 28, 2, 82-87.</span></span>
+            <span class="publication-entry"><span class="publication-venue">IJHCS</span><span class="publication-citation">Ali, A. X., McAweeny, E. R., Wobbrock, J. O. Anachronism by Design: Understanding Young Adults' Perceptions of Computer Iconography.</span></span>
+          </div>
+        </div>
+        <div class="publication-group">
+          <h4 class="publication-group-title">Conference Papers</h4>
+          <div class="publication-list">
+            <span class="publication-entry"><span class="publication-venue">CHI 2019</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Crowdlicit: A System for Conducting Distributed End-User Elicitation and Design Studies.</span></span>
+            <span class="publication-entry"><span class="publication-venue">UIST 2018</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Crowdsourcing Similarity Judgments for Agreement Analysis in End-User Elicitation Studies.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI 2018</span><span class="publication-citation">Morris, M. R., Fourney, A., Ali, A. X., Vonessen, L. Understanding the Needs of Searchers with Dyslexia.</span></span>
+            <span class="publication-entry"><span class="publication-venue">W4A 2018</span><span class="publication-citation">Martin-Hammond, A., Hamidi, F., Bhalerao, T., Ortega, C., Ali, A. X., et al. Designing an Adaptive Web Navigation Interface for Users with Variable Pointing Performance.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI LBW 2018</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Distributed Interaction Design: Designing Human-Centered Interactions in a Time of Social Distancing.</span></span>
+            <span class="publication-entry"><span class="publication-venue">SIGIR 2017</span><span class="publication-citation">Fourney, A., Morris, M. R., Ali, A. X., Vonessen, L. HCI Research for Accessible Search: Enhancing Information Retrieval Systems to Better Serve Users with Dyslexia.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI 2015</span><span class="publication-citation">Buehler, E., Branham, S., Ali, A. X., Chang, J., Hofmann, M., Hurst, A., Kane, S. Sharing is Caring: Assistive Technology Designs on Thingiverse. Best Paper Award - Top 1%.</span></span>
+            <span class="publication-entry"><span class="publication-venue">ASSETS 2015</span><span class="publication-citation">Rello, L., Ali, A. X., Bigham, J. P. Dytective: Toward a Game to Detect Dyslexia. Best Demo Award.</span></span>
+            <span class="publication-entry"><span class="publication-venue">W4A 2015</span><span class="publication-citation">Martin-Hammond, A., Ali, A. X., Hornback, C., Hurst, A. Understanding Design Considerations for Adaptive User Interfaces for Accessible Pointing with Older and Younger Adults. Best Paper Nomination.</span></span>
+            <span class="publication-entry"><span class="publication-venue">ASSETS SRC 2015</span><span class="publication-citation">Ali, A. X. Interpreting Gestures with a Mobile Device to Support Communication.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI SRC 2014</span><span class="publication-citation">Ali, A. X. Investigating Input Performance on Mobile Devices for Users with Hand Tremors.</span></span>
+          </div>
+        </div>
+        <div class="publication-group">
+          <h4 class="publication-group-title">Workshop Papers &amp; Doctoral Consortium</h4>
+          <div class="publication-list">
+            <span class="publication-entry"><span class="publication-venue">HCOMP 2017</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Crowdlicit: A System for Distributed End-User Elicitation and Identification Studies.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI 2017 Workshop</span><span class="publication-citation">Ali, A. X., Morris, M. R., Wobbrock, J. O. Distributed Interaction Design.</span></span>
+            <span class="publication-entry"><span class="publication-venue">HCOMP 2017 DC</span><span class="publication-citation">Ali, A. X. System for Distributed End-User Elicitation and Identification Studies.</span></span>
+            <span class="publication-entry"><span class="publication-venue">CHI 2016 Workshop</span><span class="publication-citation">Ali, A. X., Hurst, A., Martin-Hammond, A. Designing Interactive Systems for Users with Variable Pointing Performance.</span></span>
+            <span class="publication-entry"><span class="publication-venue">ASSETS 2016 Poster</span><span class="publication-citation">Ali, A. X., Siddig, S., Hurst, A. Building Adaptive User Interfaces for Improving Pointing Performance for Users with Parkinson's Disease.</span></span>
+            <span class="publication-entry"><span class="publication-venue">ASSETS 2014 Poster</span><span class="publication-citation">Ali, A. X., Hurst, A., Martin, A. Performance Evaluation of Mobile Touchscreen Gestures.</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="press" data-after-intro>
+      <div class="section-heading-row">
+        <h2>Press</h2>
+        <span class="initiative media-kit-initiative" data-detail-card="product"><button class="initiative-link media-kit-button" type="button" aria-haspopup="dialog"><span data-label="Get Media Kit">Get Media Kit</span></button><span class="initiative-card" role="dialog" aria-label="Media Kit"><span class="initiative-title">Media Kit</span><span class="media-kit-content"><span class="media-kit-asset"><span class="media-kit-portrait" aria-hidden="true"><img src="assets/media-kit-square.png" alt=""></span><span class="media-kit-actions"><a class="media-kit-download" href="assets/media-kit-square.png" download="Dr-Ax-Ali-square.png"><span class="media-kit-format-icon media-kit-format-icon-square" aria-hidden="true"></span><span class="media-kit-download-label" data-label="Get Square">Get Square</span></a><a class="media-kit-download" href="assets/media-kit-wide.png" download="Dr-Ax-Ali-wide.png"><span class="media-kit-format-icon media-kit-format-icon-wide" aria-hidden="true"></span><span class="media-kit-download-label" data-label="Get Wide">Get Wide</span></a></span></span><span class="media-kit-text"><span data-media-kit-text><span><strong>Title</strong>Creative Scientist &amp; Founder, Seena Labs</span><span><strong>Bio</strong>Dr. Ax Ali has been designing AI-powered experiences since 2014. As founder of Seena Labs and an HCI researcher, his 20+ peer-reviewed papers range from self-adapting interfaces for people with Parkinson's to AI that detects dyslexia in children. After leading product at Apple, Microsoft, and Amazon, he now runs workshops for Adobe on using AI-powered tools to enhance creative workflows, and has lectured on design at Carnegie Mellon, Columbia, and Harvard.</span></span><button class="media-kit-copy" type="button" data-copy-media-kit>Copy</button></span></span></span></span>
+      </div>
+      <div class="press-columns">
+      <div class="press-group">
+        <h3 class="press-group-title">Press &amp; Media Coverage</h3>
+        <div class="rows">
+          <div class="row">
+            <div class="row-title">Modern Husbands Podcast</div>
+            <div class="row-text">&ldquo;Balancing Act: How Dual Career Couples Can Manage Together&rdquo; (July 2025)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Foreign Founders Podcast</div>
+            <div class="row-text">Featured interview (February 2025)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Columbia University</div>
+            <div class="row-text">Guest Lecture: &ldquo;Building Human-Centered Products in the Age of AI&rdquo; (September 2025)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">UW Startup Spotlight</div>
+            <div class="row-text">Startup spotlight feature (2024)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Microsoft Research Blog</div>
+            <div class="row-text"><a class="press-link" href="https://www.microsoft.com/en-us/research/blog/in-between-the-lines-broadening-access-to-web-search-by-understanding-the-needs-of-people-with-dyslexia/" target="_blank" rel="noreferrer">&ldquo;Broadening access to web search&rdquo;</a> (2018)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Carnegie Mellon HCI</div>
+            <div class="row-text"><a class="press-link" href="https://hcii.cmu.edu/news/cmu-researchers-earn-honors-assets" target="_blank" rel="noreferrer">&ldquo;CMU Researchers Earn Honors at ASSETS&rdquo;</a> (2015)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">El Pa&iacute;s</div>
+            <div class="row-text">&ldquo;Find out if you are at risk of dyslexia in 15 minutes&rdquo; (2015)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Spanish National TV</div>
+            <div class="row-text">Change Dyslexia and Dytective coverage (2015)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-group">
+        <h3 class="press-group-title">Workshops</h3>
+        <div class="rows">
+          <div class="row">
+            <div class="row-title">The Good Idea Sprint by Seena Labs</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Enhancing Creative Workflows with Generative AI</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Expert Adobe Express Workshop</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Expert Adobe Firefly (Generative AI) Workshop</div>
+          </div>
+        </div>
+
+        <h3 class="press-group-title">Product Launch Coverage</h3>
+        <div class="rows">
+          <div class="row">
+            <div class="row-title">CNBC</div>
+            <div class="row-text"><a class="press-link" href="https://www.cnbc.com/select/bilt-partners-with-pointme/" target="_blank" rel="noreferrer">Bilt partners with point.me</a></div>
+          </div>
+          <div class="row">
+            <div class="row-title">Lyft Blog</div>
+            <div class="row-text"><a class="press-link" href="https://www.lyft.com/blog/posts/lyft-teams-up-with-bilt-rewards" target="_blank" rel="noreferrer">&ldquo;Lyft teams up with Bilt Rewards&rdquo;</a></div>
+          </div>
+          <div class="row">
+            <div class="row-title">Upgraded Points</div>
+            <div class="row-text"><a class="press-link" href="https://upgradedpoints.com/news/bilt-dining-wallet/" target="_blank" rel="noreferrer">Bilt Dining Wallet launch</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-group">
+        <h3 class="press-group-title">Invited Talks &amp; Guest Lectures</h3>
+        <div class="rows">
+          <div class="row">
+            <div class="row-title">Columbia University</div>
+            <div class="row-text">Guest Lecture: &ldquo;Building Human-Centered Products in the Age of AI: From Theory to Application&rdquo; (September 25, 2025). Invited by Professor Alexis Wichowski.</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Harvard University</div>
+            <div class="row-text">Distributed Interaction Design (2021). Invited by Professor Elena Glassman.</div>
+          </div>
+          <div class="row">
+            <div class="row-title">University of Michigan</div>
+            <div class="row-text">Distributed Interaction Design (2021). Invited by Professor Robin Brewer.</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Towson University</div>
+            <div class="row-text">Distributed Interaction Design (2021)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Carnegie Mellon University / Apple</div>
+            <div class="row-text">Distributed Interaction Design (2019). Invited by Jeffrey Bigham.</div>
+          </div>
+          <div class="row">
+            <div class="row-title">Microsoft</div>
+            <div class="row-text">Research projects presentation to Chief Accessibility Officer Jenny Lay-Flurrie (2017)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">DUB Group</div>
+            <div class="row-text">The Crowd: Participant and Researcher (2018)</div>
+          </div>
+          <div class="row">
+            <div class="row-title">AAAI HCOMP Doctoral Consortium</div>
+            <div class="row-text">Crowdlicit Platform (2017)</div>
+          </div>
+        </div>
+      </div>
+      </div>
     </section>
 
     <section id="contact" data-after-intro>
@@ -1393,13 +3093,47 @@
       </div>
     </section>
 
-    <p class="note" data-after-intro>Prototype v1. Zach/Maddie first; Kenneth-style index emerging below.</p>
+    <footer class="site-footer" data-after-intro>&copy; 2026 Dr. Ax Ali. All rights reserved.</footer>
   </main>
   <script>
     (function () {
       var root = document.documentElement;
       var button = document.querySelector("[data-theme-toggle]");
       var systemThemeQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+      var customCursorQuery = window.matchMedia ? window.matchMedia("(pointer: fine)") : null;
+
+      function updateStickyHeader() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        root.classList.toggle("is-scrolled", scrollTop > 72);
+      }
+
+      updateStickyHeader();
+      window.addEventListener("scroll", updateStickyHeader, { passive: true });
+
+      function setupCustomCursor() {
+        if (!customCursorQuery || !customCursorQuery.matches) {
+          return;
+        }
+
+        var cursor = document.createElement("span");
+        cursor.className = "custom-cursor";
+        cursor.setAttribute("aria-hidden", "true");
+        document.body.appendChild(cursor);
+        root.classList.add("has-custom-cursor");
+
+        document.addEventListener("pointermove", function (event) {
+          cursor.style.transform = "translate3d(" + event.clientX + "px, " + event.clientY + "px, 0) translate(-50%, -50%)";
+          root.classList.add("cursor-ready");
+          root.classList.toggle("cursor-link-hover", Boolean(event.target && event.target.closest && event.target.closest("a, button")));
+        });
+
+        document.addEventListener("pointerleave", function () {
+          root.classList.remove("cursor-ready");
+          root.classList.remove("cursor-link-hover");
+        });
+      }
+
+      setupCustomCursor();
 
       function getSystemTheme() {
         return systemThemeQuery && systemThemeQuery.matches ? "dark" : "light";
@@ -1435,6 +3169,8 @@
 
       var eyebrowTarget = document.querySelector("[data-type-eyebrow]");
       var titleTarget = document.querySelector("[data-type-title]");
+      var titleRestTarget = document.querySelector("[data-type-title-rest]");
+      var titleLine = document.querySelector("[data-title-line]");
       var typingCursor = document.querySelector("[data-typing-cursor]");
 
       function wait(ms) {
@@ -1460,19 +3196,57 @@
         }
       }
 
+      function shouldSkipIntroSequence() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        return Boolean(window.location.hash) || scrollTop > 24;
+      }
+
+      function completeIntroSequence() {
+        if (eyebrowTarget) {
+          eyebrowTarget.textContent = eyebrowTarget.dataset.introShort || "Hi, I'm Ax,";
+        }
+
+        if (titleTarget) {
+          titleTarget.textContent = titleTarget.dataset.introTitle || "Creative Scientist";
+        }
+
+        if (titleRestTarget) {
+          titleRestTarget.textContent = titleRestTarget.dataset.introTitleRest || " & Entrepreneur";
+        }
+
+        if (typingCursor && titleLine) {
+          titleLine.appendChild(typingCursor);
+          typingCursor.hidden = false;
+        }
+
+        root.classList.add("intro-complete");
+        root.classList.remove("intro-pending");
+        root.classList.remove("intro-started");
+        root.classList.remove("intro-revealed");
+      }
+
       async function runIntroSequence() {
-        if (!root.classList.contains("intro-pending") || !eyebrowTarget || !titleTarget || !typingCursor) {
+        if (!root.classList.contains("intro-pending") || !eyebrowTarget || !titleTarget || !titleRestTarget || !titleLine || !typingCursor) {
+          return;
+        }
+
+        await wait(120);
+
+        if (shouldSkipIntroSequence()) {
+          completeIntroSequence();
           return;
         }
 
         var formalName = eyebrowTarget.dataset.introFormal || "Hi, I'm Dr. Abdullah \"Ax\" Ali.";
         var shortName = eyebrowTarget.dataset.introShort || "Hi, I'm Ax,";
         var prefix = "Hi, I'm ";
-        var titleText = titleTarget.dataset.introTitle || "Creative Scientist & Entrepreneur";
+        var titleText = titleTarget.dataset.introTitle || "Creative Scientist";
+        var titleRestText = titleRestTarget.dataset.introTitleRest || " & Entrepreneur";
 
         root.classList.add("intro-started");
         eyebrowTarget.textContent = "";
         titleTarget.textContent = "";
+        titleRestTarget.textContent = "";
         typingCursor.hidden = false;
         eyebrowTarget.parentNode.appendChild(typingCursor);
 
@@ -1484,17 +3258,15 @@
         await typeText(eyebrowTarget, shortName.slice(prefix.length), 42);
         await wait(360);
 
-        titleTarget.parentNode.appendChild(typingCursor);
+        titleLine.appendChild(typingCursor);
         await wait(180);
         await typeText(titleTarget, titleText, 31);
+        await typeText(titleRestTarget, titleRestText, 31);
         await wait(260);
 
         root.classList.add("intro-revealed");
         window.setTimeout(function () {
-          root.classList.add("intro-complete");
-          root.classList.remove("intro-pending");
-          root.classList.remove("intro-started");
-          root.classList.remove("intro-revealed");
+          completeIntroSequence();
         }, 1800);
       }
 
@@ -1502,6 +3274,10 @@
 
       var writingSection = document.querySelector("[data-substack-feed]");
       var writingList = document.querySelector("[data-writing-list]");
+      var writingPrev = document.querySelector("[data-writing-prev]");
+      var writingNext = document.querySelector("[data-writing-next]");
+      var mediaKitCopyButton = document.querySelector("[data-copy-media-kit]");
+      var mediaKitText = document.querySelector("[data-media-kit-text]");
 
       function decodeHtml(value) {
         var textarea = document.createElement("textarea");
@@ -1539,6 +3315,33 @@
         }).format(date);
       }
 
+      function updateWritingCarousel() {
+        if (!writingList || !writingPrev || !writingNext) {
+          return;
+        }
+
+        var maxScroll = Math.max(0, writingList.scrollWidth - writingList.clientWidth);
+        var atStart = writingList.scrollLeft <= 2;
+        var atEnd = writingList.scrollLeft >= maxScroll - 2;
+
+        writingPrev.classList.toggle("is-visible", maxScroll > 2 && !atStart);
+        writingNext.classList.toggle("is-visible", maxScroll > 2 && !atEnd);
+      }
+
+      function scrollWritingCarousel(direction) {
+        if (!writingList) {
+          return;
+        }
+
+        var firstPost = writingList.querySelector(".writing-post");
+        var step = firstPost ? firstPost.getBoundingClientRect().width + 32 : writingList.clientWidth * 0.8;
+
+        writingList.scrollBy({
+          left: step * direction,
+          behavior: "smooth"
+        });
+      }
+
       function renderWritingPosts(posts) {
         if (!writingList || !posts.length) {
           return;
@@ -1557,6 +3360,7 @@
           var meta = document.createElement("span");
           var title = document.createElement("span");
           var description = document.createElement("span");
+          var read = document.createElement("span");
 
           article.className = "writing-post";
           link.className = "writing-post-link";
@@ -1578,16 +3382,45 @@
           title.textContent = post.title;
           description.className = "writing-post-description";
           description.textContent = post.description;
+          read.className = "writing-post-read";
+          read.innerHTML = 'Read<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M5 11L11 5M7 5h4v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
 
           content.appendChild(meta);
           content.appendChild(title);
           content.appendChild(description);
+          content.appendChild(read);
           link.appendChild(cover);
           link.appendChild(content);
           article.appendChild(link);
           writingList.appendChild(article);
         });
+
+        updateWritingCarousel();
       }
+
+      if (writingList) {
+        writingList.addEventListener("scroll", updateWritingCarousel, { passive: true });
+      }
+
+      if (writingPrev) {
+        writingPrev.addEventListener("click", function () {
+          scrollWritingCarousel(-1);
+        });
+      }
+
+      if (writingNext) {
+        writingNext.addEventListener("click", function () {
+          scrollWritingCarousel(1);
+        });
+      }
+
+      if (window.ResizeObserver && writingList) {
+        new ResizeObserver(updateWritingCarousel).observe(writingList);
+      } else {
+        window.addEventListener("resize", updateWritingCarousel);
+      }
+
+      window.setTimeout(updateWritingCarousel, 120);
 
       async function loadSubstackPosts() {
         if (!writingSection || !writingList || !window.fetch) {
@@ -1606,7 +3439,7 @@
           var itemPattern = /<item>([\s\S]*?)<\/item>/g;
           var match;
 
-          while ((match = itemPattern.exec(xml)) && posts.length < 3) {
+          while ((match = itemPattern.exec(xml)) && posts.length < 10) {
             var block = match[1];
             var title = getFeedValue(block, "title");
             var description = getFeedValue(block, "description");
@@ -1631,11 +3464,142 @@
 
       loadSubstackPosts();
 
+      async function copyTextToClipboard(text) {
+        var textarea;
+        var success = false;
+        var handleCopy = function (copyEvent) {
+          if (!copyEvent.clipboardData) {
+            return;
+          }
+
+          copyEvent.clipboardData.setData("text/plain", text);
+          copyEvent.preventDefault();
+          success = true;
+        };
+
+        if (navigator.clipboard) {
+          try {
+            await navigator.clipboard.writeText(text);
+            return true;
+          } catch (error) {
+            // Local file previews often expose the Clipboard API but reject writes.
+          }
+        }
+
+        document.addEventListener("copy", handleCopy, { once: true });
+
+        try {
+          document.execCommand("copy");
+        } finally {
+          document.removeEventListener("copy", handleCopy);
+        }
+
+        if (success) {
+          return true;
+        }
+
+        textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "0";
+        textarea.style.left = "-9999px";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+          success = document.execCommand("copy");
+        } finally {
+          document.body.removeChild(textarea);
+        }
+
+        if (!success) {
+          throw new Error("Copy command failed");
+        }
+
+        return true;
+      }
+
+      function selectMediaKitText() {
+        var selection;
+        var range;
+
+        if (!mediaKitText || !window.getSelection || !document.createRange) {
+          return false;
+        }
+
+        selection = window.getSelection();
+        range = document.createRange();
+        range.selectNodeContents(mediaKitText);
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        return true;
+      }
+
+      if (mediaKitCopyButton && mediaKitText) {
+        mediaKitCopyButton.addEventListener("click", async function (event) {
+          var text = (mediaKitText.innerText || mediaKitText.textContent).replace(/\n{3,}/g, "\n\n").trim();
+          var previousLabel = mediaKitCopyButton.textContent;
+
+          event.stopPropagation();
+
+          try {
+            await copyTextToClipboard(text);
+            mediaKitCopyButton.textContent = "Copied";
+          } catch (error) {
+            mediaKitCopyButton.textContent = selectMediaKitText() ? "Press Cmd+C" : "Copy failed";
+          }
+
+          window.setTimeout(function () {
+            mediaKitCopyButton.textContent = previousLabel;
+          }, 1600);
+        });
+      }
+
       var initiatives = Array.prototype.slice.call(document.querySelectorAll(".initiative"));
       var dwellDelay = 3000;
       var activeCompanyKey = null;
       var hoverCompanyKey = null;
+      var activeProjectElement = null;
+      var hoverProjectElement = null;
       var relatedElements = Array.prototype.slice.call(document.querySelectorAll("[data-company]"));
+      var companyColumn = document.querySelector("#career .career-column");
+      var detailProductIds = [
+        "creative-scientist",
+        "seena-ethnographer",
+        "bilt-dining",
+        "bilt-wallet",
+        "bilt-lyft",
+        "bilt-pointme",
+        "amazon-low-price",
+        "amazon-bundle",
+        "amazon-grocery",
+        "apple-vision-pro",
+        "distributed-interaction-design",
+        "iron-man",
+        "crowdlicit",
+        "crowdsensus",
+        "dytective"
+      ];
+      var productMetaByCompany = {
+        "seena": { date: "2025-Present", org: "Seena Labs by 3rd Brain, Inc.", roles: ["Founder & CEO", "Technical Product Leader", "Designer", "Developer"] },
+        "third-brain": { date: "2023-2025", org: "3rd Brain, Inc.", roles: ["Founder & CEO", "Technical Product Leader", "Designer", "Developer"] },
+        "bilt": { org: "Bilt Rewards", role: "Technical Product Leader" },
+        "amazon": { org: "Amazon", role: "Product" },
+        "aws": { org: "AWS Professional Services", role: "Experience Design Lead" },
+        "itau": { org: "Itau Bank", role: "Product Innovation" },
+        "johnson-johnson": { org: "Johnson & Johnson", role: "Product Innovation" },
+        "abb": { org: "ABB", role: "Product Innovation" },
+        "apple": { org: "Apple", role: "Interaction Research & Prototyping" },
+        "uw": { org: "University of Washington", role: "HCI Research" },
+        "cmu": { org: "Carnegie Mellon University", role: "Research Scientist" },
+        "microsoft-research": { org: "Microsoft Research", role: "Accessibility Research" },
+        "umbc": { org: "UMBC", role: "Accessibility Research" },
+        "johns-hopkins": { org: "Johns Hopkins", role: "Interpreter / Builder" }
+      };
 
       function getCompanyKeys(value) {
         return (value || "").split(/\s+/).filter(Boolean);
@@ -1650,11 +3614,28 @@
         });
       }
 
+      function isCompanyListInitiative(initiative) {
+        return Boolean(companyColumn && initiative.closest(".career-column") === companyColumn);
+      }
+
+      function allowsHoverPreview(initiative) {
+        return Boolean(initiative.closest("#career"));
+      }
+
       function applyRelatedHighlight() {
+        var currentProjectElement = hoverProjectElement || activeProjectElement;
         var currentCompanyKey = activeCompanyKey || hoverCompanyKey;
 
         relatedElements.forEach(function (element) {
-          element.classList.toggle("is-related-highlight", Boolean(currentCompanyKey) && sharesCompanyKey(element.dataset.company, currentCompanyKey));
+          var shouldHighlight = false;
+
+          if (currentProjectElement) {
+            shouldHighlight = element === currentProjectElement;
+          } else if (currentCompanyKey) {
+            shouldHighlight = sharesCompanyKey(element.dataset.company, currentCompanyKey);
+          }
+
+          element.classList.toggle("is-related-highlight", shouldHighlight);
         });
       }
 
@@ -1675,7 +3656,93 @@
       }
 
       function isProductDetailInitiative(initiative) {
-        return initiative.dataset.detailCard === "product";
+        if (initiative.classList.contains("media-kit-initiative")) {
+          return true;
+        }
+
+        if (initiative.dataset.company === "third-brain") {
+          return true;
+        }
+
+        return initiative.dataset.detailCard === "product" && detailProductIds.indexOf(initiative.dataset.productId) !== -1;
+      }
+
+      function getProductMeta(initiative) {
+        var productOrg = initiative.dataset.productOrg;
+        var productDate = initiative.dataset.productDate;
+        var productRole = initiative.dataset.productRole;
+        var keys = getCompanyKeys(initiative.dataset.company);
+
+        if (productOrg || productDate || productRole) {
+          return {
+            date: productDate || "",
+            org: productOrg || "",
+            roles: productRole ? productRole.split(/\||,/).map(function (role) {
+              return role.trim();
+            }).filter(Boolean) : []
+          };
+        }
+
+        for (var index = 0; index < keys.length; index += 1) {
+          if (productMetaByCompany[keys[index]]) {
+            return productMetaByCompany[keys[index]];
+          }
+        }
+
+        return null;
+      }
+
+      function addProductMeta(initiative, card) {
+        var title = card.querySelector(".initiative-title");
+        var existingMeta = card.querySelector(".initiative-meta");
+        var meta = getProductMeta(initiative);
+        var metaBlock;
+        var orgLine;
+        var dateLine;
+        var roles;
+        var rolesBlock;
+        var rolePill;
+
+        if (!isProductDetailInitiative(initiative) || existingMeta || !meta || !title) {
+          return;
+        }
+
+        metaBlock = document.createElement("span");
+        metaBlock.className = "initiative-meta";
+
+        if (meta.date) {
+          dateLine = document.createElement("span");
+          dateLine.className = "initiative-meta-line";
+          dateLine.textContent = meta.date;
+          metaBlock.appendChild(dateLine);
+        }
+
+        if (meta.org) {
+          orgLine = document.createElement("span");
+          orgLine.className = "initiative-meta-line";
+          orgLine.textContent = meta.org;
+          metaBlock.appendChild(orgLine);
+        }
+
+        roles = meta.roles || (meta.role ? [meta.role] : []);
+
+        if (roles.length) {
+          rolesBlock = document.createElement("span");
+          rolesBlock.className = "initiative-meta-pills";
+        }
+
+        roles.forEach(function (role) {
+          rolePill = document.createElement("span");
+          rolePill.className = "initiative-meta-role";
+          rolePill.textContent = role;
+          rolesBlock.appendChild(rolePill);
+        });
+
+        if (rolesBlock) {
+          metaBlock.appendChild(rolesBlock);
+        }
+
+        card.insertBefore(metaBlock, title);
       }
 
       function closeInitiative(initiative, dismiss) {
@@ -1690,8 +3757,11 @@
         }
         if (initiative.dataset.company && activeCompanyKey === initiative.dataset.company) {
           activeCompanyKey = null;
-          applyRelatedHighlight();
         }
+        if (activeProjectElement === initiative) {
+          activeProjectElement = null;
+        }
+        applyRelatedHighlight();
         setExpanded(initiative, false);
       }
 
@@ -1708,7 +3778,8 @@
         closeInitiatives(initiative);
         initiative.classList.remove("is-detail");
         initiative.classList.add("is-pinned");
-        activeCompanyKey = initiative.dataset.company || null;
+        activeProjectElement = null;
+        activeCompanyKey = isCompanyListInitiative(initiative) ? initiative.dataset.company || null : null;
         applyRelatedHighlight();
         setExpanded(initiative, true);
       }
@@ -1725,7 +3796,8 @@
         if (card) {
           card.setAttribute("aria-modal", "true");
         }
-        activeCompanyKey = initiative.dataset.company || null;
+        activeCompanyKey = null;
+        activeProjectElement = initiative;
         applyRelatedHighlight();
         setExpanded(initiative, true);
 
@@ -1759,10 +3831,19 @@
           card.id = "initiative-card-" + (index + 1);
         }
 
+        addProductMeta(initiative, card);
         trigger.setAttribute("aria-controls", card.id);
         trigger.setAttribute("aria-expanded", "false");
 
         var moreButton = card.querySelector(".initiative-more");
+        if (moreButton && !isProductDetailInitiative(initiative)) {
+          var actionRow = moreButton.closest(".initiative-action-row");
+          moreButton.remove();
+          if (actionRow && !actionRow.querySelector("a, button")) {
+            actionRow.remove();
+          }
+          moreButton = null;
+        }
 
         var closeButton = card.querySelector(".initiative-close");
         if (!closeButton) {
@@ -1772,9 +3853,33 @@
           closeButton.setAttribute("aria-label", "Close");
           card.appendChild(closeButton);
         }
+        var existingCloseIcon = closeButton.querySelector(".initiative-close-icon");
+        if (!existingCloseIcon || existingCloseIcon.getAttribute("viewBox") !== "0 0 56 56") {
+          closeButton.textContent = "";
+
+          var closeIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          closeIcon.setAttribute("class", "initiative-close-icon");
+          closeIcon.setAttribute("viewBox", "0 0 56 56");
+          closeIcon.setAttribute("fill", "none");
+          closeIcon.setAttribute("aria-hidden", "true");
+          closeIcon.setAttribute("focusable", "false");
+
+          var closePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          closePath.setAttribute("d", "M41.1644 14L14 41.1644M14 14L41.1644 41.1644");
+          closePath.setAttribute("stroke", "currentColor");
+          closePath.setAttribute("stroke-linecap", "round");
+          closePath.setAttribute("stroke-linejoin", "round");
+
+          closeIcon.appendChild(closePath);
+          closeButton.appendChild(closeIcon);
+        }
 
         initiative.addEventListener("pointerenter", function (event) {
           if (event.pointerType && event.pointerType !== "mouse" && event.pointerType !== "pen") {
+            return;
+          }
+
+          if (!allowsHoverPreview(initiative)) {
             return;
           }
 
@@ -1783,6 +3888,10 @@
         });
 
         initiative.addEventListener("pointerleave", function () {
+          if (!allowsHoverPreview(initiative)) {
+            return;
+          }
+
           if (!initiative.classList.contains("is-pinned")) {
             cancelDwell(initiative);
           }
@@ -1833,6 +3942,20 @@
       });
 
       Array.prototype.slice.call(document.querySelectorAll("#career .career-related")).forEach(function (item) {
+        item.addEventListener("pointerenter", function () {
+          hoverProjectElement = item;
+          applyRelatedHighlight();
+        });
+
+        item.addEventListener("pointerleave", function () {
+          if (hoverProjectElement === item) {
+            hoverProjectElement = null;
+            applyRelatedHighlight();
+          }
+        });
+      });
+
+      Array.prototype.slice.call(document.querySelectorAll("#career .career-column:first-child [data-company]")).forEach(function (item) {
         item.addEventListener("pointerenter", function () {
           hoverCompanyKey = item.dataset.company || null;
           applyRelatedHighlight();
