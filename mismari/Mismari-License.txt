@@ -1,0 +1,65 @@
+MISMARI FONT SOFTWARE
+END USER LICENSE AGREEMENT (DESKTOP) - Version 1.0
+
+Licensor: STUDIO89 (the "Foundry")
+Typeface: Mismari (Regular)
+Designer: Dr. Ax Ali
+
+1. ACCEPTANCE
+By downloading, installing, or using the Mismari font software (the "Font
+Software"), you ("Licensee") agree to be bound by this Agreement. If you do
+not agree, do not install or use the Font Software.
+
+2. GRANT OF LICENSE
+The Foundry grants the Licensee a non-exclusive, non-transferable license to
+install and use the Font Software on up to three (3) workstations under the
+Licensee's control. This is a Desktop license.
+
+3. PERMITTED USES
+   a. Personal and commercial design projects.
+   b. Logos, wordmarks, and brand identities, including registration of such
+      marks by the Licensee or the Licensee's client.
+   c. Print, packaging, signage, and other physical output.
+   d. Static raster or vector images, PDFs, and social media graphics in which
+      the Font Software itself is not embedded in an editable or extractable
+      form.
+
+4. RESTRICTIONS
+   a. The Font Software may not be copied, redistributed, resold,
+      sublicensed, rented, lent, or otherwise made available to third parties.
+   b. The license may not be shared between unrelated legal entities.
+   c. Web embedding (e.g. CSS @font-face / WOFF), application or game
+      embedding, server use, and broadcast or large-scale use are NOT covered
+      and require a separate license tier from the Foundry.
+   d. The Font Software may not be modified, reverse-engineered, decompiled, or
+      converted to other formats without the Foundry's prior written consent.
+
+5. INTRODUCTORY PRICE
+Mismari is offered at an introductory launch price of $0 (regular price $99).
+The terms of this Agreement apply in full regardless of price paid. The
+Foundry may change pricing and license terms for future versions.
+
+6. OWNERSHIP
+The Font Software is licensed, not sold. All intellectual property rights in
+the Font Software, including the design of the typeface, remain the exclusive
+property of STUDIO89 and Dr. Ax Ali.
+
+7. ADDITIONAL LICENSES
+Web, App/Game, eBook/Digital Publication, Broadcast, and Enterprise licenses
+are available separately. Contact STUDIO89 to arrange coverage.
+
+8. WARRANTY DISCLAIMER
+The Font Software is provided "AS IS" without warranty of any kind, express or
+implied, including but not limited to merchantability and fitness for a
+particular purpose.
+
+9. LIMITATION OF LIABILITY
+In no event shall the Foundry be liable for any damages arising out of the use
+of or inability to use the Font Software.
+
+10. TERMINATION
+This license terminates automatically if the Licensee breaches any term. Upon
+termination, the Licensee must remove and destroy all copies of the Font
+Software.
+
+(c) 2022-2026 STUDIO89 / Dr. Ax Ali. All rights reserved.

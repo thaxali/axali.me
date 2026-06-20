@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mismari - A chiseled unicase display face</title>
+<script>
+  var FONT_B64="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";
+  var st=document.createElement('style');
+  st.textContent="@font-face{font-family:'Mismari';src:url(data:font/ttf;base64,"+FONT_B64+") format('truetype');font-display:block;}";
+  document.head.appendChild(st);
+</script>
+<style>
+  :root{ --ink:#0E0E0E; --paper:#FFFFFF; --gray:#8C8C8C; --line:rgba(0,0,0,.12);
+         --soft:#F4F3F1; --eo:cubic-bezier(.23,1,.32,1); }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+  .mis{font-family:'Mismari';}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gray);}
+  a{color:inherit;text-decoration:none;}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);}
+  .navin{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:'Mismari';font-size:30px;letter-spacing:3px;line-height:1;}
+  .navlinks{display:flex;align-items:center;gap:26px;}
+  .navlinks a{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);
+              transition:color .15s ease;}
+  .navlinks a:hover{color:var(--ink);}
+  .btn{font:inherit;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+       padding:11px 20px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;
+       border-radius:0;transition:transform .16s var(--eo),background .15s ease,color .15s ease;}
+  .btn:hover{background:#000;}
+  .btn:active{transform:scale(.97);}
+  .btn.ghost{background:transparent;color:var(--ink);}
+  .btn.ghost:hover{background:var(--ink);color:#fff;}
+  .btn s{color:var(--gray);font-weight:400;text-decoration:line-through;margin-right:7px;}
+  @media (max-width:760px){ .navlinks .nl{display:none;} }
+
+  .hero{padding:90px 0 70px;text-align:center;border-bottom:1px solid var(--line);}
+  .hero .name{font-family:'Mismari';font-size:clamp(72px,17vw,260px);line-height:.92;letter-spacing:2px;margin:8px 0 0;}
+  .hero .sub{font-size:clamp(16px,2.2vw,24px);font-weight:700;letter-spacing:1px;margin-top:26px;}
+  .hero .meta{margin-top:14px;color:var(--gray);font-size:14px;letter-spacing:.5px;}
+  .hero .meta .mis{font-size:17px;color:var(--ink);}
+  .hero .price{margin-top:30px;font-size:16px;letter-spacing:1px;}
+  .hero .price s{color:var(--gray);margin-right:8px;}
+  .hero .price b{font-weight:700;}
+
+  section{padding:84px 0;border-bottom:1px solid var(--line);}
+  .shead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;}
+  .shead h2{font-family:'Mismari';font-size:clamp(34px,6vw,68px);margin:0;letter-spacing:1px;font-weight:400;}
+
+  .glyphs{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:1px;background:var(--line);
+          border:1px solid var(--line);}
+  .cell{background:var(--paper);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative;
+        transition:background .18s var(--eo);}
+  .cell .g{font-family:'Mismari';font-size:56px;transition:color .18s ease;}
+  .cell .tag{position:absolute;bottom:8px;left:10px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray);}
+  @media (hover:hover){ .cell:hover{background:var(--ink);} .cell:hover .g{color:#fff;} .cell:hover .tag{color:#fff;} }
+
+  .tt{font-family:'Mismari';font-size:150px;line-height:1.1;letter-spacing:4px;outline:none;
+      word-break:break-word;min-height:1.1em;}
+  .tt:empty:before{content:'TYPE HERE';color:var(--line);}
+  .ttbar{display:flex;align-items:center;gap:18px;margin-top:34px;border-top:1px solid var(--line);padding-top:22px;}
+  .ttbar label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:2px;background:var(--ink);flex:1;max-width:360px;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--ink);
+       border-radius:50%;cursor:pointer;}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;background:var(--ink);border:none;border-radius:50%;cursor:pointer;}
+  .ttval{font-size:13px;font-weight:700;letter-spacing:1px;min-width:64px;text-align:right;}
+  .presets{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+  .chip{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 13px;
+        border:1px solid var(--line);background:transparent;cursor:pointer;border-radius:0;
+        transition:border-color .15s ease,color .15s ease;color:var(--gray);}
+  .chip:hover{border-color:var(--ink);color:var(--ink);}
+
+  .wf div{font-family:'Mismari';color:var(--ink);margin:0;line-height:1.18;}
+  .wf .a{font-size:clamp(40px,8vw,96px);}
+  .wf .b{font-size:clamp(28px,5vw,52px);}
+  .wf .c{font-size:clamp(20px,3.4vw,34px);}
+  .wf .d{font-size:clamp(15px,2.2vw,22px);color:var(--gray);}
+
+  .about{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:start;}
+  .about p{font-size:17px;line-height:1.7;max-width:48ch;}
+  .about p .mis{font-size:20px;}
+  .spec{width:100%;border-top:1px solid var(--ink);}
+  .spec .row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .spec .row .k{color:var(--gray);letter-spacing:1px;text-transform:uppercase;font-size:11px;font-weight:700;align-self:center;}
+  .spec .row .v{font-weight:700;text-align:right;}
+  @media (max-width:820px){ .about{grid-template-columns:1fr;gap:40px;} }
+
+  .lic{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  .lic h3{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin:0 0 8px;}
+  .lic ul{list-style:none;margin:0;padding:0;}
+  .lic li{font-size:15px;padding:11px 0;border-bottom:1px solid var(--line);}
+  .lic .lead{font-weight:700;margin-right:8px;}
+  .lic .no .lead{color:var(--gray);}
+  .licnote{font-size:13px;color:var(--gray);max-width:74ch;margin:26px 0 22px;line-height:1.6;}
+  @media (max-width:820px){ .lic{grid-template-columns:1fr;gap:28px;} }
+
+  .cta{background:var(--ink);color:#fff;text-align:center;padding:100px 0;border:none;}
+  .cta .big{font-family:'Mismari';font-size:clamp(56px,13vw,170px);line-height:.95;letter-spacing:2px;}
+  .cta .bigprice{font-size:22px;letter-spacing:1px;margin-top:20px;}
+  .cta .bigprice s{color:#8a8a8a;margin-right:10px;}
+  .cta .bigprice b{font-weight:700;}
+  .cta .btn{background:#fff;color:var(--ink);border-color:#fff;margin-top:26px;padding:15px 30px;font-size:13px;}
+  .cta .btn:hover{background:#eee;}
+  .cta .btn s{color:#9a9a9a;}
+  .ctanote{margin-top:20px;font-size:12px;color:#9a9a9a;letter-spacing:1px;}
+  .ctanote a{color:#fff;border-bottom:1px solid #555;}
+  footer{padding:38px 0;font-size:12px;color:var(--gray);letter-spacing:1px;}
+  .footin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+
+  .rev{opacity:0;transform:translateY(14px);transition:opacity .5s var(--eo),transform .5s var(--eo);}
+  .rev.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .rev{opacity:1;transform:none;transition:none;} }
+</style></head>
+<body>
+
+<nav><div class="navin">
+  <a href="#top" class="brand">Mismari</a>
+  <div class="navlinks">
+    <a class="nl" href="#glyphs">Glyphs</a>
+    <a class="nl" href="#tester">Tester</a>
+    <a class="nl" href="#about">About</a>
+    <a class="nl" href="#license">License</a>
+    <button class="btn" onclick="buy()">Buy &#8212; <s>$99</s> $0</button>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">Type specimen - Regular</div>
+  <div class="name">Mismari</div>
+  <div class="sub">A chiseled unicase display face</div>
+  <div class="meta">Unicase &#183; 40 glyphs &#183; Display &#183; from the Arabic <span class="mis">mismar</span>, &#8216;nail&#8217;</div>
+  <div class="price"><s>$99</s> <b>$0</b> &#183; introductory launch price</div>
+</div></header>
+
+<section id="glyphs"><div class="wrap">
+  <div class="shead rev"><h2>Glyphs</h2><div class="eyebrow">Unicase A&#8211;Z &#183; Punctuation</div></div>
+  <div class="glyphs" id="glyphgrid"></div>
+</div></section>
+
+<section id="tester"><div class="wrap">
+  <div class="shead rev"><h2>Type tester</h2><div class="eyebrow">Edit the line below</div></div>
+  <div class="rev">
+    <div id="ttout" class="tt mis" contenteditable="true" spellcheck="false">MISMARI</div>
+    <div class="presets">
+      <button class="chip" onclick="setTT('MONOLITH')">Monolith</button>
+      <button class="chip" onclick="setTT('OBELISK')">Obelisk</button>
+      <button class="chip" onclick="setTT('CUNEIFORM')">Cuneiform</button>
+      <button class="chip" onclick="setTT('INSCRIBE')">Inscribe</button>
+    </div>
+    <div class="ttbar">
+      <label>Size</label>
+      <input type="range" id="ttsize" min="40" max="260" value="150">
+      <span class="ttval" id="ttval">150 px</span>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap wf">
+  <div class="shead rev"><h2>Waterfall</h2><div class="eyebrow">Headline to caption</div></div>
+  <div class="rev a">CUNEIFORM</div>
+  <div class="rev b">MARKS PRESSED INTO WET CLAY</div>
+  <div class="rev c">FORMS CUT LIKE NAILS DRIVEN INTO STONE</div>
+  <div class="rev d">THE SAME FACE HOLDS ITS EDGE FROM HEADLINE TO CAPTION</div>
+</div></section>
+
+<section id="about"><div class="wrap about">
+  <div class="rev">
+    <div class="eyebrow" style="margin-bottom:18px;">About the face</div>
+    <p>Mismari is a unicase display typeface built from thin strokes and sharp, triangular terminals &#8212; letters that read as though they were chiselled rather than drawn. Its name comes from the Arabic <span class="mis">mismar</span>, &#8216;nail&#8217;, the same root behind the wedge-pressed script of cuneiform.</p>
+    <p>With a single case and a compact set of forms, it is made for headlines, marks, and monograms where character matters more than text.</p>
+  </div>
+  <div class="rev">
+    <div class="spec">
+      <div class="row"><span class="k">Designer</span><span class="v">Dr. Ax Ali</span></div>
+      <div class="row"><span class="k">Studio</span><span class="v">STUDIO89</span></div>
+      <div class="row"><span class="k">Year</span><span class="v">2022</span></div>
+      <div class="row"><span class="k">Classification</span><span class="v">Display, Unicase</span></div>
+      <div class="row"><span class="k">Styles</span><span class="v">Regular (1)</span></div>
+      <div class="row"><span class="k">Glyphs</span><span class="v">40</span></div>
+      <div class="row"><span class="k">Etymology</span><span class="v">mism&#257;r &#183; Arabic &#183; &#8216;nail&#8217;</span></div>
+    </div>
+    <button class="btn" style="margin-top:26px;width:100%;" onclick="buy()">Buy Mismari &#8212; <s>$99</s> $0</button>
+  </div>
+</div></section>
+
+<section id="license"><div class="wrap">
+  <div class="shead rev"><h2>License</h2><div class="eyebrow">Desktop EULA v1.0 &#183; STUDIO89</div></div>
+  <div class="lic rev">
+    <div class="yes">
+      <h3>Permitted</h3>
+      <ul>
+        <li><span class="lead">+</span>Personal &amp; commercial projects</li>
+        <li><span class="lead">+</span>Logos, wordmarks &amp; branding</li>
+        <li><span class="lead">+</span>Print, packaging &amp; signage</li>
+        <li><span class="lead">+</span>Static images, PDFs &amp; social posts</li>
+        <li><span class="lead">+</span>Up to 3 workstations</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>Requires a separate tier</h3>
+      <ul>
+        <li><span class="lead">&#8212;</span>Redistributing or reselling the files</li>
+        <li><span class="lead">&#8212;</span>Sublicensing or sharing the license</li>
+        <li><span class="lead">&#8212;</span>Web (@font-face), app or game embedding</li>
+        <li><span class="lead">&#8212;</span>Modifying or converting the files</li>
+        <li><span class="lead">&#8212;</span>Broadcast / large-scale use</li>
+      </ul>
+    </div>
+  </div>
+  <p class="licnote">Mismari ships with a Desktop license. Web, App, Broadcast, and Enterprise tiers are available separately &#8212; contact STUDIO89. Offered at the launch price of $0 (regular $99); the same terms apply and pricing for future versions may change.</p>
+  <button class="btn ghost" onclick="downloadLicense()">Download full license (.txt)</button>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <div class="eyebrow" style="color:#9a9a9a;">Introductory &#183; launch</div>
+  <div class="big mis">Mismari</div>
+  <div class="bigprice"><s>$99</s> <b>$0</b></div>
+  <button class="btn" onclick="buy()">Buy the font</button>
+  <div class="ctanote">Desktop license included &#183; <a href="#license">read the license</a></div>
+</div></section>
+
+<footer><div class="wrap footin">
+  <span>Mismari &#183; Designed by Dr. Ax Ali &#183; STUDIO89 &#183; 2022</span>
+  <span>Specimen site &#183; self-contained</span>
+</div></footer>
+
+<script>
+  var LICENSE_TEXT=`MISMARI FONT SOFTWARE
+END USER LICENSE AGREEMENT (DESKTOP) - Version 1.0
+
+Licensor: STUDIO89 (the "Foundry")
+Typeface: Mismari (Regular)
+Designer: Dr. Ax Ali
+
+1. ACCEPTANCE
+By downloading, installing, or using the Mismari font software (the "Font
+Software"), you ("Licensee") agree to be bound by this Agreement. If you do
+not agree, do not install or use the Font Software.
+
+2. GRANT OF LICENSE
+The Foundry grants the Licensee a non-exclusive, non-transferable license to
+install and use the Font Software on up to three (3) workstations under the
+Licensee's control. This is a Desktop license.
+
+3. PERMITTED USES
+   a. Personal and commercial design projects.
+   b. Logos, wordmarks, and brand identities, including registration of such
+      marks by the Licensee or the Licensee's client.
+   c. Print, packaging, signage, and other physical output.
+   d. Static raster or vector images, PDFs, and social media graphics in which
+      the Font Software itself is not embedded in an editable or extractable
+      form.
+
+4. RESTRICTIONS
+   a. The Font Software may not be copied, redistributed, resold,
+      sublicensed, rented, lent, or otherwise made available to third parties.
+   b. The license may not be shared between unrelated legal entities.
+   c. Web embedding (e.g. CSS @font-face / WOFF), application or game
+      embedding, server use, and broadcast or large-scale use are NOT covered
+      and require a separate license tier from the Foundry.
+   d. The Font Software may not be modified, reverse-engineered, decompiled, or
+      converted to other formats without the Foundry's prior written consent.
+
+5. INTRODUCTORY PRICE
+Mismari is offered at an introductory launch price of $0 (regular price $99).
+The terms of this Agreement apply in full regardless of price paid. The
+Foundry may change pricing and license terms for future versions.
+
+6. OWNERSHIP
+The Font Software is licensed, not sold. All intellectual property rights in
+the Font Software, including the design of the typeface, remain the exclusive
+property of STUDIO89 and Dr. Ax Ali.
+
+7. ADDITIONAL LICENSES
+Web, App/Game, eBook/Digital Publication, Broadcast, and Enterprise licenses
+are available separately. Contact STUDIO89 to arrange coverage.
+
+8. WARRANTY DISCLAIMER
+The Font Software is provided "AS IS" without warranty of any kind, express or
+implied, including but not limited to merchantability and fitness for a
+particular purpose.
+
+9. LIMITATION OF LIABILITY
+In no event shall the Foundry be liable for any damages arising out of the use
+of or inability to use the Font Software.
+
+10. TERMINATION
+This license terminates automatically if the Licensee breaches any term. Upon
+termination, the Licensee must remove and destroy all copies of the Font
+Software.
+
+(c) 2022-2026 STUDIO89 / Dr. Ax Ali. All rights reserved.
+`;
+  function downloadFont(){
+    var bin=atob(FONT_B64),n=bin.length,arr=new Uint8Array(n);
+    for(var i=0;i<n;i++)arr[i]=bin.charCodeAt(i);
+    var blob=new Blob([arr],{type:'font/ttf'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='Mismari-Regular.ttf';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+  }
+  function downloadLicense(){
+    var blob=new Blob([LICENSE_TEXT],{type:'text/plain;charset=utf-8'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='Mismari-License.txt';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+  }
+  function buy(){ downloadFont(); downloadLicense(); }
+
+  var set='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').concat(['.',',',':',';','?','!',"'",'"']);
+  var gg=document.getElementById('glyphgrid'),gh='';
+  for(var i=0;i<set.length;i++){ var ch=set[i].replace('&','&amp;').replace('<','&lt;').replace('"','&quot;');
+    gh+='<div class="cell"><span class="g">'+ch+'</span><span class="tag">'+(i+1)+'</span></div>'; }
+  gg.innerHTML=gh;
+
+  var out=document.getElementById('ttout'),sz=document.getElementById('ttsize'),val=document.getElementById('ttval');
+  sz.addEventListener('input',function(){ out.style.fontSize=sz.value+'px'; val.textContent=sz.value+' px'; });
+  function setTT(t){ out.textContent=t; }
+
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.12});
+  document.querySelectorAll('.rev').forEach(function(el,i){ el.style.transitionDelay=(Math.min(i,4)*55)+'ms'; io.observe(el); });
+</script>
+</body></html>
