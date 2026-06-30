@@ -1,0 +1,29 @@
+# Dr. Ax Ali
+
+> Dr. Abdullah "Ax" Ali (goes by Ax Ali) is a creative scientist, HCI researcher, and AI product builder based in New York City. He is the founder and CEO of Seena Labs, runs Studio89 Design, and writes the newsletter Everything is Designed. He holds a Ph.D. in Human-Computer Interaction from the University of Washington and has led product and research work at Apple, Amazon, AWS, Microsoft Research, Bilt Rewards, and Carnegie Mellon.
+
+## About
+- [Full bio and career (Markdown)](https://axali.me/about.md): Complete background, career history, research, and publications in plain text.
+- [axali.me](https://axali.me/): Personal site and portfolio.
+
+## Current work
+- [Seena Labs](https://seenalabs.io): Founder & CEO. A human-centered applied AI lab building products for understanding human-AI behavior. First product is an AI Ambient Ethnographer.
+- [Studio89 Design](https://studio89.design): Consulting and teaching studio for applied AI products and human-centered product strategy.
+- Adobe: AI & creativity expert delivering workshops on AI tools in creative workflows.
+
+## Writing
+- [Everything is Designed](https://axali.substack.com): Newsletter on AI, design, systems, creativity, and behavior.
+
+## Research
+- [Google Scholar](https://scholar.google.com/citations?user=6xqfyO8AAAAJ): 20+ peer-reviewed publications in HCI, accessibility, and adaptive interfaces.
+- Thesis: Distributed Interaction Design (University of Washington, advised by Prof. Jake Wobbrock).
+- Notable: Co-inventor of Dytective, an AI game that detects dyslexia (helped 500,000+ children). CHI Best Paper Award (top 1%).
+
+## Profiles
+- [LinkedIn](https://www.linkedin.com/in/theaxali)
+- [Google Scholar](https://scholar.google.com/citations?user=6xqfyO8AAAAJ)
+- [Instagram](https://www.instagram.com/dr.axali/)
+- [Threads](https://www.threads.com/@dr.axali)
+
+## Contact
+- Email: hi [at] axali.me

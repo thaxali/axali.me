@@ -6,6 +6,83 @@
   <title>Dr. Ax Ali</title>
   <meta name="description" content="Dr. Ax Ali is a creative scientist, founder, HCI researcher, and AI product builder.">
   <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://axali.me/">
+
+  <!-- Open Graph / social + AI link previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dr. Ax Ali">
+  <meta property="og:title" content="Dr. Ax Ali — Creative Scientist & Entrepreneur">
+  <meta property="og:description" content="Dr. Ax Ali is a creative scientist, founder, HCI researcher, and AI product builder. Founder & CEO of Seena Labs.">
+  <meta property="og:url" content="https://axali.me/">
+  <meta property="og:image" content="https://axali.me/assets/media-kit-wide.png">
+  <meta property="og:image:alt" content="Dr. Ax Ali">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dr. Ax Ali — Creative Scientist & Entrepreneur">
+  <meta name="twitter:description" content="Dr. Ax Ali is a creative scientist, founder, HCI researcher, and AI product builder. Founder & CEO of Seena Labs.">
+  <meta name="twitter:image" content="https://axali.me/assets/media-kit-wide.png">
+
+  <!-- Structured data: entity graph for AI/LLM + search understanding -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://axali.me/#person",
+        "name": "Ax Ali",
+        "alternateName": ["Dr. Ax Ali", "Abdullah Ali", "Abdullah \"Ax\" Ali", "Dr. Abdullah Ali"],
+        "honorificPrefix": "Dr.",
+        "jobTitle": "Creative Scientist",
+        "description": "Dr. Ax Ali is a creative scientist, HCI researcher, and AI product builder based in New York City. Founder and CEO of Seena Labs.",
+        "url": "https://axali.me/",
+        "image": "https://axali.me/assets/media-kit-square.png",
+        "homeLocation": { "@type": "Place", "name": "New York City, New York, United States" },
+        "worksFor": { "@id": "https://seenalabs.io/#org" },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "University of Washington" },
+          { "@type": "CollegeOrUniversity", "name": "University of Maryland, Baltimore County" }
+        ],
+        "knowsAbout": ["Human-Computer Interaction", "Applied AI", "Product design", "Accessibility", "Adaptive interfaces", "UX research", "Generative AI"],
+        "award": ["CHI Best Paper Award (Top 1%)", "ASSETS Best Demo Award", "W4A Best Paper Nomination", "NSF LSAMP Bridge Fellowship", "Microsoft Research Grant"],
+        "sameAs": [
+          "https://www.linkedin.com/in/theaxali",
+          "https://scholar.google.com/citations?user=6xqfyO8AAAAJ",
+          "https://axali.substack.com",
+          "https://www.instagram.com/dr.axali/",
+          "https://www.threads.com/@dr.axali",
+          "https://seenalabs.io",
+          "https://studio89.design"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://seenalabs.io/#org",
+        "name": "Seena Labs",
+        "url": "https://seenalabs.io",
+        "founder": { "@id": "https://axali.me/#person" },
+        "description": "A human-centered applied AI lab building products for understanding human-AI behavior, including an AI Ambient Ethnographer embedded in products with a single line of code."
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://studio89.design/#org",
+        "name": "Studio89 Design",
+        "url": "https://studio89.design",
+        "founder": { "@id": "https://axali.me/#person" },
+        "description": "Consulting and teaching studio helping companies design and build applied AI products, workflows, and human-centered product strategies."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://axali.me/#website",
+        "url": "https://axali.me/",
+        "name": "Dr. Ax Ali",
+        "about": { "@id": "https://axali.me/#person" }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script src="https://app.seenalabs.io/widget/seena.js" data-site-id="bb07724c-7070-4427-8e46-55e1f5c9e3f6"></script>
   <script>
@@ -24,6 +101,20 @@
       } catch (error) {
         document.documentElement.classList.add("intro-pending");
       }
+      // Failsafe: if the intro animation never completes (JS error, blocked
+      // assets, or an automated/headless agent), reveal all content anyway so
+      // it is never left hidden behind opacity:0 / visibility:hidden.
+      try {
+        window.setTimeout(function () {
+          var root = document.documentElement;
+          if (root.classList.contains("intro-pending")) {
+            root.classList.remove("intro-pending");
+            root.classList.remove("intro-started");
+            root.classList.remove("intro-revealed");
+            root.classList.add("intro-complete");
+          }
+        }, 6500);
+      } catch (error) {}
     }());
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1729,7 +1820,8 @@
 
     #career,
     #writing,
-    #press {
+    #press,
+    #index {
       margin-left: calc((100% - min(900px, calc(100vw - 48px))) / 2);
       width: min(900px, calc(100vw - 48px));
     }
@@ -2961,10 +3053,63 @@
       <p class="eyebrow"><span class="intro-type-text" data-type-eyebrow data-intro-formal="Hi, I'm Dr. Abdullah &quot;Ax&quot; Ali." data-intro-short="Hi, I'm Ax,">Hi, I'm Ax,</span><span class="typing-cursor" data-typing-cursor hidden aria-hidden="true"></span></p>
       <h1 aria-label="Creative Scientist &amp; Entrepreneur."><span data-title-line><span class="initiative creative-scientist-initiative" data-detail-card="product" data-product-id="creative-scientist"><button class="initiative-link creative-scientist-link" type="button" aria-haspopup="dialog"><span class="intro-type-text" data-type-title data-intro-title="Creative Scientist">Creative Scientist</span></button><span class="initiative-card" role="dialog" aria-label="What is a Creative Scientist?"><span class="initiative-title">What is a Creative Scientist?</span><span class="initiative-action-row"><button class="initiative-more" type="button">Find out<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="creative-scientist-bg" aria-hidden="true"><img src="assets/creative-scientist-card-bg.png" alt=""></span><span class="creative-scientist-expanded-title" aria-hidden="true"><span class="creative-scientist-small">What is a</span><span class="creative-scientist-large">Creative</span><span class="creative-scientist-large">Scientist?</span></span><span class="initiative-detail"><p>I've worn many hats: Founder, Product Manager, Designer, Developer, and Research Scientist, which is why I call myself a Creative Scientist.</p><p>I can bridge every seat at the product table, taking ideas from research insight to design, code, and market-ready products used by hundreds of thousands.</p><p>This makes me a rare asset: accelerating product cycles, uncovering opportunities, and raising the bar for user experience.</p></span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span><span class="intro-title-rest" data-type-title-rest data-intro-title-rest=" &amp; Entrepreneur"> &amp; Entrepreneur</span></span></h1>
       <div class="intro-copy" data-after-intro>
-        <p>I live in New York City. My career has taken many shapes: a human-computer interaction research scientist and developer, designer, product leader, and entrepreneur. The throughline has been working on 0-to-1 applied AI products.</p>
+        <p>I'm Ax Ali, and I live in New York City. My career has taken many shapes: a human-computer interaction research scientist and developer, designer, product leader, and entrepreneur. The throughline has been working on 0-to-1 applied AI products.</p>
         <p>Right now, I'm building <span class="initiative" data-company="seena"><button class="initiative-link" type="button" aria-haspopup="dialog">Seena Labs</button><span class="initiative-card" role="dialog" aria-label="About Seena Labs"><span class="initiative-title">Seena Labs</span><span class="initiative-body">I'm the founder and CEO of Seena Labs, a human-centered applied AI lab focused on building products for understanding human-AI behavior and helping businesses build better products.</span><a href="https://seenalabs.io" target="_blank" rel="noreferrer">Visit Seena Labs</a></span></span>, teaching and advising through <span class="initiative" data-company="studio89"><button class="initiative-link" type="button" aria-haspopup="dialog">Studio89 Design</button><span class="initiative-card" role="dialog" aria-label="About Studio89 Design"><span class="initiative-title">Studio89 Design</span><span class="initiative-body">I run Studio89 Design as my consulting and teaching studio, where I help companies design and build applied AI products, workflows, and human-centered product strategies.</span><a href="mailto:ax@studio89.design">Let's work together</a><a href="https://studio89.design" target="_blank" rel="noreferrer">Visit Studio89</a></span></span>, and writing <span class="initiative"><button class="initiative-link" type="button" aria-haspopup="dialog">Everything is Designed</button><span class="initiative-card" role="dialog" aria-label="About Everything is Designed"><span class="initiative-title">Everything is Designed</span><span class="initiative-body">A newsletter about AI, design, systems, creativity, and behavior.</span><a href="https://axali.substack.com" target="_blank" rel="noreferrer">Read Everything is Designed</a></span></span>.</p>
       </div>
     </div>
+
+    <style>
+      #index .rows {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+      #index .row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        grid-template-columns: none;
+        align-items: stretch;
+        min-height: 132px;
+        padding: 22px 24px;
+        border: 0;
+        background: var(--paper);
+      }
+      #index .row-title { font-size: 16px; }
+      @media (max-width: 760px) {
+        #index .rows { grid-template-columns: 1fr; }
+        #index .row { min-height: 0; padding: 20px 0; }
+      }
+    </style>
+    <section id="index" data-after-intro>
+      <h2>Areas of experience</h2>
+      <div class="rows">
+        <div class="row">
+          <div class="row-title">Applied AI</div>
+          <div class="row-text">Designing and building AI/ML-powered products since 2014.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Product leadership</div>
+          <div class="row-text">Owning 0-to-1 strategy, roadmaps, experiments, launches, partnerships, analytics, and teams.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Product development</div>
+          <div class="row-text">Building prototypes and production systems across software: web and native apps, APIs, AI integration; and physical objects: woodworking, 3D printing, laser cutting.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Human understanding</div>
+          <div class="row-text">Ph.D.-trained researcher with experience in mixed-method experimental design and analysis, co-design protocols, interviews, surveys, and prototype testing to understand human behavior.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Experience Design</div>
+          <div class="row-text">End-to-end experience mapping, design, and execution of technologies centered around human needs, abilities, values, and preferences: from problem definition and journey mapping to pixel-perfect interfaces and brand identities.</div>
+        </div>
+        <div class="row">
+          <div class="row-title">Teaching and writing</div>
+          <div class="row-text">Years of experience teaching at the graduate and undergraduate level, speaking at scientific conferences, and running workshops for enterprise clients. My lectures and writing bridge academia and applied industry work.</div>
+        </div>
+      </div>
+    </section>
 
     <section id="career" data-after-intro>
       <h2>My career at a glance</h2>
@@ -3065,36 +3210,6 @@
             <li><span class="initiative career-related" data-company="johns-hopkins" data-detail-card="product" data-product-id="insterpreter"><button class="initiative-link" type="button" aria-haspopup="dialog">Insterpreter</button><span class="initiative-card" role="dialog" aria-label="About Insterpreter"><span class="initiative-title">Insterpreter</span><span class="initiative-body">My first software project, inspired by working as an interpreter at Johns Hopkins.</span><span class="initiative-action-row"><button class="initiative-more" type="button">Learn more<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="initiative-detail">While I was in college, I worked as an interpreter at Johns Hopkins. That job inspired me to build Insterpreter, my first piece of software: an early attempt to turn a lived communication problem into a tool that could help people coordinate interpretation work more effectively.</span><span class="initiative-detail-extra" aria-hidden="true"></span></span></span></li>
           </ul>
         </article>
-      </div>
-    </section>
-
-    <section id="index" data-after-intro>
-      <h2>Areas of experience</h2>
-      <div class="rows">
-        <div class="row">
-          <div class="row-title">Applied AI</div>
-          <div class="row-text">Designing and building AI/ML-powered products since 2014.</div>
-        </div>
-        <div class="row">
-          <div class="row-title">Product leadership</div>
-          <div class="row-text">Owning 0-to-1 strategy, roadmaps, experiments, launches, partnerships, analytics, and teams.</div>
-        </div>
-        <div class="row">
-          <div class="row-title">Product development</div>
-          <div class="row-text">Building prototypes and production systems across software: web and native apps, APIs, AI integration; and physical objects: woodworking, 3D printing, laser cutting.</div>
-        </div>
-        <div class="row">
-          <div class="row-title">Human understanding</div>
-          <div class="row-text">Ph.D.-trained researcher with experience in mixed-method experimental design and analysis, co-design protocols, interviews, surveys, and prototype testing to understand human behavior.</div>
-        </div>
-        <div class="row">
-          <div class="row-title">Experience Design</div>
-          <div class="row-text">End-to-end experience mapping, design, and execution of technologies centered around human needs, abilities, values, and preferences: from problem definition and journey mapping to pixel-perfect interfaces and brand identities.</div>
-        </div>
-        <div class="row">
-          <div class="row-title">Teaching and writing</div>
-          <div class="row-text">Years of experience teaching at the graduate and undergraduate level, speaking at scientific conferences, and running workshops for enterprise clients. My lectures and writing bridge academia and applied industry work.</div>
-        </div>
       </div>
     </section>
 
@@ -3300,6 +3415,113 @@
       </div>
       </div>
     </section>
+
+    <style>
+      #about { display: none; }
+      #about .about-facts dl { margin: 0; }
+      #about .about-facts dl > div {
+        display: grid;
+        grid-template-columns: minmax(120px, 168px) 1fr;
+        gap: 16px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+      #about .about-facts dt { color: var(--muted); font-weight: 500; }
+      #about .about-facts dd { margin: 0; color: var(--ink); }
+      #about .about-faq-heading { margin: 52px 0 4px; }
+      #about .about-faq details { border-top: 1px solid var(--line); padding: 16px 0; }
+      #about .about-faq summary {
+        cursor: pointer;
+        color: var(--ink);
+        font-weight: 500;
+        list-style: none;
+      }
+      #about .about-faq summary::-webkit-details-marker { display: none; }
+      #about .about-faq details[open] summary { color: var(--activity); }
+      #about .about-faq p { color: var(--muted); margin: 12px 0 0; max-width: 68ch; }
+      @media (max-width: 600px) {
+        #about .about-facts dl > div { grid-template-columns: 1fr; gap: 4px; }
+      }
+    </style>
+    <section id="about" data-after-intro>
+      <h2>In short</h2>
+      <div class="about-facts">
+        <dl>
+          <div><dt>Name</dt><dd>Dr. Abdullah &ldquo;Ax&rdquo; Ali &mdash; goes by Ax Ali</dd></div>
+          <div><dt>Role</dt><dd>Creative Scientist; Founder &amp; CEO of Seena Labs</dd></div>
+          <div><dt>Based in</dt><dd>New York City</dd></div>
+          <div><dt>Also</dt><dd>Runs Studio89 Design; AI &amp; creativity expert delivering workshops for Adobe</dd></div>
+          <div><dt>Education</dt><dd>Ph.D. in Human-Computer Interaction, University of Washington</dd></div>
+          <div><dt>Known for</dt><dd>Distributed Interaction Design; co-inventing Dytective (AI dyslexia detection); 20+ peer-reviewed HCI publications; CHI Best Paper Award (top 1%)</dd></div>
+        </dl>
+      </div>
+      <h3 class="about-faq-heading">Frequently asked</h3>
+      <div class="about-faq">
+        <details>
+          <summary>Who is Ax Ali?</summary>
+          <p>Dr. Abdullah &ldquo;Ax&rdquo; Ali is a creative scientist, HCI researcher, and AI product builder based in New York City. He is the founder and CEO of Seena Labs, an applied-AI lab studying human&ndash;AI behavior, and runs Studio89 Design. He has led product and research work at Apple, Amazon, AWS, Microsoft Research, Bilt Rewards, and Carnegie Mellon, and holds a Ph.D. in Human-Computer Interaction from the University of Washington.</p>
+        </details>
+        <details>
+          <summary>What is a Creative Scientist?</summary>
+          <p>&ldquo;Creative Scientist&rdquo; is how Ax Ali describes his blend of roles &mdash; founder, product manager, designer, developer, and research scientist. It means he can bridge every seat at the product table, taking ideas from research insight to design, code, and market-ready products used by hundreds of thousands.</p>
+        </details>
+        <details>
+          <summary>What is Seena Labs?</summary>
+          <p>Seena Labs is a human-centered applied AI lab founded by Ax Ali. Its first product is an AI Ambient Ethnographer &mdash; an always-on AI UX researcher embedded in a product with a single line of code to explain the qualitative &ldquo;why&rdquo; behind usage analytics.</p>
+        </details>
+        <details>
+          <summary>What is Studio89 Design?</summary>
+          <p>Studio89 Design is Ax Ali&rsquo;s consulting and teaching studio, where he helps companies design and build applied AI products, workflows, and human-centered product strategies.</p>
+        </details>
+        <details>
+          <summary>What is Ax Ali known for in research?</summary>
+          <p>Ax Ali is known for Distributed Interaction Design (his Ph.D. thesis at the University of Washington), co-inventing Dytective &mdash; an AI game that detects dyslexia and has helped more than 500,000 children &mdash; and 20+ peer-reviewed publications in HCI and accessibility, including a CHI Best Paper Award (top 1%).</p>
+        </details>
+        <details>
+          <summary>Where has Ax Ali worked?</summary>
+          <p>Ax Ali has worked at Apple (Vision Pro multimodal interaction research), Amazon (grocery product), AWS (enterprise product innovation), Microsoft Research (accessible search and dyslexia), Bilt Rewards (loyalty product leadership), and Carnegie Mellon. He founded 3rd Brain, an AI organizer for couples, and is now founder and CEO of Seena Labs.</p>
+        </details>
+      </div>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is Ax Ali?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Dr. Abdullah \"Ax\" Ali is a creative scientist, HCI researcher, and AI product builder based in New York City. He is the founder and CEO of Seena Labs, an applied-AI lab studying human-AI behavior, and runs Studio89 Design. He has led product and research work at Apple, Amazon, AWS, Microsoft Research, Bilt Rewards, and Carnegie Mellon, and holds a Ph.D. in Human-Computer Interaction from the University of Washington." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a Creative Scientist?",
+          "acceptedAnswer": { "@type": "Answer", "text": "\"Creative Scientist\" is how Ax Ali describes his blend of roles - founder, product manager, designer, developer, and research scientist. It means he can bridge every seat at the product table, taking ideas from research insight to design, code, and market-ready products used by hundreds of thousands." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Seena Labs?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Seena Labs is a human-centered applied AI lab founded by Ax Ali. Its first product is an AI Ambient Ethnographer - an always-on AI UX researcher embedded in a product with a single line of code to explain the qualitative 'why' behind usage analytics." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Studio89 Design?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Studio89 Design is Ax Ali's consulting and teaching studio, where he helps companies design and build applied AI products, workflows, and human-centered product strategies." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Ax Ali known for in research?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ax Ali is known for Distributed Interaction Design (his Ph.D. thesis at the University of Washington), co-inventing Dytective - an AI game that detects dyslexia and has helped more than 500,000 children - and 20+ peer-reviewed publications in HCI and accessibility, including a CHI Best Paper Award (top 1%)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where has Ax Ali worked?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ax Ali has worked at Apple (Vision Pro multimodal interaction research), Amazon (grocery product), AWS (enterprise product innovation), Microsoft Research (accessible search and dyslexia), Bilt Rewards (loyalty product leadership), and Carnegie Mellon. He founded 3rd Brain, an AI organizer for couples, and is now founder and CEO of Seena Labs." }
+        }
+      ]
+    }
+    </script>
 
     <section id="contact" data-after-intro>
       <h2>Contact</h2>
