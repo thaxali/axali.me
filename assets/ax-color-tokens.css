@@ -1,0 +1,103 @@
+/* Dr. Ax Ali - color tokens. V.2609.11.09, superseding 2026-09-01.
+ *
+ * EIGHT hue families, each paired: one value per ground. The anchor is one
+ * of them - it is still the single accent, but it lives in the spectrum so
+ * the whole set reads in one view.
+ *
+ * THE RULE: paper text lands at L* 27-47, ink text at 57-93, and between
+ * them is a dead zone illegible on both. Inverted, every paper value takes
+ * white and every ink value takes black; the --on tokens carry that type
+ * color so a fill is never guessed at.
+ *
+ * TWO KNOWN COLLISIONS, both kept on purpose:
+ *   anchor / red on ink   dE 0.029  - red's ink value was derived by lifting
+ *     United Red and landed on the anchor, which was not a family then. The
+ *     anchor cannot move and United Red carries an association worth
+ *     keeping, so both stay. DO NOT SET THEM SIDE BY SIDE ON A DARK GROUND.
+ *     On paper they are 0.121 apart and fine.
+ *   gold / green on ink   dE 0.079  - IDEO Yellow against Tennis Green. Both
+ *     are named associations and both are used as fills, so they rarely
+ *     meet as letters.
+ * For scale: teal was retired at dE 0.069 to blue.
+ *
+ * TWO FAMILIES ARE FILLS ON PAPER, NOT TYPE: gold and the anchor. IDEO
+ * Yellow reads 1.14:1 as letters on paper and #EC622C reads 3.2:1. A yellow
+ * that clears 4.5:1 on white sits at L* 48 and is a dark mustard - measured,
+ * not assumed - so both trade text-safety on paper for staying themselves.
+ * The anchor had a third value, a darkened #C54412, so it could be type on
+ * paper; it was carrying 140 elements and was deleted this pass, because one
+ * accent cannot be three values. The wordmark's period and the D in the EiD
+ * lockup keep the anchor on paper - they are the mark (law 33), not type.
+ *
+ * TWO FAMILIES WERE RETIRED: jade (no association, sat beside teal) and
+ * teal (dE 0.069 to Knicks Blue on ink, wedged between blue and green).
+ * --ok followed them onto green, sharing with the "ready" fill on purpose:
+ * both mean the work is good.
+ *
+ * WHERE THE COLORS COME FROM. Seven of the eight carry an association:
+ *   red    Manchester United     green   a tennis ball
+ *   orange the anchor            blue    the Knicks
+ *   gold   IDEO                  violet  University of Washington
+ *   pink   3rd Brain, Bo the Brain
+ * Brown is named for what it is. UW Purple and Bo Pink arrived as given
+ * values with their opposite half derived from them.
+ *
+ * Contrast is against #FBFBFE on paper and #111111 on ink. Every role of every
+ * value is measured; nothing here is picked by eye. */
+
+:root{
+  /* the core */
+  --ax-pure-white:#FFFFFF;
+  --ax-paper:#FBFBFE;
+  --ax-cream:#FAF4EA;
+  --ax-light-grey:#F1F1F5;
+  --ax-silver:#B7B7BC;
+  --ax-slate:#6A6A6F;
+  --ax-graphite:#46464B;
+  --ax-charcoal:#27272B;
+  --ax-ink:#101010;
+  --ax-pure-black:#000000;
+
+  /* the eight families. Paper value, then the type it takes as a fill. */
+  --ax-red-paper:#DA020E; --ax-red-paper-on:#FAFAFA;  /* United Red       L*45.6  text  5.09:1  fill  5.03:1 */
+  --ax-orange-paper:#EC622C; --ax-orange-paper-on:#101010;  /* The Anchor       L*58.7  FILL ONLY              fill  5.75:1 */
+  --ax-brown-paper:#684428; --ax-brown-paper-on:#FAFAFA;  /* Coffee           L*32.3  text  8.31:1  fill  8.23:1 */
+  --ax-gold-paper:#FEF102; --ax-gold-paper-on:#101010;  /* IDEO Yellow      L*93.4  FILL ONLY              fill 16.13:1 */
+  --ax-green-paper:#5D6E4B; --ax-green-paper-on:#FAFAFA;  /* Dark Olive       L*44.2  text  5.35:1  fill   5.3:1 */
+  --ax-blue-paper:#006BB6; --ax-blue-paper-on:#FAFAFA;  /* Knicks Blue      L*44.1  text  5.38:1  fill  5.32:1 */
+  --ax-violet-paper:#4B2E83; --ax-violet-paper-on:#FAFAFA;  /* UW Purple        L*27.0  text 10.08:1  fill  9.97:1 */
+  --ax-pink-paper:#D11687; --ax-pink-paper-on:#FAFAFA;  /* Bo Pink dark     L*46.8  text  4.87:1  fill  4.82:1 */
+
+  --ax-red-ink:#FF5649; --ax-red-ink-on:#101010;  /* Coral Red        L*60.2  text  6.01:1  fill  6.05:1 */
+  --ax-orange-ink:#FF5021; --ax-orange-ink-on:#101010;  /* The Anchor       L*59.1  text  5.77:1  fill  5.82:1 */
+  --ax-brown-ink:#A98163; --ax-brown-ink-on:#101010;  /* Milk Coffee      L*57.1  text   5.4:1  fill  5.44:1 */
+  --ax-gold-ink:#FEF102; --ax-gold-ink-on:#101010;  /* IDEO Yellow      L*93.4  text  16.0:1  fill 16.13:1 */
+  --ax-green-ink:#C9E638; --ax-green-ink-on:#101010;  /* Tennis Green     L*86.7  text 13.36:1  fill 13.46:1 */
+  --ax-blue-ink:#3F95E3; --ax-blue-ink-on:#101010;  /* Sky Knicks       L*60.0  text  5.95:1  fill   6.0:1 */
+  --ax-violet-ink:#A37BFF; --ax-violet-ink-on:#101010;  /* UW Purple lifted L*60.9  text  6.15:1  fill  6.19:1 */
+  --ax-pink-ink:#F241A3; --ax-pink-ink-on:#101010;  /* Bo Pink          L*57.4  text  5.45:1  fill  5.49:1 */
+
+  /* the anchor, by its own name. Same values as the orange family. */
+  --ax-anchor:var(--ax-orange-paper);
+  --ax-anchor-on:var(--ax-orange-paper-on);
+  --ax-anchor-text:var(--ax-ink);   /* on paper the accent is not type */
+
+  /* semantic */
+  --ax-ok:var(--ax-green-paper);     /* 5.35:1 on paper - shares with "ready" */
+  --ax-warn:var(--ax-brown-paper);   /* 8.31:1 on paper */
+  --ax-link:var(--ax-ink);
+  --ax-proof:var(--ax-blue-paper);
+}
+
+[data-ground="ink"]{
+  --ax-red-paper:#FF5649; --ax-red-paper-on:#101010;
+  --ax-orange-paper:#FF5021; --ax-orange-paper-on:#101010;
+  --ax-brown-paper:#A98163; --ax-brown-paper-on:#101010;
+  --ax-gold-paper:#FEF102; --ax-gold-paper-on:#101010;
+  --ax-green-paper:#C9E638; --ax-green-paper-on:#101010;
+  --ax-blue-paper:#3F95E3; --ax-blue-paper-on:#101010;
+  --ax-violet-paper:#A37BFF; --ax-violet-paper-on:#101010;
+  --ax-pink-paper:#F241A3; --ax-pink-paper-on:#101010;
+  --ax-anchor-text:var(--ax-orange-ink);   /* type here is fine */
+  --ax-link:var(--ax-paper);
+}
