@@ -3,3 +3,6 @@ node_modules/
 dist/
 .env
 .env.*
+
+# local-only design notes (repo is public)
+.design-twice/
