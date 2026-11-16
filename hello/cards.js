@@ -16,15 +16,12 @@ document.querySelectorAll('[data-dialog]').forEach(button => {
 const posterCycle = document.querySelector('.poster-cycle');
 if (posterCycle) {
   const posters = [...posterCycle.querySelectorAll('.poster')];
-  const toggle = posterCycle.querySelector('.poster-toggle');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let current = 0;
   let paused = reducedMotion.matches;
   let timer;
   function syncRotation() {
     clearInterval(timer);
-    toggle.textContent = paused ? '▶' : 'Ⅱ';
-    toggle.setAttribute('aria-label', paused ? 'Play poster rotation' : 'Pause poster rotation');
     if (paused || document.hidden) return;
     timer = setInterval(() => {
       const next = (current + 1) % posters.length;
@@ -36,7 +33,6 @@ if (posterCycle) {
       posters[current].removeAttribute('aria-hidden');
     }, 3000);
   }
-  toggle.addEventListener('click', () => { paused = !paused; syncRotation(); });
   document.addEventListener('visibilitychange', syncRotation);
   reducedMotion.addEventListener('change', event => { paused = event.matches; syncRotation(); });
   syncRotation();
