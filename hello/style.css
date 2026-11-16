@@ -14,7 +14,7 @@
 /* Original brand artwork, with a dark overlay for readable card copy. */
 .seena{background:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.72)),url("assets/seena-ideas.jpg") center/cover;color:#fafafa;border-color:transparent}
 .action-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px}
-.seena-logo{display:block;width:44px;height:44px;object-fit:contain}
+.seena-logo{display:block;width:32px;height:32px;object-fit:contain}
 .seena h2 span{color:inherit}
 .newsletter{background:#101010;color:#fafafa;border-color:#101010}
 .newsletter-wordmark{display:block;width:100%;max-width:330px;height:auto}
