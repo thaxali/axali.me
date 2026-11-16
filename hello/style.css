@@ -38,3 +38,5 @@
 @media(max-width:580px){.seena-option h2{font-size:21px}.newsletter.is-open{padding:20px 16px}}
 
 @media(max-width:580px){.newsletter iframe{height:480px;width:calc(100% + 24px);max-width:none;margin-left:-12px}}
+
+.seena.is-open{background:#101010;border-color:#101010}.seena-panel-logo{display:block;width:22px;height:22px;object-fit:contain}
