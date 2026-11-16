@@ -50,3 +50,18 @@ h1{font-size:clamp(26px,8vw,44px);margin:18px 0}
 .social-icons{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .social-icons a{flex-direction:column;justify-content:center;gap:6px;padding:10px 2px;font-size:11px;min-width:0}
 }
+
+/* Seena card: Figma 58:487, adapted to the existing responsive card grid. */
+@font-face{font-family:Nacelle;src:url(assets/Nacelle-600.ttf);font-weight:600}
+.seena:not(.is-open){background:linear-gradient(#00000094,#00000094),url("assets/seena-redesign-photo.png") center/cover}
+.seena .card-front{position:relative;min-height:310px}
+.seena-redesign-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.seena-redesign-heading h2{font-weight:400;font-size:29px;line-height:.98;letter-spacing:-1.16px;margin:0;max-width:300px}
+.seena-redesign-heading img{width:32px;height:32px;flex:none;object-fit:contain;margin-top:3px}
+.seena-promise{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px;margin-top:25px;font-size:18px;line-height:1.04;letter-spacing:-.72px;font-weight:600}
+.seena .seena-promise p{font-size:inherit;line-height:inherit;margin:0}
+.seena-touchpoints{display:flex;flex-direction:column}
+.seena-touchpoints span:nth-child(2){opacity:.9}.seena-touchpoints span:nth-child(3){opacity:.8}.seena-touchpoints span:nth-child(4){opacity:.7}.seena-touchpoints span:nth-child(5){opacity:.6}.seena-touchpoints span:nth-child(6){opacity:.5}.seena-touchpoints span:nth-child(7){opacity:.4}
+.seena-start{display:flex;align-items:center;justify-content:space-between;gap:12px;width:62%;margin-top:auto;padding:22px 0 10px;border-bottom:3px solid #ff5021;font-size:24px;font-weight:600;letter-spacing:-.96px}
+.seena-start img{display:block;width:42px;height:42px;transform:rotate(90deg)}
+@media(max-width:360px){.seena-redesign-heading h2{font-size:25px}.seena-redesign-heading{gap:12px}.seena-promise{font-size:16px}.seena-start{font-size:22px;width:60%}}
