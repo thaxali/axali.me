@@ -87,3 +87,10 @@ body.dialog-open{overflow:hidden}
 .dialog-options{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}.dialog-options .seena-option{padding:24px 0;border-top:1px solid #555}.dialog-options h2{font-weight:600;font-size:25px}.dialog-options p{color:#c6c6cc;font-size:16px}
 .work-body>h2{font-size:clamp(40px,6vw,72px);line-height:1;max-width:800px;margin:28px 0}.work-intro{font-size:24px;line-height:1.5;max-width:740px}.work-body>.eyebrow{margin-top:24px}
 @media(max-width:580px){.action-button{padding:18px 14px;gap:12px;font-size:16px}.button-divider{display:none}.button-cta{display:block;font-size:14px;margin-top:4px}.action-buttons{margin-bottom:28px}.newsletter-footer{padding:26px 8px 12px}.newsletter-footer iframe{height:520px}.dialog-bar{padding:12px 18px}.dialog-body{padding:20px 18px 40px}.seena-hero{padding:24px 18px}.seena-hero .seena-redesign-heading img{width:28px;height:28px}.seena-hero .seena-promise{font-size:19px;gap:12px}.dialog-options{grid-template-columns:1fr;gap:0;margin-top:16px}.dialog-options h2{font-size:23px}.work-intro{font-size:19px}}
+
+/* Compact newsletter band spans the viewport outside the content column. */
+.newsletter-footer{width:100%;padding:8px 20px 0;margin:0;gap:0}
+.newsletter-footer>.eyebrow{display:none}
+.newsletter-footer iframe{height:320px;max-width:560px}
+.action-buttons{margin-bottom:16px}
+@media(max-width:580px){.newsletter-footer{padding:4px 10px 0}.newsletter-footer iframe{height:380px}}
