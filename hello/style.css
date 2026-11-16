@@ -96,3 +96,5 @@ body.dialog-open{overflow:hidden}
 @media(max-width:580px){.newsletter-footer{padding:4px 10px 0}.newsletter-footer iframe{height:380px}}
 
 .action-button>.seena-button-mark{display:block;flex:none!important;width:28px;height:28px;background:#ff5021;mask:url("assets/seena-logo.svg") center/contain no-repeat;-webkit-mask:url("assets/seena-logo.svg") center/contain no-repeat}.action-button>.work-signature{object-fit:contain;filter:brightness(0) invert(1)}
+
+.action-button>.work-signature{width:56px;height:56px}.social-icons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}.social-icons a{min-width:0}
