@@ -40,3 +40,13 @@
 @media(max-width:580px){.newsletter iframe{height:480px;width:calc(100% + 24px);max-width:none;margin-left:-12px}}
 
 .seena.is-open{background:#101010;border-color:#101010}.seena-panel-logo{display:block;width:22px;height:22px;object-fit:contain}
+
+/* Balanced mobile intro and a single row of social profiles. */
+@media(max-width:580px){
+.intro{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+.portrait{width:100%;height:auto;align-self:start;object-fit:contain}
+.eyebrow{white-space:normal}
+h1{font-size:clamp(26px,8vw,44px);margin:18px 0}
+.social-icons{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.social-icons a{flex-direction:column;justify-content:center;gap:6px;padding:10px 2px;font-size:11px;min-width:0}
+}
